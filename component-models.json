@@ -221,7 +221,7 @@
       {
         "component": "richtext",
         "name": "quote",
-        "value": "",
+        "value": "Test Quote",
         "label": "Quote",
         "valueType": "string"
       },
@@ -230,7 +230,7 @@
         "valueType": "string",
         "name": "author",
         "label": "Author",
-        "value": ""
+        "value": "Test Author"
       }
     ]
   }

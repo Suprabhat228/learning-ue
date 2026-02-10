@@ -1,5 +1,4 @@
 export default function decorate(block) {
-    console.log('block',block);
   const [quoteWrapper] = block.children;
 
   const blockquote = document.createElement('blockquote');
