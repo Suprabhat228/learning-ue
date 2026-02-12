@@ -255,5 +255,31 @@
         ]
       }
     ]
+  },
+  {
+    "id": "team",
+    "fields": [
+      {
+        "component": "text",
+        "name": "title",
+        "label": "Title"
+      }
+    ]
+  },
+  {
+    "id": "member",
+    "fields": [
+      {
+        "component": "reference",
+        "name": "image",
+        "label": "Photo",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "name": "name",
+        "label": "Name"
+      }
+    ]
   }
 ]
