@@ -75,10 +75,26 @@
                     "label": "CTA 2 Text"
                 },
                 {
-                    "component": "text",
-                    "name": "keywords",
-                    "label": "Keywords",
+                    "component": "richtext",
+                    "name": "paragraphs",
+                    "label": "Paragraphs",
                     "multi": true
+                },
+                {
+                    "component": "container",
+                    "name": "cta",
+                    "label": "CTAs",
+                    "multi": true,
+                    "fields": [
+                        {
+                            "component": "text",
+                            "name": "link"
+                        },
+                        {
+                            "component": "text",
+                            "name": "label"
+                        }
+                    ]
                 }
             ]
         }
