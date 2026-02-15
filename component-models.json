@@ -312,6 +312,21 @@
             "value": "h3"
           }
         ]
+      },
+      {
+        "name": "teaser",
+        "model": "teaser",
+        "image": "/content/dam/teaser-background.png",
+        "imageAlt": "A group of people sitting on a stage",
+        "teaserText_subtitle": "Adobe Experience Cloud",
+        "teaserText_title": "Meet the Experts",
+        "teaserText_titleType": "h2",
+        "teaserText_description": "<p>Join us in this ask me everything session...</p>",
+        "teaserText_cta1": "https://link.to/more-details",
+        "teaserText_cta1Text": "More Details",
+        "teaserText_cta2": "https://link.to/sign-up",
+        "teaserText_cta2Text": "RSVP",
+        "teaserText_cta2Type": "primary"
       }
     ]
   },
