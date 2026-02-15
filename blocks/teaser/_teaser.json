@@ -19,82 +19,17 @@
     "models": [
         {
             "id": "teaser",
+            "multi": true,
             "fields": [
                 {
                     "component": "text",
-                    "name": "teaserText_subtitle",
+                    "name": "subtitle",
                     "label": "Subtitle"
                 },
                 {
                     "component": "text",
-                    "name": "teaserText_title",
+                    "name": "title",
                     "label": "Title"
-                },
-                {
-                    "component": "select",
-                    "name": "teaserText_titleType",
-                    "label": "Title Type",
-                    "options": [
-                        {
-                            "name": "H1",
-                            "value": "h1"
-                        },
-                        {
-                            "name": "H2",
-                            "value": "h2"
-                        },
-                        {
-                            "name": "H3",
-                            "value": "h3"
-                        }
-                    ]
-                },
-                {
-                    "component": "richtext",
-                    "name": "teaserText_description",
-                    "label": "Description"
-                },
-                {
-                    "component": "text",
-                    "name": "teaserText_cta1",
-                    "label": "CTA 1 URL"
-                },
-                {
-                    "component": "text",
-                    "name": "teaserText_cta1Text",
-                    "label": "CTA 1 Text"
-                },
-                {
-                    "component": "text",
-                    "name": "teaserText_cta2",
-                    "label": "CTA 2 URL"
-                },
-                {
-                    "component": "text",
-                    "name": "teaserText_cta2Text",
-                    "label": "CTA 2 Text"
-                },
-                {
-                    "component": "richtext",
-                    "name": "paragraphs",
-                    "label": "Paragraphs",
-                    "multi": true
-                },
-                {
-                    "component": "container",
-                    "name": "cta",
-                    "label": "CTAs",
-                    "multi": true,
-                    "fields": [
-                        {
-                            "component": "text",
-                            "name": "link"
-                        },
-                        {
-                            "component": "text",
-                            "name": "label"
-                        }
-                    ]
                 }
             ]
         }
