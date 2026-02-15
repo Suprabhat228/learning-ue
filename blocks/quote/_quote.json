@@ -26,14 +26,14 @@
                     "component": "richtext",
                     "name": "quote",
                     "value": "",
-                    "label": "Quote",
+                    "label": "QuoteSection",
                     "valueType": "string"
                 },
                 {
                     "component": "text",
                     "valueType": "string",
                     "name": "author",
-                    "label": "Author",
+                    "label": "AuthorSection",
                     "value": ""
                 },
                 {
@@ -62,27 +62,6 @@
                         {
                             "name": "Blue",
                             "value": "bg-blue"
-                        }
-                    ]
-                },
-                {
-                    "component": "multiselect",
-                    "name": "classes",
-                    "label": "Style Options",
-                    "description": "The quote background color",
-                    "valueType": "string",
-                    "options": [
-                        {
-                            "name": "Dark",
-                            "value": "dark"
-                        },
-                        {
-                            "name": "Centered",
-                            "value": "centered"
-                        },
-                        {
-                            "name": "Large",
-                            "value": "large"
                         }
                     ]
                 }
