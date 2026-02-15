@@ -312,21 +312,6 @@
             "value": "h3"
           }
         ]
-      },
-      {
-        "name": "teaser",
-        "model": "teaser",
-        "image": "/content/dam/teaser-background.png",
-        "imageAlt": "A group of people sitting on a stage",
-        "teaserText_subtitle": "Adobe Experience Cloud",
-        "teaserText_title": "Meet the Experts",
-        "teaserText_titleType": "h2",
-        "teaserText_description": "<p>Join us in this ask me everything session...</p>",
-        "teaserText_cta1": "https://link.to/more-details",
-        "teaserText_cta1Text": "More Details",
-        "teaserText_cta2": "https://link.to/sign-up",
-        "teaserText_cta2Text": "RSVP",
-        "teaserText_cta2Type": "primary"
       }
     ]
   },
@@ -343,6 +328,65 @@
         "component": "text",
         "name": "name",
         "label": "Name"
+      }
+    ]
+  },
+  {
+    "id": "teaser",
+    "fields": [
+      {
+        "component": "text",
+        "name": "teaserText_subtitle",
+        "label": "Subtitle"
+      },
+      {
+        "component": "text",
+        "name": "teaserText_title",
+        "label": "Title"
+      },
+      {
+        "component": "select",
+        "name": "teaserText_titleType",
+        "label": "Title Type",
+        "options": [
+          {
+            "name": "H1",
+            "value": "h1"
+          },
+          {
+            "name": "H2",
+            "value": "h2"
+          },
+          {
+            "name": "H3",
+            "value": "h3"
+          }
+        ]
+      },
+      {
+        "component": "richtext",
+        "name": "teaserText_description",
+        "label": "Description"
+      },
+      {
+        "component": "text",
+        "name": "teaserText_cta1",
+        "label": "CTA 1 URL"
+      },
+      {
+        "component": "text",
+        "name": "teaserText_cta1Text",
+        "label": "CTA 1 Text"
+      },
+      {
+        "component": "text",
+        "name": "teaserText_cta2",
+        "label": "CTA 2 URL"
+      },
+      {
+        "component": "text",
+        "name": "teaserText_cta2Text",
+        "label": "CTA 2 Text"
       }
     ]
   }
