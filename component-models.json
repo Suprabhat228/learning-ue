@@ -253,6 +253,25 @@
             "value": "bg-blue"
           }
         ]
+      },
+      {
+        "component": "multiselect",
+        "name": "classes",
+        "label": "Style Options",
+        "options": [
+          {
+            "name": "Dark",
+            "value": "dark"
+          },
+          {
+            "name": "Centered",
+            "value": "centered"
+          },
+          {
+            "name": "Large",
+            "value": "large"
+          }
+        ]
       }
     ]
   },
