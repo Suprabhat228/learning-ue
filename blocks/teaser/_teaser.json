@@ -19,17 +19,21 @@
     "models": [
         {
             "id": "teaser",
-            "multi": true,
             "fields": [
                 {
-                    "component": "text",
-                    "name": "subtitle",
-                    "label": "Subtitle"
-                },
-                {
-                    "component": "text",
-                    "name": "title",
-                    "label": "Title"
+                    "component": "container",
+                    "name": "teasers",
+                    "multi": true,
+                    "fields": [
+                        {
+                            "component": "text",
+                            "name": "subtitle"
+                        },
+                        {
+                            "component": "text",
+                            "name": "title"
+                        }
+                    ]
                 }
             ]
         }
