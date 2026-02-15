@@ -242,7 +242,7 @@
       {
         "component": "multiselect",
         "name": "classes",
-        "label": "Style",
+        "label": "Styles",
         "multiple": true,
         "options": [
           {
