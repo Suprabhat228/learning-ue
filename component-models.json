@@ -258,6 +258,8 @@
         "component": "multiselect",
         "name": "classes",
         "label": "Style Options",
+        "description": "The quote background color",
+        "valueType": "string",
         "options": [
           {
             "name": "Dark",
