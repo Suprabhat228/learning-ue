@@ -80,6 +80,41 @@
                             "value": "bg-blue"
                         }
                     ]
+                },
+                {
+                    "component": "reference",
+                    "name": "image",
+                    "label": "Image",
+                    "multi": false
+                },
+                {
+                    "component": "text",
+                    "name": "imageAlt",
+                    "label": "Alt Text"
+                },
+                {
+                    "component": "text",
+                    "name": "headingTitle",
+                    "label": "Heading"
+                },
+                {
+                    "component": "select",
+                    "name": "headingTitleType",
+                    "label": "Heading Type",
+                    "options": [
+                        {
+                            "name": "H1",
+                            "value": "h1"
+                        },
+                        {
+                            "name": "H2",
+                            "value": "h2"
+                        },
+                        {
+                            "name": "H3",
+                            "value": "h3"
+                        }
+                    ]
                 }
             ]
         }
