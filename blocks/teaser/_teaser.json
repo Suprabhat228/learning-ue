@@ -73,6 +73,12 @@
                     "component": "text",
                     "name": "teaserText_cta2Text",
                     "label": "CTA 2 Text"
+                },
+                {
+                    "component": "text",
+                    "name": "keywords",
+                    "label": "Keywords",
+                    "multi": true
                 }
             ]
         }
