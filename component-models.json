@@ -243,6 +243,7 @@
         "component": "multiselect",
         "name": "classes",
         "label": "Style",
+        "multiple": true,
         "options": [
           {
             "name": "Highlight",
@@ -251,28 +252,6 @@
           {
             "name": "Highlight2",
             "value": "highlight2"
-          }
-        ]
-      },
-      {
-        "component": "select",
-        "name": "classes",
-        "value": "",
-        "label": "Background Color",
-        "description": "The quote background color",
-        "valueType": "string",
-        "options": [
-          {
-            "name": "Red",
-            "value": "bg-red"
-          },
-          {
-            "name": "Green",
-            "value": "bg-green"
-          },
-          {
-            "name": "Blue",
-            "value": "bg-blue"
           }
         ]
       }
