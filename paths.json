@@ -6,5 +6,13 @@
   ],
   "includes": [
     "/content/dept-ue-site/"
-  ]
+  ],
+  "headers": {
+    "/": [
+      {
+        "key": "x-test-header",
+        "value": "hello-world"
+      }
+    ]
+  }
 }

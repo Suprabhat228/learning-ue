@@ -142,16 +142,6 @@
     ]
   },
   {
-    "id": "section-metadata",
-    "fields": [
-      {
-        "component": "text",
-        "name": "backgroundImage",
-        "label": "Background Image"
-      }
-    ]
-  },
-  {
     "id": "card",
     "fields": [
       {
