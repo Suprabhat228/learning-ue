@@ -2,17 +2,10 @@
   "mappings": [
     "/content/dept-ue-site/:/",
     "/content/dept-ue-site/configuration:/.helix/config.json",
-    "/content/dept-ue-site/metadata:/metadata.json"
+    "/content/dept-ue-site/metadata:/metadata.json",
+    "/content/dept-ue-site/headers:/headers.json"
   ],
   "includes": [
     "/content/dept-ue-site/"
-  ],
-  "headers": {
-    "/": [
-      {
-        "key": "x-test-header",
-        "value": "hello-world"
-      }
-    ]
-  }
+  ]
 }
