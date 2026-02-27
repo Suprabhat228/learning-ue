@@ -51,6 +51,12 @@
     ]
   },
   {
+    "id": "home-page-banner-items",
+    "components": [
+      "home-page-banner-item"
+    ]
+  },
+  {
     "id": "team",
     "components": [
       "member"

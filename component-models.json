@@ -257,6 +257,32 @@
     ]
   },
   {
+    "id": "home-page-banner",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "heading",
+        "label": "Main Heading",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "subheading",
+        "label": "Subheading",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "description",
+        "label": "Description",
+        "multi": false
+      }
+    ]
+  },
+  {
     "id": "quote",
     "fields": [
       {
