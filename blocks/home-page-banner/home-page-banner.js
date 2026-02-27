@@ -2,74 +2,101 @@ import { createOptimizedPicture } from '../../scripts/aem.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
 
 export default function decorate(block) {
-  // 1. Tag the main block - DO NOT replace it
-  block.classList.add('home-page-banner-container');
+  const banner = document.createElement('div');
+  banner.className = 'home-page-banner-container';
 
-  // 2. Identify Rows
-  const rows = [...block.children];
-  
-  rows.forEach((row, index) => {
-    if (index === 0) {
-      // --- HEADER ROW ---
-      row.classList.add('home-page-banner-header-row');
-      const content = row.querySelector(':scope > div');
-      if (content) {
-        content.classList.add('home-page-banner-header-content');
-        
-        // Use class assignment rather than moving nodes
-        const h = content.querySelector('h1, h2, h3, h4, h5, h6');
-        if (h) h.classList.add('home-page-banner-main-heading');
-        
-        const ps = content.querySelectorAll('p');
-        if (ps[0]) ps[0].classList.add('home-page-banner-subheading');
-        if (ps[1]) ps[1].classList.add('home-page-banner-description');
-      }
-    } else {
-      // --- ITEM ROWS ---
-      row.classList.add('home-page-banner-item');
-      const cols = [...row.children];
+  // Process block fields (main heading, subheading, description)
+  const blockFields = block.querySelector(':scope > div');
+  if (blockFields) {
+    const heading = blockFields.querySelector('h1, h2, h3, h4, h5, h6');
+    if (heading) {
+      heading.className = 'home-page-banner-main-heading';
+    }
 
-      // Column 0: Image
-      const imageCol = cols[0];
-      if (imageCol) {
-        imageCol.classList.add('home-page-banner-image-wrapper');
-        const img = imageCol.querySelector('img');
+    const subheading = blockFields.querySelector('p');
+    if (subheading) {
+      subheading.className = 'home-page-banner-subheading';
+    }
+
+    const description = blockFields.nextElementSibling?.querySelector('p');
+    if (description) {
+      description.className = 'home-page-banner-description';
+    }
+  }
+
+  // Process banner items
+  const items = [...block.children].slice(1); // Skip block fields
+  items.forEach((row) => {
+    const item = document.createElement('div');
+    item.className = 'home-page-banner-item';
+
+    const columns = row.querySelectorAll(':scope > div');
+    if (columns.length >= 1) {
+      const imageCol = columns[0];
+      const contentCol = columns[1];
+
+      // Process image
+      const picture = imageCol.querySelector('picture');
+      if (picture) {
+        const img = picture.querySelector('img');
         if (img) {
           const optimizedPic = createOptimizedPicture(img.src, img.alt, false, [
-            { width: '800' }, { width: '1200' }, { width: '1600' }
+            { width: '800' },
+            { width: '1200' },
+            { width: '1600' }
           ]);
-          // This is the ONLY safe place to replace an element 
-          // because moveInstrumentation handles the UE metadata transfer
-          moveInstrumentation(img.closest('picture'), optimizedPic);
-          img.closest('picture').replaceWith(optimizedPic);
+          moveInstrumentation(img, optimizedPic.querySelector('img'));
+          picture.replaceWith(optimizedPic);
+          item.appendChild(optimizedPic);
         }
       }
 
-      // Column 1: Content
-      const contentCol = cols[1];
+      // Process content
       if (contentCol) {
-        contentCol.classList.add('home-page-banner-content');
-        
-        const itemH = contentCol.querySelector('h1, h2, h3, h4, h5, h6');
-        if (itemH) itemH.classList.add('home-page-banner-item-heading');
+        const contentDiv = document.createElement('div');
+        contentDiv.className = 'home-page-banner-content';
 
-        const itemPs = contentCol.querySelectorAll('p');
-        itemPs.forEach((p, pIdx) => {
-          // Identify if it's a link container or text
-          if (p.querySelector('a')) {
-            p.classList.add('home-page-banner-cta-container');
-            const links = p.querySelectorAll('a');
-            links.forEach((a, aIdx) => {
-              a.classList.add('home-page-banner-cta');
-              a.classList.add(aIdx === 0 ? 'primary' : 'secondary');
-            });
-          } else {
-            // Map remaining paragraphs to subhead/desc based on order
-            if (pIdx === 0) p.classList.add('home-page-banner-item-subheading');
-            else p.classList.add('home-page-banner-item-description');
-          }
-        });
+        const heading = contentCol.querySelector('h1, h2, h3, h4, h5, h6');
+        if (heading) {
+          heading.className = 'home-page-banner-item-heading';
+          contentDiv.appendChild(heading);
+        }
+
+        const subheading = contentCol.querySelector('p');
+        if (subheading) {
+          subheading.className = 'home-page-banner-item-subheading';
+          contentDiv.appendChild(subheading);
+        }
+
+        const description = contentCol.nextElementSibling?.querySelector('p');
+        if (description) {
+          description.className = 'home-page-banner-item-description';
+          contentDiv.appendChild(description);
+        }
+
+        // Process CTAs
+        const ctaContainer = document.createElement('div');
+        ctaContainer.className = 'home-page-banner-cta-container';
+
+        const ctaLink = contentCol.querySelector('a');
+        if (ctaLink) {
+          ctaLink.className = 'home-page-banner-cta primary';
+          ctaContainer.appendChild(ctaLink);
+        }
+
+        const secondaryCtaLink = contentCol.nextElementSibling?.querySelector('a');
+        if (secondaryCtaLink) {
+          secondaryCtaLink.className = 'home-page-banner-cta secondary';
+          ctaContainer.appendChild(secondaryCtaLink);
+        }
+
+        contentDiv.appendChild(ctaContainer);
+        item.appendChild(contentDiv);
       }
     }
+
+    banner.appendChild(item);
   });
+
+  block.replaceWith(banner);
 }
