@@ -1,4 +1,4 @@
 
 export default function decorate(block) {
-  console.log(block);
+  console.log('carousel',block);
 }  
