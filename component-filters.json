@@ -51,9 +51,9 @@
     ]
   },
   {
-    "id": "home-page-banner",
+    "id": "carousels",
     "components": [
-      "home-page-banner-item"
+      "carousel-items"
     ]
   },
   {
