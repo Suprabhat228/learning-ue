@@ -2,101 +2,84 @@ import { createOptimizedPicture } from '../../scripts/aem.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
 
 export default function decorate(block) {
-  const banner = document.createElement('div');
-  banner.className = 'home-page-banner-container';
+  // 1. Setup the main container
+  block.classList.add('home-page-banner-container');
 
-  // Process block fields (main heading, subheading, description)
-  const blockFields = block.querySelector(':scope > div');
-  if (blockFields) {
-    const heading = blockFields.querySelector('h1, h2, h3, h4, h5, h6');
-    if (heading) {
-      heading.className = 'home-page-banner-main-heading';
-    }
+  // 2. Separate the first row (Header) from the rest (Items)
+  const rows = [...block.children];
+  const headerRow = rows[0];
+  const itemRows = rows.slice(1);
 
-    const subheading = blockFields.querySelector('p');
-    if (subheading) {
-      subheading.className = 'home-page-banner-subheading';
-    }
+  // --- Process Header Section ---
+  if (headerRow) {
+    headerRow.classList.add('home-page-banner-header');
+    const headerCol = headerRow.querySelector(':scope > div');
+    
+    if (headerCol) {
+      // Find heading and description in the header
+      const heading = headerCol.querySelector('h1, h2, h3, h4, h5, h6');
+      if (heading) heading.classList.add('home-page-banner-main-heading');
 
-    const description = blockFields.nextElementSibling?.querySelector('p');
-    if (description) {
-      description.className = 'home-page-banner-description';
+      const subheading = headerCol.querySelector('p');
+      if (subheading) subheading.classList.add('home-page-banner-subheading');
+      
+      // If there's a second paragraph, it's the description
+      const description = headerCol.querySelectorAll('p')[1];
+      if (description) description.classList.add('home-page-banner-description');
     }
   }
 
-  // Process banner items
-  const items = [...block.children].slice(1); // Skip block fields
-  items.forEach((row) => {
-    const item = document.createElement('div');
-    item.className = 'home-page-banner-item';
-
-    const columns = row.querySelectorAll(':scope > div');
-    if (columns.length >= 1) {
-      const imageCol = columns[0];
-      const contentCol = columns[1];
-
-      // Process image
-      const picture = imageCol.querySelector('picture');
-      if (picture) {
-        const img = picture.querySelector('img');
-        if (img) {
-          const optimizedPic = createOptimizedPicture(img.src, img.alt, false, [
-            { width: '800' },
-            { width: '1200' },
-            { width: '1600' }
-          ]);
-          moveInstrumentation(img, optimizedPic.querySelector('img'));
-          picture.replaceWith(optimizedPic);
-          item.appendChild(optimizedPic);
+  // --- Process Banner Items ---
+  itemRows.forEach((row) => {
+    row.classList.add('home-page-banner-item');
+    const cols = [...row.children];
+    
+    // Column 0: Image
+    const imageCol = cols[0];
+    if (imageCol) {
+      imageCol.classList.add('home-page-banner-image-wrapper');
+      const img = imageCol.querySelector('img');
+      if (img) {
+        const optimizedPic = createOptimizedPicture(img.src, img.alt, false, [
+          { width: '800' },
+          { width: '1200' },
+          { width: '1600' }
+        ]);
+        // Critical for UE: Move instrumentation from old picture to new one
+        const oldPic = img.closest('picture');
+        if (oldPic) {
+          moveInstrumentation(oldPic, optimizedPic);
+          oldPic.replaceWith(optimizedPic);
         }
-      }
-
-      // Process content
-      if (contentCol) {
-        const contentDiv = document.createElement('div');
-        contentDiv.className = 'home-page-banner-content';
-
-        const heading = contentCol.querySelector('h1, h2, h3, h4, h5, h6');
-        if (heading) {
-          heading.className = 'home-page-banner-item-heading';
-          contentDiv.appendChild(heading);
-        }
-
-        const subheading = contentCol.querySelector('p');
-        if (subheading) {
-          subheading.className = 'home-page-banner-item-subheading';
-          contentDiv.appendChild(subheading);
-        }
-
-        const description = contentCol.nextElementSibling?.querySelector('p');
-        if (description) {
-          description.className = 'home-page-banner-item-description';
-          contentDiv.appendChild(description);
-        }
-
-        // Process CTAs
-        const ctaContainer = document.createElement('div');
-        ctaContainer.className = 'home-page-banner-cta-container';
-
-        const ctaLink = contentCol.querySelector('a');
-        if (ctaLink) {
-          ctaLink.className = 'home-page-banner-cta primary';
-          ctaContainer.appendChild(ctaLink);
-        }
-
-        const secondaryCtaLink = contentCol.nextElementSibling?.querySelector('a');
-        if (secondaryCtaLink) {
-          secondaryCtaLink.className = 'home-page-banner-cta secondary';
-          ctaContainer.appendChild(secondaryCtaLink);
-        }
-
-        contentDiv.appendChild(ctaContainer);
-        item.appendChild(contentDiv);
       }
     }
 
-    banner.appendChild(item);
-  });
+    // Column 1: Content
+    const contentCol = cols[1];
+    if (contentCol) {
+      contentCol.classList.add('home-page-banner-content');
 
-  block.replaceWith(banner);
+      // Style Heading
+      const itemHeading = contentCol.querySelector('h1, h2, h3, h4, h5, h6');
+      if (itemHeading) itemHeading.classList.add('home-page-banner-item-heading');
+
+      // Style Paragraphs (Subheading & Description)
+      const paragraphs = contentCol.querySelectorAll('p:not(.button-container)');
+      if (paragraphs[0]) paragraphs[0].classList.add('home-page-banner-item-subheading');
+      if (paragraphs[1]) paragraphs[1].classList.add('home-page-banner-item-description');
+
+      // Style CTAs (AEM naturally wraps links in .button-container)
+      const ctaContainer = document.createElement('div');
+      ctaContainer.className = 'home-page-banner-cta-container';
+      
+      const links = contentCol.querySelectorAll('a');
+      links.forEach((link, index) => {
+        link.classList.add('home-page-banner-cta');
+        link.classList.add(index === 0 ? 'primary' : 'secondary');
+        // We wrap links in a container for styling, but keep the link elements themselves
+        ctaContainer.appendChild(link.closest('.button-container') || link);
+      });
+      contentCol.appendChild(ctaContainer);
+    }
+  });
 }
