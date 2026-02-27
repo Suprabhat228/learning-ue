@@ -51,7 +51,7 @@
     ]
   },
   {
-    "id": "home-page-banner-items",
+    "id": "home-page-banner",
     "components": [
       "home-page-banner-item"
     ]

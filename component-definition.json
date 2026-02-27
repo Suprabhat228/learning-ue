@@ -198,7 +198,7 @@
                 "template": {
                   "name": "home-page-banner",
                   "model": "home-page-banner",
-                  "filter": "home-page-banner-items"
+                  "filter": "home-page-banner"
                 }
               }
             }
