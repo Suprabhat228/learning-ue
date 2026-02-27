@@ -1,27 +1,128 @@
-.cards > ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(257px, 1fr));
-  gap: 24px;
+/* Base Styles */
+.cards {
+  font-family: 'Noto Sans', sans-serif;
+  background-color: #f2f2f5;
+  padding: 32px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.cards > ul > li {
-  border: 1px solid #dadada;
-  background-color: var(--background-color);
+/* Title */
+.cards-container h1 {
+  color: #12121c;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 31.92px;
+  margin-bottom: 32px;
 }
 
-.cards .cards-card-body {
-  margin: 16px;
+/* Search */
+.cards-search {
+  margin-bottom: 32px;
+  display: flex;
+  justify-content: flex-end;
 }
 
-.cards .cards-card-image {
-  line-height: 0;
+.cards-search-input {
+  position: relative;
+  width: 400px;
+  max-width: 100%;
 }
 
-.cards > ul > li img {
+.cards-search-input input {
   width: 100%;
-  aspect-ratio: 4 / 3;
+  padding: 10px 40px 10px 16px;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  font-size: 14px;
+  background-color: #ffffff;
+}
+
+.cards-search-icon {
+  position: absolute;
+  right: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #767676;
+}
+
+.cards-mic-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #767676;
+  cursor: pointer;
+}
+
+/* Cards Grid */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.cards-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cards-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.cards-card img {
+  width: 100%;
+  height: 180px;
   object-fit: cover;
+  display: block;
+}
+
+.cards-card-content {
+  padding: 16px;
+}
+
+.cards-card-content h3 {
+  color: #12121c;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.cards-card-content p {
+  color: #6b6b80;
+  font-size: 12px;
+  line-height: 14.4px;
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .cards {
+    padding: 16px;
+  }
+
+  .cards-container h1 {
+    font-size: 24px;
+  }
+
+  .cards-search-input {
+    width: 100%;
+  }
+
+  .cards-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
 }

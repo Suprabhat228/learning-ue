@@ -142,6 +142,37 @@
     ]
   },
   {
+    "id": "cards",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "label": "Title",
+        "multi": false
+      },
+      {
+        "component": "aem-content",
+        "name": "searchLink",
+        "label": "Search Link",
+        "valueType": "string",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "searchText",
+        "label": "Search Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "searchPlaceholder",
+        "label": "Search Placeholder"
+      }
+    ]
+  },
+  {
     "id": "card",
     "fields": [
       {
@@ -152,11 +183,22 @@
         "multi": false
       },
       {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Image Alt"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "label": "Title"
+      },
+      {
         "component": "richtext",
-        "name": "text",
-        "value": "",
-        "label": "Text",
-        "valueType": "string"
+        "valueType": "string",
+        "name": "description",
+        "label": "Description"
       }
     ]
   },
