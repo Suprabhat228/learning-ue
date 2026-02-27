@@ -24,7 +24,8 @@
                     "page": {
                         "resourceType": "core/franklin/components/block/v1/block/item",
                         "template": {
-                            "name": "home-page-banner-item"
+                            "name": "home-page-banner-item",
+                            "model": "home-page-banner-item"
                         }
                     }
                 }
@@ -55,6 +56,102 @@
                     "name": "description",
                     "label": "Description",
                     "multi": false
+                }
+            ]
+        },
+        {
+            "id": "home-page-banner-item",
+            "fields": [
+                {
+                    "component": "reference",
+                    "valueType": "string",
+                    "name": "image",
+                    "label": "Background Image",
+                    "multi": false
+                },
+                {
+                    "component": "text",
+                    "valueType": "string",
+                    "name": "imageAlt",
+                    "label": "Image Alt Text",
+                    "multi": false
+                },
+                {
+                    "component": "text",
+                    "valueType": "string",
+                    "name": "heading",
+                    "label": "Heading",
+                    "multi": false
+                },
+                {
+                    "component": "text",
+                    "valueType": "string",
+                    "name": "subheading",
+                    "label": "Subheading",
+                    "multi": false
+                },
+                {
+                    "component": "richtext",
+                    "valueType": "string",
+                    "name": "description",
+                    "label": "Description",
+                    "multi": false
+                },
+                {
+                    "component": "aem-content",
+                    "name": "cta",
+                    "label": "Call to Action",
+                    "valueType": "string",
+                    "fields": [
+                        {
+                            "component": "text",
+                            "valueType": "string",
+                            "name": "ctaText",
+                            "label": "Button Text"
+                        },
+                        {
+                            "component": "text",
+                            "valueType": "string",
+                            "name": "ctaLink",
+                            "label": "Button Link"
+                        },
+                        {
+                            "component": "select",
+                            "valueType": "string",
+                            "name": "ctaType",
+                            "label": "Button Type",
+                            "options": [
+                                {
+                                    "value": "primary",
+                                    "label": "Primary"
+                                },
+                                {
+                                    "value": "secondary",
+                                    "label": "Secondary"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "component": "aem-content",
+                    "name": "secondaryCta",
+                    "label": "Secondary Call to Action",
+                    "valueType": "string",
+                    "fields": [
+                        {
+                            "component": "text",
+                            "valueType": "string",
+                            "name": "secondaryCtaText",
+                            "label": "Button Text"
+                        },
+                        {
+                            "component": "text",
+                            "valueType": "string",
+                            "name": "secondaryCtaLink",
+                            "label": "Button Link"
+                        }
+                    ]
                 }
             ]
         }
