@@ -2,6 +2,7 @@ import { createOptimizedPicture } from '../../scripts/aem.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
 
 export default function decorate(block) {
+  console.log('home-page-banner',block)
   const banner = document.createElement('div');
   banner.className = 'home-page-banner-container';
 
