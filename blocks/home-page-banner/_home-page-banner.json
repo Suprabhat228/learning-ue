@@ -1,32 +1,31 @@
-
 {
   "definitions": [
     {
-      "title": "Carousels",
-      "id": "carousels",
+      "title": "Home Page Banner",
+      "id": "home-page-banner",
       "plugins": {
         "xwalk": {
           "page": {
             "resourceType": "core/franklin/components/block/v1/block",
             "template": {
-              "name": "Carousels",
-              "filter": "carousels",
-              "model": "carousels"
+              "name": "home-page-banner",
+              "model": "home-page-banner",
+              "filter": "home-page-banner-items"
             }
           }
         }
       }
     },
     {
-      "title": "Carousel Items",
-      "id": "carousel-items",
+      "title": "Home Page Banner Item",
+      "id": "home-page-banner-item",
       "plugins": {
         "xwalk": {
           "page": {
             "resourceType": "core/franklin/components/block/v1/block/item",
             "template": {
-              "name": "Carousel Items",
-              "model": "carousel-items"
+              "name": "home-page-banner-item",
+              "model": "home-page-banner-item"
             }
           }
         }
@@ -35,54 +34,78 @@
   ],
   "models": [
     {
-      "id": "carousels",
+      "id": "home-page-banner",
       "fields": [
         {
           "component": "text",
           "valueType": "string",
-          "name": "title",
-          "label": "Title"
+          "name": "heading",
+          "label": "Main Heading",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "subheading",
+          "label": "Subheading",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "description",
+          "label": "Description",
+          "multi": false
         }
       ]
     },
     {
-      "id": "carousel-items",
+      "id": "home-page-banner-item",
       "fields": [
         {
           "component": "reference",
           "valueType": "string",
           "name": "image",
-          "label": "Image",
+          "label": "Background Image",
           "multi": false
         },
         {
           "component": "text",
           "valueType": "string",
           "name": "imageAlt",
-          "label": "Image Alt"
+          "label": "Image Alt Text",
+          "multi": false
         },
         {
           "component": "text",
           "valueType": "string",
-          "name": "link",
-          "label": "Link"
+          "name": "heading",
+          "label": "Heading",
+          "multi": false
         },
         {
           "component": "text",
           "valueType": "string",
-          "name": "linkText",
-          "label": "Link Text"
+          "name": "subheading",
+          "label": "Subheading",
+          "multi": false
+        },
+        {
+          "component": "richtext",
+          "valueType": "string",
+          "name": "description",
+          "label": "Description",
+          "multi": false
         }
       ]
     }
   ],
   "filters": [
     {
-      "id": "carousels",
+      "id": "home-page-banner-items",
       "components": [
-        "carousel-items"
+        "home-page-banner-item"
       ]
     }
   ]
 }
-    
