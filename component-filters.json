@@ -19,7 +19,8 @@
       "quote",
       "team",
       "teaser",
-      "carousel"
+      "carousel",
+      "home-page-banner-items"
     ]
   },
   {
@@ -47,6 +48,12 @@
       "image",
       "button",
       "title"
+    ]
+  },
+  {
+    "id": "home-page-banner-items",
+    "components": [
+      "home-page-banner-item"
     ]
   },
   {
