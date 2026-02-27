@@ -20,7 +20,7 @@
       "team",
       "teaser",
       "carousel",
-      "home-page-banner-items"
+      "home-page-banner"
     ]
   },
   {
@@ -48,12 +48,6 @@
       "image",
       "button",
       "title"
-    ]
-  },
-  {
-    "id": "home-page-banner-items",
-    "components": [
-      "home-page-banner-item"
     ]
   },
   {
