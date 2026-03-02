@@ -1,531 +1,139 @@
-
-/* ─────────────────────────────────────────────────────────
-   Hero Banner – Custom Properties
-───────────────────────────────────────────────────────── */
 .hero-banner {
-  --hero-banner-min-height: 480px;
-  --hero-banner-min-height-lg: 620px;
-  --hero-banner-padding-x: 1.25rem;
-  --hero-banner-padding-y: 3.5rem;
-  --hero-banner-max-content-width: 700px;
-  --hero-banner-overlay: rgba(0 0 0 / 0.45);
-  --hero-banner-text-light: #fff;
-  --hero-banner-text-dark: #1a1a2e;
-  --hero-banner-eyebrow-color: #e26b4a;
-  --hero-banner-eyebrow-color-light: rgba(255 255 255 / 0.8);
-  --hero-banner-primary-bg: #e26b4a;
-  --hero-banner-primary-hover: #c95a39;
-  --hero-banner-secondary-border: #fff;
-  --hero-banner-secondary-hover-bg: rgba(255 255 255 / 0.15);
-  --hero-banner-radius: 0.375rem;
-  --hero-banner-shadow: 0 4px 24px rgba(0 0 0 / 0.18);
-  --hero-banner-transition: 220ms ease;
-  --hero-banner-font-eyebrow: 0.75rem;
-  --hero-banner-font-title: clamp(2rem, 5vw, 3.25rem);
-  --hero-banner-font-desc: clamp(1rem, 2vw, 1.2rem);
-  --hero-banner-gradient-a: #667eea;
-  --hero-banner-gradient-b: #764ba2;
-  --hero-banner-dot-size: 10px;
-  --hero-banner-nav-size: 2.75rem;
-  --hero-banner-slide-transition: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  /* High-end Color Palette */
+  --hero-banner-accent: #e26b4a;
+  --hero-banner-accent-hover: #c95a39;
+  --hero-banner-bg-dark: #0f172a;
+  --hero-banner-text-main: #ffffff;
+  --hero-banner-text-muted: rgba(255, 255, 255, 0.7);
+  
+  /* Glassmorphism & Effects */
+  --hero-banner-glass-bg: rgba(255, 255, 255, 0.03);
+  --hero-banner-glass-border: rgba(255, 255, 255, 0.1);
+  --hero-banner-overlay-gradient: linear-gradient(to right, rgba(15, 23, 42, 0.9) 0%, rgba(15, 23, 42, 0.4) 50%, transparent 100%);
+  
+  /* Sizing */
+  --hero-banner-height-desktop: 75vh;
+  --hero-banner-height-mobile: 550px;
+  --hero-banner-content-max: 850px;
+  
+  /* Typography */
+  --hero-font-weight-bold: 800;
+  --hero-letter-spacing-tight: -0.03em;
 }
 
-/* ─────────────────────────────────────────────────────────
-   Block Root
-───────────────────────────────────────────────────────── */
 .hero-banner {
   position: relative;
-  width: 100%;
-  overflow: hidden;
-  background-color: var(--hero-banner-text-dark);
-}
-
-/* Remove EDS default column padding */
-.hero-banner > div {
-  margin: 0;
-  padding: 0;
-}
-
-/* ─────────────────────────────────────────────────────────
-   Inner Wrapper (shared across all variants)
-───────────────────────────────────────────────────────── */
-.hero-banner-inner {
-  position: relative;
+  min-height: var(--hero-banner-height-mobile);
   display: flex;
   align-items: center;
-  min-height: var(--hero-banner-min-height);
-  padding: var(--hero-banner-padding-y) var(--hero-banner-padding-x);
-  box-sizing: border-box;
-  width: 100%;
+  background-color: var(--hero-banner-bg-dark);
+  color: var(--hero-banner-text-main);
+  overflow: hidden;
 }
 
 @media (min-width: 900px) {
-  .hero-banner-inner {
-    min-height: var(--hero-banner-min-height-lg);
-    padding-inline: clamp(2rem, 8vw, 6rem);
+  .hero-banner {
+    min-height: var(--hero-banner-height-desktop);
   }
 }
 
-/* ─────────────────────────────────────────────────────────
-   Background Layer (image / video)
-───────────────────────────────────────────────────────── */
-.hero-banner-bg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  overflow: hidden;
-}
-
-.hero-banner-bg picture,
-.hero-banner-bg img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  display: block;
-}
-
-.hero-banner-bg--video video {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-
-/* Dark overlay for legibility over background media */
-.hero-banner--image-bg .hero-banner-inner::before,
-.hero-banner--video-bg .hero-banner-inner::before {
+/* Gradient Overlay for Legibility */
+.hero-banner--image-bg::after,
+.hero-banner--video-bg::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: var(--hero-banner-overlay);
+  background: var(--hero-banner-overlay-gradient);
   z-index: 1;
-  pointer-events: none;
 }
 
-/* ─────────────────────────────────────────────────────────
-   Content Block
-───────────────────────────────────────────────────────── */
+/* Content Layout */
 .hero-banner-content {
   position: relative;
   z-index: 2;
-  max-width: var(--hero-banner-max-content-width);
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  max-width: var(--hero-banner-content-max);
+  padding: 2rem;
+  animation: hero-fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* ─────────────────────────────────────────────────────────
-   Eyebrow
-───────────────────────────────────────────────────────── */
+@keyframes hero-fade-up {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 .hero-banner-eyebrow {
-  margin: 0;
-  font-size: var(--hero-banner-font-eyebrow);
+  font-size: 0.875rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--hero-banner-eyebrow-color);
+  letter-spacing: 0.2em;
+  color: var(--hero-banner-accent);
+  margin-bottom: 0.5rem;
+  display: block;
 }
 
-.hero-banner--image-bg .hero-banner-eyebrow,
-.hero-banner--video-bg .hero-banner-eyebrow {
-  color: var(--hero-banner-eyebrow-color-light);
-}
-
-/* ─────────────────────────────────────────────────────────
-   Heading
-───────────────────────────────────────────────────────── */
 .hero-banner-title {
-  margin: 0;
-  font-size: var(--hero-banner-font-title);
-  font-weight: 800;
-  line-height: 1.15;
-  letter-spacing: -0.02em;
-  color: var(--hero-banner-text-dark);
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: var(--hero-font-weight-bold);
+  line-height: 1.05;
+  letter-spacing: var(--hero-letter-spacing-tight);
+  text-wrap: balance; /* Modern browsers will wrap this nicely */
+  margin-bottom: 1.5rem;
 }
 
-.hero-banner--image-bg .hero-banner-title,
-.hero-banner--video-bg .hero-banner-title,
-.hero-banner--gradient .hero-banner-title,
-.hero-banner--carousel .hero-banner-title {
-  color: var(--hero-banner-text-light);
-}
-
-/* ─────────────────────────────────────────────────────────
-   Description
-───────────────────────────────────────────────────────── */
 .hero-banner-description {
-  font-size: var(--hero-banner-font-desc);
-  line-height: 1.65;
-  color: #444;
-  margin: 0;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  line-height: 1.6;
+  color: var(--hero-banner-text-muted);
+  max-width: 600px;
+  margin-bottom: 2.5rem;
 }
 
-.hero-banner-description p {
-  margin: 0;
-}
-
-.hero-banner--image-bg .hero-banner-description,
-.hero-banner--video-bg .hero-banner-description,
-.hero-banner--gradient .hero-banner-description,
-.hero-banner--carousel .hero-banner-description {
-  color: rgba(255 255 255 / 0.88);
-}
-
-/* ─────────────────────────────────────────────────────────
-   CTA Actions
-───────────────────────────────────────────────────────── */
-.hero-banner-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  margin-top: 0.5rem;
-}
-
+/* Premium CTAs */
 .hero-banner-cta {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.75rem 1.75rem;
-  border-radius: var(--hero-banner-radius);
-  font-size: 0.9375rem;
-  font-weight: 600;
-  text-decoration: none;
-  cursor: pointer;
-  transition:
-    background-color var(--hero-banner-transition),
-    transform var(--hero-banner-transition),
-    box-shadow var(--hero-banner-transition);
-  white-space: nowrap;
-}
-
-.hero-banner-cta:focus-visible {
-  outline: 3px solid #fff;
-  outline-offset: 3px;
+  padding: 1rem 2.5rem;
+  border-radius: 100px; /* Pill shape is more modern */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 1rem;
 }
 
 .hero-banner-cta--primary {
-  background-color: var(--hero-banner-primary-bg);
-  color: #fff;
-  box-shadow: 0 2px 8px rgba(226 107 74 / 0.4);
+  background: var(--hero-banner-accent);
+  border: 1px solid var(--hero-banner-accent);
+  box-shadow: 0 10px 20px -10px rgba(226, 107, 74, 0.5);
 }
 
 .hero-banner-cta--primary:hover {
-  background-color: var(--hero-banner-primary-hover);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(226 107 74 / 0.5);
-}
-
-.hero-banner-cta--primary:active {
-  transform: translateY(0);
+  background: var(--hero-banner-accent-hover);
+  transform: scale(1.05);
+  box-shadow: 0 15px 30px -10px rgba(226, 107, 74, 0.6);
 }
 
 .hero-banner-cta--secondary {
-  background-color: transparent;
-  color: var(--hero-banner-text-dark);
-  border: 2px solid var(--hero-banner-text-dark);
+  backdrop-filter: blur(10px); /* Glass effect */
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .hero-banner-cta--secondary:hover {
-  background-color: rgba(26 26 46 / 0.08);
-  transform: translateY(-2px);
-}
-
-.hero-banner--image-bg .hero-banner-cta--secondary,
-.hero-banner--video-bg .hero-banner-cta--secondary,
-.hero-banner--gradient .hero-banner-cta--secondary,
-.hero-banner--carousel .hero-banner-cta--secondary {
-  color: var(--hero-banner-text-light);
-  border-color: var(--hero-banner-secondary-border);
-}
-
-.hero-banner--image-bg .hero-banner-cta--secondary:hover,
-.hero-banner--video-bg .hero-banner-cta--secondary:hover,
-.hero-banner--gradient .hero-banner-cta--secondary:hover,
-.hero-banner--carousel .hero-banner-cta--secondary:hover {
-  background-color: var(--hero-banner-secondary-hover-bg);
-}
-
-/* ─────────────────────────────────────────────────────────
-   Variant: Text Only
-───────────────────────────────────────────────────────── */
-.hero-banner--text-only {
-  background-color: #f7f7f9;
-}
-
-.hero-banner--text-only .hero-banner-inner--text-only {
-  justify-content: center;
-  text-align: center;
-}
-
-.hero-banner--text-only .hero-banner-content {
-  align-items: center;
-  max-width: 780px;
-}
-
-/* ─────────────────────────────────────────────────────────
-   Variant: Image Background
-───────────────────────────────────────────────────────── */
-.hero-banner--image-bg .hero-banner-inner--image-bg {
-  justify-content: flex-start;
-}
-
-/* ─────────────────────────────────────────────────────────
-   Variant: Video Background
-───────────────────────────────────────────────────────── */
-.hero-banner--video-bg .hero-banner-inner--video-bg {
-  justify-content: center;
-  text-align: center;
-}
-
-.hero-banner--video-bg .hero-banner-content {
-  align-items: center;
-}
-
-/* ─────────────────────────────────────────────────────────
-   Variant: Split (Text + Image)
-───────────────────────────────────────────────────────── */
-.hero-banner--split {
-  background-color: #fff;
-}
-
-.hero-banner--split .hero-banner-inner--split {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
-  align-items: center;
-  padding-block: 2.5rem;
-}
-
-.hero-banner--split .hero-banner-title {
-  color: var(--hero-banner-text-dark);
-}
-
-.hero-banner--split .hero-banner-split-media {
-  width: 100%;
-  border-radius: 0.75rem;
-  overflow: hidden;
-  box-shadow: var(--hero-banner-shadow);
-}
-
-.hero-banner--split .hero-banner-split-media picture,
-.hero-banner--split .hero-banner-split-media img {
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: cover;
-}
-
-@media (min-width: 768px) {
-  .hero-banner--split .hero-banner-inner--split {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .hero-banner--split .hero-banner-split-media {
-    min-height: 400px;
-  }
-
-  .hero-banner--split .hero-banner-split-media img {
-    height: 100%;
-  }
-}
-
-/* ─────────────────────────────────────────────────────────
-   Variant: Animated Gradient
-───────────────────────────────────────────────────────── */
-.hero-banner--gradient {
-  background: linear-gradient(
-    135deg,
-    var(--hero-banner-gradient-a),
-    var(--hero-banner-gradient-b),
-    #f093fb,
-    var(--hero-banner-gradient-a)
-  );
-  background-size: 300% 300%;
-  animation: hero-banner-gradient-shift 8s ease infinite;
-}
-
-@keyframes hero-banner-gradient-shift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-.hero-banner--gradient .hero-banner-inner--gradient {
-  justify-content: center;
-  text-align: center;
-}
-
-.hero-banner--gradient .hero-banner-content {
-  align-items: center;
-}
-
-/* ─────────────────────────────────────────────────────────
-   Variant: Carousel
-───────────────────────────────────────────────────────── */
-.hero-banner--carousel .hero-banner-inner--carousel {
-  display: block;
-  padding: 0;
-  min-height: var(--hero-banner-min-height);
-}
-
-@media (min-width: 900px) {
-  .hero-banner--carousel .hero-banner-inner--carousel {
-    min-height: var(--hero-banner-min-height-lg);
-  }
-}
-
-.hero-banner-carousel-track {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-  min-height: inherit;
-}
-
-.hero-banner-slide {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  padding: var(--hero-banner-padding-y) var(--hero-banner-padding-x);
-  box-sizing: border-box;
-  opacity: 0;
-  transform: translateX(40px);
-  transition:
-    opacity var(--hero-banner-slide-transition),
-    transform var(--hero-banner-slide-transition);
-  pointer-events: none;
-  min-height: var(--hero-banner-min-height);
-}
-
-@media (min-width: 900px) {
-  .hero-banner-slide {
-    min-height: var(--hero-banner-min-height-lg);
-    padding-inline: clamp(2rem, 8vw, 6rem);
-  }
-}
-
-.hero-banner-slide--active {
-  opacity: 1;
-  transform: translateX(0);
-  pointer-events: auto;
-  position: relative;
-}
-
-/* Slide background overlay */
-.hero-banner-slide .hero-banner-bg + .hero-banner-content {
-  position: relative;
-  z-index: 2;
-}
-
-.hero-banner-slide .hero-banner-bg::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: var(--hero-banner-overlay);
-  z-index: 1;
-}
-
-/* Carousel nav buttons */
-.hero-banner-nav {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 10;
-  width: var(--hero-banner-nav-size);
-  height: var(--hero-banner-nav-size);
-  border-radius: 50%;
-  border: 2px solid rgba(255 255 255 / 0.6);
-  background: rgba(0 0 0 / 0.3);
-  color: #fff;
-  font-size: 1.5rem;
-  line-height: 1;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition:
-    background-color var(--hero-banner-transition),
-    border-color var(--hero-banner-transition),
-    transform var(--hero-banner-transition);
-  padding: 0;
-}
-
-.hero-banner-nav:hover {
-  background: rgba(0 0 0 / 0.55);
+  background: rgba(255, 255, 255, 0.2);
   border-color: #fff;
 }
 
-.hero-banner-nav:focus-visible {
-  outline: 3px solid #fff;
-  outline-offset: 2px;
+.hero-banner--split .hero-banner-inner {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr; /* Text is slightly larger than image */
+  align-items: center;
+  gap: 4rem;
 }
 
-.hero-banner-nav--prev {
-  left: 1rem;
+.hero-banner-split-media {
+  position: relative;
+  border-radius: 2rem;
+  box-shadow: 0 30px 60px -15px rgba(0,0,0,0.3);
+  transform: perspective(1000px) rotateY(-5deg); /* Subtle 3D effect */
+  transition: transform 0.5s ease;
 }
 
-.hero-banner-nav--next {
-  right: 1rem;
-}
-
-/* Dot indicators */
-.hero-banner-dots {
-  position: absolute;
-  bottom: 1.25rem;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 0.5rem;
-  z-index: 10;
-}
-
-.hero-banner-dot {
-  width: var(--hero-banner-dot-size);
-  height: var(--hero-banner-dot-size);
-  border-radius: 50%;
-  border: 2px solid rgba(255 255 255 / 0.7);
-  background: transparent;
-  cursor: pointer;
-  padding: 0;
-  transition:
-    background-color var(--hero-banner-transition),
-    transform var(--hero-banner-transition);
-}
-
-.hero-banner-dot--active {
-  background: #fff;
-  transform: scale(1.25);
-}
-
-.hero-banner-dot:hover {
-  background: rgba(255 255 255 / 0.6);
-}
-
-.hero-banner-dot:focus-visible {
-  outline: 2px solid #fff;
-  outline-offset: 2px;
-}
-
-/* ─────────────────────────────────────────────────────────
-   Accessibility – Reduced Motion
-───────────────────────────────────────────────────────── */
-@media (prefers-reduced-motion: reduce) {
-  .hero-banner--gradient {
-    animation: none;
-    background-position: 0% 50%;
-  }
-
-  .hero-banner-slide {
-    transition: opacity 120ms ease;
-    transform: none;
-  }
-
-  .hero-banner-cta--primary:hover,
-  .hero-banner-cta--secondary:hover,
-  .hero-banner-nav:hover {
-    transform: none;
-  }
+.hero-banner-split-media:hover {
+  transform: perspective(1000px) rotateY(0deg);
 }
