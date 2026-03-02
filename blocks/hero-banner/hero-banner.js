@@ -1,6 +1,8 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
 
+const VALID_VARIANTS = ['text-only', 'image-bg', 'video-bg', 'split', 'gradient'];
+
 const FIELD = {
   VARIANT: 1,
   EYEBROW: 2,
@@ -31,23 +33,106 @@ function getCellPicture(block, index) {
   return block.querySelector(`:scope > div:nth-child(${index}) > div picture`) || null;
 }
 
+function optimisePicture(picture, alt = '') {
+  if (!picture) return null;
+  const img = picture.querySelector('img');
+  if (!img) return picture;
+  const optimised = createOptimizedPicture(img.src, alt || img.alt, false, [
+    { media: '(min-width: 900px)', width: '1440' },
+    { width: '750' },
+  ]);
+  moveInstrumentation(img, optimised.querySelector('img'));
+  picture.replaceWith(optimised);
+  return optimised;
+}
+
+function buildCta(anchor, className) {
+  if (!anchor || !anchor.href) return null;
+  const a = document.createElement('a');
+  a.href = anchor.href;
+  if (anchor.title) a.title = anchor.title;
+  a.textContent = anchor.textContent.trim() || anchor.href;
+  a.className = className;
+  return a;
+}
+
+function buildActions(primaryAnchor, secondaryAnchor) {
+  const primaryCta = buildCta(primaryAnchor, 'hero-banner-cta hero-banner-cta--primary');
+  const secondaryCta = buildCta(secondaryAnchor, 'hero-banner-cta hero-banner-cta--secondary');
+  if (!primaryCta && !secondaryCta) return null;
+  const actions = document.createElement('div');
+  actions.className = 'hero-banner-actions';
+  if (primaryCta) actions.append(primaryCta);
+  if (secondaryCta) actions.append(secondaryCta);
+  return actions;
+}
+
+function buildTextContent({ eyebrow, title, descHtml, primaryAnchor, secondaryAnchor }) {
+  const content = document.createElement('div');
+  content.className = 'hero-banner-content';
+
+  if (eyebrow) {
+    const el = document.createElement('p');
+    el.className = 'hero-banner-eyebrow';
+    el.textContent = eyebrow;
+    content.append(el);
+  }
+
+  if (title) {
+    const h1 = document.createElement('h1');
+    h1.className = 'hero-banner-title';
+    h1.textContent = title;
+    content.append(h1);
+  }
+
+  if (descHtml) {
+    const desc = document.createElement('div');
+    desc.className = 'hero-banner-description';
+    desc.innerHTML = descHtml;
+    content.append(desc);
+  }
+
+  const actions = buildActions(primaryAnchor, secondaryAnchor);
+  if (actions) content.append(actions);
+
+  return content;
+}
+
 export default function decorate(block) {
-  const variant = getCellText(block, FIELD.VARIANT);
+  const rawVariant = getCellText(block, FIELD.VARIANT);
+  const variant = VALID_VARIANTS.includes(rawVariant) ? rawVariant : 'text-only';
+  block.classList.add(`hero-banner--${variant}`);
+
   const eyebrow = getCellText(block, FIELD.EYEBROW);
   const title = getCellText(block, FIELD.TITLE);
   const descHtml = getCellHtml(block, FIELD.DESCRIPTION);
   const primaryAnchor = getCellAnchor(block, FIELD.PRIMARY_LINK);
   const secondaryAnchor = getCellAnchor(block, FIELD.SECONDARY_LINK);
-  const picture = getCellPicture(block, FIELD.IMAGE);
+  const data = { eyebrow, title, descHtml, primaryAnchor, secondaryAnchor };
 
-  console.log('=== PARSED VALUES ===');
-  console.log('variant:', variant);
-  console.log('eyebrow:', eyebrow);
-  console.log('title:', title);
-  console.log('descHtml:', descHtml);
-  console.log('primaryAnchor href:', primaryAnchor?.href);
-  console.log('primaryAnchor text:', primaryAnchor?.textContent);
-  console.log('secondaryAnchor href:', secondaryAnchor?.href);
-  console.log('picture found:', picture);
-  console.log('=====================');
+  const firstInstrumented = block.firstElementChild;
+  const inner = document.createElement('div');
+  inner.className = 'hero-banner-inner';
+  if (firstInstrumented) moveInstrumentation(firstInstrumented, inner);
+
+  // image-bg variant
+  if (variant === 'image-bg') {
+    let picture = getCellPicture(block, FIELD.IMAGE);
+    picture = optimisePicture(picture, getCellText(block, FIELD.IMAGE));
+
+    console.log('picture after optimise:', picture);
+
+    if (picture) {
+      const bg = document.createElement('div');
+      bg.className = 'hero-banner-bg';
+      bg.append(picture);
+      block.prepend(bg);
+    }
+    inner.classList.add('hero-banner-inner--image-bg');
+  } else {
+    inner.classList.add(`hero-banner-inner--${variant}`);
+  }
+
+  inner.append(buildTextContent(data));
+  block.replaceChildren(inner);
 }
