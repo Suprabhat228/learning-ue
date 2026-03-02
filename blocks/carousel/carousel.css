@@ -1,78 +1,362 @@
 
-.carousel-container {
+/* ============================================================
+   Carousel Block — carousel.css
+   Mobile-first, scoped to .carousel, accessible & polished
+   ============================================================ */
+
+/* 1. CSS Custom Properties */
+.carousel {
+  --carousel-slide-gap: 0;
+  --carousel-radius: 0.75rem;
+  --carousel-overlay-bg: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.78) 0%,
+    rgba(0, 0, 0, 0.38) 55%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  --carousel-content-padding: 1.5rem;
+  --carousel-eyebrow-color: #f0a500;
+  --carousel-title-color: #ffffff;
+  --carousel-desc-color: rgba(255, 255, 255, 0.88);
+  --carousel-btn-bg: rgba(255, 255, 255, 0.15);
+  --carousel-btn-bg-hover: rgba(255, 255, 255, 0.32);
+  --carousel-btn-border: rgba(255, 255, 255, 0.4);
+  --carousel-btn-size: 2.75rem;
+  --carousel-dot-size: 0.5rem;
+  --carousel-dot-active-width: 1.75rem;
+  --carousel-dot-color: rgba(255, 255, 255, 0.4);
+  --carousel-dot-active-color: #ffffff;
+  --carousel-cta-bg: #f0a500;
+  --carousel-cta-color: #1a1a1a;
+  --carousel-cta-bg-hover: #d4920a;
+  --carousel-transition: 0.3s ease;
+  --carousel-aspect-ratio: 9 / 16;
+}
+
+/* 2. Block Root */
+.carousel {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--carousel-radius);
+  background: #111;
+  user-select: none;
+  outline: none;
+}
+
+.carousel:focus-visible {
+  outline: 3px solid var(--carousel-eyebrow-color);
+  outline-offset: 2px;
+}
+
+/* 3. Container */
+.carousel .carousel-container {
   position: relative;
   width: 100%;
-  overflow: hidden;
 }
 
-.carousel-slides {
+/* 4. Track */
+.carousel .carousel-track {
   display: flex;
-  transition: transform 0.5s ease-in-out;
+  overflow: hidden;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
 }
 
-.carousel-slide {
-  min-width: 100%;
-  display: none;
-}
-
-.carousel-slide.active {
+/* 5. Individual Slide */
+.carousel .carousel-slide {
+  position: relative;
+  flex: 0 0 100%;
+  width: 100%;
+  aspect-ratio: var(--carousel-aspect-ratio);
+  scroll-snap-align: start;
+  overflow: hidden;
+  /* Hidden slides are visually out of view but remain in DOM for a11y */
   display: block;
 }
 
-.carousel-slide picture {
-  width: 100%;
-}
-
-.carousel-slide picture img {
-  width: 100%;
-  height: auto;
-}
-
-.carousel-link-container {
+/* 6. Slide Image */
+.carousel .carousel-slide-image {
   position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  text-align: center;
+  inset: 0;
+  width: 100%;
+  height: 100%;
 }
 
-.carousel-link-container a {
+.carousel .carousel-slide-image picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.carousel .carousel-slide-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.6s ease;
+}
+
+.carousel .carousel-slide.is-active .carousel-slide-image img {
+  transform: scale(1.03);
+}
+
+/* 7. Overlay gradient */
+.carousel .carousel-slide::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--carousel-overlay-bg);
+  pointer-events: none;
+}
+
+/* 8. Slide Content */
+.carousel .carousel-slide-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  padding: var(--carousel-content-padding);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* 9. Eyebrow */
+.carousel .carousel-slide-eyebrow {
   display: inline-block;
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  text-decoration: none;
-  border-radius: 5px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--carousel-eyebrow-color);
+  background: rgba(240, 165, 0, 0.12);
+  border: 1px solid rgba(240, 165, 0, 0.35);
+  padding: 0.2rem 0.6rem;
+  border-radius: 2rem;
+  width: fit-content;
 }
 
-.carousel-indicators {
+/* 10. Title */
+.carousel .carousel-slide-title {
+  margin: 0;
+  font-size: clamp(1.25rem, 5vw, 2rem);
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--carousel-title-color);
+  letter-spacing: -0.02em;
+}
+
+/* 11. Description */
+.carousel .carousel-slide-description {
+  font-size: clamp(0.825rem, 2vw, 0.95rem);
+  line-height: 1.6;
+  color: var(--carousel-desc-color);
+  max-width: 60ch;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.carousel .carousel-slide-description p {
+  margin: 0;
+}
+
+/* 12. CTA */
+.carousel .carousel-slide-cta {
+  margin-top: 0.25rem;
+}
+
+.carousel .carousel-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1.25rem;
+  background: var(--carousel-cta-bg);
+  color: var(--carousel-cta-color);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 2rem;
+  letter-spacing: 0.02em;
+  transition:
+    background var(--carousel-transition),
+    transform var(--carousel-transition),
+    box-shadow var(--carousel-transition);
+  box-shadow: 0 2px 8px rgba(240, 165, 0, 0.3);
+}
+
+.carousel .carousel-cta-btn:hover {
+  background: var(--carousel-cta-bg-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(240, 165, 0, 0.45);
+}
+
+.carousel .carousel-cta-btn:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+/* 13. Navigation Buttons */
+.carousel .carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--carousel-btn-size);
+  height: var(--carousel-btn-size);
+  background: var(--carousel-btn-bg);
+  border: 1px solid var(--carousel-btn-border);
+  border-radius: 50%;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition:
+    background var(--carousel-transition),
+    transform var(--carousel-transition),
+    opacity var(--carousel-transition);
+  opacity: 0.8;
+}
+
+.carousel .carousel-btn:hover {
+  background: var(--carousel-btn-bg-hover);
+  opacity: 1;
+  transform: translateY(-50%) scale(1.08);
+}
+
+.carousel .carousel-btn:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+  opacity: 1;
+}
+
+.carousel .carousel-btn svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  fill: #ffffff;
+  pointer-events: none;
+}
+
+.carousel .carousel-btn-prev {
+  left: 0.75rem;
+}
+
+.carousel .carousel-btn-next {
+  right: 0.75rem;
+}
+
+/* 14. Dot Indicators */
+.carousel .carousel-dots {
   display: flex;
   justify-content: center;
-  margin-top: 10px;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.75rem 0 0.25rem;
 }
 
-.carousel-indicator {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background-color: #ccc;
-  margin: 0 5px;
+.carousel .carousel-dot {
+  width: var(--carousel-dot-size);
+  height: var(--carousel-dot-size);
+  border-radius: 99px;
+  background: var(--carousel-dot-color);
   border: none;
   cursor: pointer;
+  padding: 0;
+  transition:
+    width var(--carousel-transition),
+    background var(--carousel-transition);
 }
 
-.carousel-indicator.active {
-  background-color: #007bff;
+.carousel .carousel-dot.is-active {
+  width: var(--carousel-dot-active-width);
+  background: var(--carousel-dot-active-color);
 }
 
-@media (max-width: 768px) {
-  .carousel-link-container {
-    bottom: 10px;
+.carousel .carousel-dot:focus-visible {
+  outline: 2px solid var(--carousel-eyebrow-color);
+  outline-offset: 2px;
+}
+
+/* 15. Empty state */
+.carousel .carousel-empty {
+  padding: 2rem;
+  text-align: center;
+  color: #888;
+  font-size: 0.9rem;
+}
+
+/* 16. Slide transition animation */
+@media (prefers-reduced-motion: no-preference) {
+  .carousel .carousel-slide {
+    transition: opacity 0.35s ease;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel .carousel-slide-image img {
+    transition: none;
   }
 
-  .carousel-link-container a {
-    padding: 8px 16px;
-    font-size: 14px;
+  .carousel .carousel-btn,
+  .carousel .carousel-cta-btn,
+  .carousel .carousel-dot {
+    transition: none;
   }
 }
-    
+
+/* 17. Responsive — Tablet (600px+) */
+@media (min-width: 600px) {
+  .carousel {
+    --carousel-aspect-ratio: 2 / 1;
+    --carousel-content-padding: 2rem;
+    --carousel-btn-size: 3rem;
+  }
+
+  .carousel .carousel-slide-description {
+    -webkit-line-clamp: 4;
+  }
+}
+
+/* 18. Responsive — Desktop (900px+) */
+@media (min-width: 900px) {
+  .carousel {
+    --carousel-aspect-ratio: 21 / 9;
+    --carousel-content-padding: 3rem 3.5rem;
+  }
+
+  .carousel .carousel-slide-content {
+    max-width: 55%;
+  }
+
+  .carousel .carousel-btn-prev {
+    left: 1.25rem;
+  }
+
+  .carousel .carousel-btn-next {
+    right: 1.25rem;
+  }
+
+  .carousel .carousel-slide-description {
+    -webkit-line-clamp: unset;
+  }
+
+  .carousel .carousel-dots {
+    padding: 1rem 0 0.5rem;
+  }
+}
+
+/* 19. Responsive — Wide (1200px+) */
+@media (min-width: 1200px) {
+  .carousel {
+    --carousel-content-padding: 4rem 5rem;
+  }
+
+  .carousel .carousel-slide-content {
+    max-width: 50%;
+  }
+}

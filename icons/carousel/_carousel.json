@@ -10,22 +10,23 @@
             "resourceType": "core/franklin/components/block/v1/block",
             "template": {
               "name": "Carousel",
-              "filter": "carousel"
+              "filter": "carousel",
+              "model": "carousel"
             }
           }
         }
       }
     },
     {
-      "title": "Carousel Slide",
-      "id": "carousel-slide",
+      "title": "Carousel Item",
+      "id": "carousel-item",
       "plugins": {
         "xwalk": {
           "page": {
             "resourceType": "core/franklin/components/block/v1/block/item",
             "template": {
-              "name": "Carousel Slide",
-              "model": "carousel-slide"
+              "name": "Carousel",
+              "model": "carousel-item"
             }
           }
         }
@@ -34,56 +35,43 @@
   ],
   "models": [
     {
-      "id": "carousel-slide",
+      "id": "carousel",
+      "fields": [
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "title",
+          "label": "Title"
+        }
+      ]
+    },
+    {
+      "id": "carousel-item",
       "fields": [
         {
           "component": "reference",
           "valueType": "string",
           "name": "image",
-          "label": "Slide Image",
+          "label": "Image",
           "multi": false
         },
         {
           "component": "text",
           "valueType": "string",
           "name": "imageAlt",
-          "label": "Image Alt Text"
+          "label": "Image Alt"
         },
         {
           "component": "text",
-          "valueType": "string",
-          "name": "eyebrow",
-          "label": "Eyebrow Label"
-        },
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "title",
-          "label": "Slide Title"
-        },
-        {
-          "component": "richtext",
-          "valueType": "string",
-          "name": "description",
-          "label": "Slide Description"
-        },
-        {
-          "component": "aem-content",
           "valueType": "string",
           "name": "link",
-          "label": "CTA Link"
+          "label": "Link"
         },
         {
           "component": "text",
           "valueType": "string",
           "name": "linkText",
-          "label": "CTA Link Text"
-        },
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "linkTitle",
-          "label": "CTA Link Title"
+          "label": "Link Text"
         }
       ]
     }
@@ -91,7 +79,10 @@
   "filters": [
     {
       "id": "carousel",
-      "components": ["carousel-slide"]
+      "components": [
+        "carousel-item"
+      ]
     }
   ]
 }
+    

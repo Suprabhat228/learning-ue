@@ -1,44 +1,47 @@
 
-# Carousel Block
+# Carousel
 
-The Carousel block displays a series of images with optional call-to-action buttons. It automatically scrolls every 4 seconds and works on both desktop and mobile devices.
+A full-width, accessible image carousel block with autoplay, keyboard navigation, dot indicators, and CTA support — built for AEM Edge Delivery Services.
 
-## Authoring Guidelines
+## Block Type
+Interactive
 
-1. **Carousel Block**:
-   - **Title**: Add a title for the carousel (optional).
+## Authoring (Universal Editor)
 
-2. **Carousel Item**:
-   - **Image**: Select an image for the carousel slide.
-   - **Image Alt**: Provide alternative text for the image.
-   - **Link**: Add a URL for the call-to-action button.
-   - **Link Text**: Specify the text for the call-to-action button.
+To add this block to a page, insert a **Carousel** block and add one or more **Carousel Slide** child items. Each slide is independently authored with an image, optional eyebrow label, title, description, and a call-to-action link. The carousel supports autoplay (5 seconds), pauses on hover or focus, and can be navigated via arrow buttons or keyboard arrow keys.
 
-## Example Usage
+## Fields
 
-```html
-<div class="carousel">
-  <div>
-    <picture>
-      <img src="/content/dam/image1.jpg" alt="Image 1">
-    </picture>
-    <a href="https://example.com" title="Learn More">Learn More</a>
-  </div>
-  <div>
-    <picture>
-      <img src="/content/dam/image2.jpg" alt="Image 2">
-    </picture>
-    <a href="https://example.com" title="Discover More">Discover More</a>
-  </div>
-</div>
-```
+| Field       | Type        | Description                                                              |
+|-------------|-------------|--------------------------------------------------------------------------|
+| image       | reference   | Background image for the slide (required for visual impact)              |
+| imageAlt    | text        | Accessible alt text for the slide image                                  |
+| eyebrow     | text        | Small label displayed above the title (e.g., "New Arrival", "Featured")  |
+| title       | text        | Main heading for the slide (e.g., "Discover the Peak Collection")        |
+| description | richtext    | Supporting body text displayed below the title                           |
+| link        | aem-content | URL the CTA button points to                                             |
+| linkText    | text        | Visible CTA button label (e.g., "Shop Now", "Learn More")                |
+| linkTitle   | text        | Tooltip / title attribute for the CTA anchor (for accessibility)         |
 
-## CSS Classes
+## Block Items
 
-- `.carousel-container`: The main container for the carousel.
-- `.carousel-slides`: The container for the carousel slides.
-- `.carousel-slide`: Individual carousel slide.
-- `.carousel-link-container`: Container for the call-to-action button.
-- `.carousel-indicators`: Container for the carousel indicators.
-- `.carousel-indicator`: Individual carousel indicator.
-    
+Each **Carousel Slide** is a repeating child item within the Carousel block. Authors can add as many slides as needed. Each slide renders as a full-width panel with an image background, gradient overlay, and a content region anchored to the bottom of the slide. Slides cycle automatically every 5 seconds (paused on hover/focus) and can be navigated manually via previous/next arrow buttons or left/right keyboard arrow keys.
+
+**Example Slide Content:**
+- **Image:** `/content/dam/hero-landscape.jpg`
+- **Image Alt:** `A panoramic mountain landscape at sunrise`
+- **Eyebrow:** `Featured`
+- **Title:** `Discover the Peak Collection`
+- **Description:** `Explore our latest range of outdoor gear crafted for every adventure, from base camp to summit.`
+- **Link:** `https://example.com/collection`
+- **Link Text:** `Shop Now`
+- **Link Title:** `Browse the Peak Collection`
+
+## Variants
+
+No variants. The carousel adapts its aspect ratio automatically across breakpoints (mobile portrait → tablet landscape → cinema widescreen).
+
+## Dependencies
+
+- `createOptimizedPicture` — from `../../scripts/aem.js`; generates responsive `<picture>` elements with WebP sources.
+- `moveInstrumentation` — from `../../scripts/scripts.js`; migrates Universal Editor instrumentation attributes when DOM nodes are replaced.

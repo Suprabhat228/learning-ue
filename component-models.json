@@ -203,43 +203,56 @@
     ]
   },
   {
-    "id": "carousel",
-    "fields": [
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "title",
-        "label": "Title"
-      }
-    ]
-  },
-  {
-    "id": "carousel-item",
+    "id": "carousel-slide",
     "fields": [
       {
         "component": "reference",
         "valueType": "string",
         "name": "image",
-        "label": "Image",
+        "label": "Slide Image",
         "multi": false
       },
       {
         "component": "text",
         "valueType": "string",
         "name": "imageAlt",
-        "label": "Image Alt"
+        "label": "Image Alt Text"
       },
       {
         "component": "text",
         "valueType": "string",
+        "name": "eyebrow",
+        "label": "Eyebrow Label"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "label": "Slide Title"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "description",
+        "label": "Slide Description"
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
         "name": "link",
-        "label": "Link"
+        "label": "CTA Link"
       },
       {
         "component": "text",
         "valueType": "string",
         "name": "linkText",
-        "label": "Link Text"
+        "label": "CTA Link Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "linkTitle",
+        "label": "CTA Link Title"
       }
     ]
   },
