@@ -149,7 +149,20 @@ function buildTextOnly(inner, data) {
 
 function buildImageBg(block, inner, data) {
   let picture = getCellPicture(block, FIELD.IMAGE);
-  picture = optimisePicture(picture, getCellText(block, FIELD.IMAGE + 1));
+
+  // Fallback: try to build picture from DAM path string
+  if (!picture) {
+    const imgPath = getCellText(block, FIELD.IMAGE);
+    if (imgPath && imgPath.startsWith('/content/')) {
+      const altText = getCellText(block, FIELD.IMAGE + 1);
+      picture = createOptimizedPicture(imgPath, altText, false, [
+        { media: '(min-width: 900px)', width: '1440' },
+        { width: '750' },
+      ]);
+    }
+  } else {
+    picture = optimisePicture(picture, getCellText(block, FIELD.IMAGE + 1));
+  }
 
   if (picture) {
     const bg = document.createElement('div');
