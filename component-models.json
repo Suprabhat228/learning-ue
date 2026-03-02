@@ -314,10 +314,6 @@
           {
             "name": "Animated Gradient",
             "value": "gradient"
-          },
-          {
-            "name": "Carousel",
-            "value": "carousel"
           }
         ]
       },

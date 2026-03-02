@@ -32,8 +32,7 @@
             { "name": "Image Background", "value": "image-bg" },
             { "name": "Video Background", "value": "video-bg" },
             { "name": "Split (Text + Image)", "value": "split" },
-            { "name": "Animated Gradient", "value": "gradient" },
-            { "name": "Carousel", "value": "carousel" }
+            { "name": "Animated Gradient", "value": "gradient" }
           ]
         },
         {
