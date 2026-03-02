@@ -1,0 +1,152 @@
+
+{
+  "definitions": [
+    {
+      "title": "Product Color Feature",
+      "id": "product-color-feature",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "Product Color Feature",
+              "model": "product-color-feature",
+              "filter": "product-color-feature"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Color Swatch",
+      "id": "color-swatch",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block/item",
+            "template": {
+              "name": "Color Swatch",
+              "model": "color-swatch"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "product-color-feature",
+      "fields": [
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "productName",
+          "label": "Product Name",
+          "value": ""
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "productSubtitle",
+          "label": "Product Subtitle",
+          "value": ""
+        },
+        {
+          "component": "reference",
+          "valueType": "string",
+          "name": "productImage",
+          "label": "Product Image",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "productImageAlt",
+          "label": "Product Image Alt Text",
+          "value": ""
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "productPrice",
+          "label": "Product Price (e.g. $299.99)",
+          "value": ""
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "colorSectionLabel",
+          "label": "Color Section Label",
+          "value": "Select Color"
+        },
+        {
+          "component": "aem-content",
+          "valueType": "string",
+          "name": "ctaLink",
+          "label": "CTA Link"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "ctaLinkText",
+          "label": "CTA Button Text",
+          "value": "Add to Cart"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "ctaLinkTitle",
+          "label": "CTA Button Title",
+          "value": "Add to Cart"
+        }
+      ]
+    },
+    {
+      "id": "color-swatch",
+      "fields": [
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "colorName",
+          "label": "Color Name (e.g. Midnight Black)",
+          "value": ""
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "colorCode",
+          "label": "Color Hex Code (e.g. #1a1a2e)",
+          "value": ""
+        },
+        {
+          "component": "reference",
+          "valueType": "string",
+          "name": "colorImage",
+          "label": "Product Image for this Color",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "colorImageAlt",
+          "label": "Color Image Alt Text",
+          "value": ""
+        },
+        {
+          "component": "checkbox",
+          "valueType": "boolean",
+          "name": "isDefault",
+          "label": "Set as Default Color",
+          "value": false
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "product-color-feature",
+      "components": ["color-swatch"]
+    }
+  ]
+}
+  

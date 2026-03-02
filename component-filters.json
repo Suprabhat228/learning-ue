@@ -20,7 +20,8 @@
       "team",
       "teaser",
       "carousel",
-      "home-page-banner"
+      "home-page-banner",
+      "product-color-feature"
     ]
   },
   {
@@ -54,6 +55,12 @@
     "id": "home-page-banner-items",
     "components": [
       "home-page-banner-item"
+    ]
+  },
+  {
+    "id": "product-color-feature",
+    "components": [
+      "color-swatch"
     ]
   },
   {
