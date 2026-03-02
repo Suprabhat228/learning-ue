@@ -134,5 +134,8 @@ export default function decorate(block) {
   }
 
   inner.append(buildTextContent(data));
-  block.replaceChildren(inner);
+  [...block.children].forEach((row) => {
+    row.style.display = 'none';
+  });
+  block.append(inner);
 }
