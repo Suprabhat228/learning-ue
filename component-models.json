@@ -286,6 +286,123 @@
     ]
   },
   {
+    "id": "hero-banner",
+    "fields": [
+      {
+        "component": "select",
+        "name": "variant",
+        "label": "Variant",
+        "valueType": "string",
+        "value": "text-only",
+        "options": [
+          {
+            "name": "Text Only",
+            "value": "text-only"
+          },
+          {
+            "name": "Image Background",
+            "value": "image-bg"
+          },
+          {
+            "name": "Video Background",
+            "value": "video-bg"
+          },
+          {
+            "name": "Split (Text + Image)",
+            "value": "split"
+          },
+          {
+            "name": "Animated Gradient",
+            "value": "gradient"
+          },
+          {
+            "name": "Carousel",
+            "value": "carousel"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "name": "eyebrow",
+        "label": "Eyebrow Text",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "title",
+        "label": "Heading",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "description",
+        "label": "Description",
+        "valueType": "string"
+      },
+      {
+        "component": "aem-content",
+        "name": "primaryLink",
+        "label": "Primary CTA Link",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "primaryLinkText",
+        "label": "Primary CTA Text",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "primaryLinkTitle",
+        "label": "Primary CTA Title",
+        "valueType": "string"
+      },
+      {
+        "component": "aem-content",
+        "name": "secondaryLink",
+        "label": "Secondary CTA Link",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "secondaryLinkText",
+        "label": "Secondary CTA Text",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "secondaryLinkTitle",
+        "label": "Secondary CTA Title",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "name": "image",
+        "label": "Background / Split Image",
+        "valueType": "string",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "name": "imageAlt",
+        "label": "Image Alt Text",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "videoUrl",
+        "label": "Video URL (for Video Background variant)",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "slides",
+        "label": "Carousel Slides (one slide per paragraph — format: Title | Description | PrimaryLinkUrl | PrimaryLinkText | ImagePath)",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
     "id": "hero",
     "fields": [
       {
