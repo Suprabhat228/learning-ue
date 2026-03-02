@@ -183,6 +183,30 @@ function buildTextOnly(inner, data) {
 }
 
 function buildImageBg(block, inner, data) {
+
+  // ── TEMP DEBUG ──
+  const imageCell = block.querySelector(`:scope > div:nth-child(${FIELD.IMAGE}) > div`);
+  console.log('=== IMAGE DEBUG ===');
+  console.log('Image cell element:', imageCell);
+  console.log('Image cell outerHTML:', imageCell?.outerHTML);
+  console.log('Image cell textContent:', imageCell?.textContent);
+  console.log('Image cell innerHTML:', imageCell?.innerHTML);
+  
+  // Check for img tag directly
+  const imgTag = imageCell?.querySelector('img');
+  console.log('img tag found:', imgTag);
+  console.log('img src:', imgTag?.src);
+  console.log('img data-src:', imgTag?.dataset?.src);
+  
+  // Check all attributes on cell children
+  if (imageCell?.firstElementChild) {
+    console.log('First child tag:', imageCell.firstElementChild.tagName);
+    console.log('First child outerHTML:', imageCell.firstElementChild.outerHTML);
+  }
+  console.log('===================');
+  // ── END DEBUG ──
+
+  
   // ✅ Fixed: use buildPictureFromPath instead of getCellPicture
   const picture = buildPictureFromPath(block, FIELD.IMAGE, FIELD.IMAGE + 1);
 
