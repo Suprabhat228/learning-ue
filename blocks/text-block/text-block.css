@@ -1,0 +1,409 @@
+
+/* ============================================================
+   Text Block
+   Variants: single-column (default), two-column, drop-cap,
+             pull-quote, large-display
+   ============================================================ */
+
+/* 1. CSS Custom Properties */
+.text-block {
+  --text-block-max-width: 72ch;
+  --text-block-gap: 2rem;
+  --text-block-color: #1a1a1a;
+  --text-block-muted: #5a5a5a;
+  --text-block-accent: #0066cc;
+  --text-block-accent-light: #e8f0fb;
+  --text-block-border: #d0d0d0;
+  --text-block-eyebrow-color: #0066cc;
+  --text-block-quote-border: #0066cc;
+  --text-block-quote-bg: #f7f9fd;
+  --text-block-drop-cap-size: 4.5rem;
+  --text-block-line-height: 1.75;
+  --text-block-heading-line-height: 1.2;
+  --text-block-font-size: clamp(1rem, 1.5vw, 1.125rem);
+  --text-block-transition: 0.2s ease;
+}
+
+/* 2. Block Root */
+.text-block {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 3rem 1.25rem;
+  color: var(--text-block-color);
+  box-sizing: border-box;
+  container-type: inline-size;
+}
+
+/* 3. Direct Children — column wrappers */
+.text-block > div {
+  max-width: var(--text-block-max-width);
+  margin: 0 auto;
+}
+
+/* 4. Row elements — individual field wrappers */
+.text-block > div > div {
+  margin-bottom: var(--text-block-gap);
+}
+
+.text-block > div > div:last-child {
+  margin-bottom: 0;
+}
+
+/* 5. Content Elements */
+
+/* Eyebrow */
+.text-block .text-block-eyebrow {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-block-eyebrow-color);
+  margin: 0 0 0.75rem;
+}
+
+/* Headings */
+.text-block h1,
+.text-block h2,
+.text-block h3,
+.text-block h4,
+.text-block h5,
+.text-block h6 {
+  margin: 0 0 1rem;
+  line-height: var(--text-block-heading-line-height);
+  color: var(--text-block-color);
+  letter-spacing: -0.02em;
+}
+
+.text-block h1 {
+  font-size: clamp(2rem, 5cqi, 3rem);
+  font-weight: 800;
+}
+
+.text-block h2 {
+  font-size: clamp(1.5rem, 3.5cqi, 2.25rem);
+  font-weight: 700;
+}
+
+.text-block h3 {
+  font-size: clamp(1.25rem, 2.5cqi, 1.75rem);
+  font-weight: 700;
+}
+
+.text-block h4 {
+  font-size: clamp(1.1rem, 2cqi, 1.375rem);
+  font-weight: 600;
+}
+
+.text-block h5,
+.text-block h6 {
+  font-size: clamp(1rem, 1.5cqi, 1.125rem);
+  font-weight: 600;
+}
+
+/* Paragraph */
+.text-block p {
+  margin: 0 0 1.25em;
+  font-size: var(--text-block-font-size);
+  line-height: var(--text-block-line-height);
+  color: var(--text-block-color);
+}
+
+.text-block p:last-child {
+  margin-bottom: 0;
+}
+
+/* Links */
+.text-block a {
+  color: var(--text-block-accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+  transition: color var(--text-block-transition), text-decoration-color var(--text-block-transition);
+}
+
+.text-block a:hover {
+  color: #004499;
+  text-decoration-color: transparent;
+}
+
+.text-block a:focus-visible {
+  outline: 2px solid var(--text-block-accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Lists */
+.text-block ul,
+.text-block ol {
+  margin: 0 0 1.25em 1.5rem;
+  padding: 0;
+  line-height: var(--text-block-line-height);
+  font-size: var(--text-block-font-size);
+  color: var(--text-block-color);
+}
+
+.text-block li {
+  margin-bottom: 0.4em;
+}
+
+.text-block li:last-child {
+  margin-bottom: 0;
+}
+
+/* Blockquote (native richtext) */
+.text-block blockquote {
+  margin: 1.5rem 0;
+  padding: 1.25rem 1.5rem;
+  border-left: 4px solid var(--text-block-quote-border);
+  background: var(--text-block-quote-bg);
+  border-radius: 0 0.5rem 0.5rem 0;
+  font-style: italic;
+  color: var(--text-block-muted);
+}
+
+.text-block blockquote p {
+  margin-bottom: 0;
+  font-size: clamp(1.05rem, 1.75cqi, 1.2rem);
+}
+
+/* Strong / Em */
+.text-block strong {
+  font-weight: 700;
+  color: var(--text-block-color);
+}
+
+.text-block em {
+  font-style: italic;
+}
+
+/* Horizontal Rule */
+.text-block hr {
+  border: none;
+  border-top: 1.5px solid var(--text-block-border);
+  margin: 2rem 0;
+}
+
+/* Images inside richtext */
+.text-block picture {
+  display: block;
+  margin: 1.5rem 0;
+}
+
+.text-block img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+}
+
+/* Code */
+.text-block code {
+  font-family: 'Fira Mono', 'Consolas', monospace;
+  font-size: 0.875em;
+  background: #f3f4f6;
+  padding: 0.15em 0.45em;
+  border-radius: 4px;
+  color: #c7254e;
+}
+
+.text-block pre {
+  background: #1e1e2e;
+  color: #cdd6f4;
+  padding: 1.25rem 1.5rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  margin: 1.5rem 0;
+}
+
+.text-block pre code {
+  background: none;
+  color: inherit;
+  padding: 0;
+  border-radius: 0;
+  font-size: inherit;
+}
+
+/* 6. JS-added classes */
+
+/* Pull Quote element */
+.text-block .text-block-pull-quote {
+  margin: 0;
+  padding: 1.75rem 2rem;
+  border-left: 5px solid var(--text-block-quote-border);
+  background: var(--text-block-quote-bg);
+  border-radius: 0 0.75rem 0.75rem 0;
+  position: relative;
+}
+
+.text-block .text-block-pull-quote::before {
+  content: '\201C';
+  position: absolute;
+  top: -0.25rem;
+  left: 1.25rem;
+  font-size: 4rem;
+  line-height: 1;
+  color: var(--text-block-quote-border);
+  font-family: Georgia, serif;
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.text-block .text-block-pull-quote p {
+  font-size: clamp(1.15rem, 2.5cqi, 1.5rem);
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.55;
+  color: var(--text-block-color);
+  margin: 0;
+}
+
+/* ============================================================
+   Variant: Single Column (default)
+   Centered layout for long-form reading
+   ============================================================ */
+.text-block.single-column > div {
+  max-width: var(--text-block-max-width);
+  margin: 0 auto;
+  text-align: left;
+}
+
+.text-block.single-column.centered > div {
+  text-align: center;
+}
+
+/* ============================================================
+   Variant: Two Column
+   Magazine-style split content
+   ============================================================ */
+.text-block.two-column > div {
+  max-width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.text-block.two-column > div > div {
+  margin-bottom: 0;
+}
+
+/* Left column gets a subtle divider rule */
+.text-block.two-column > div > div:first-child {
+  border-right: 1.5px solid var(--text-block-border);
+  padding-right: 2rem;
+}
+
+.text-block.two-column > div > div:last-child {
+  padding-left: 0.5rem;
+}
+
+/* ============================================================
+   Variant: Drop Cap
+   Editorial first-letter treatment
+   ============================================================ */
+.text-block.drop-cap .text-block-body > p:first-of-type::first-letter {
+  float: left;
+  font-size: var(--text-block-drop-cap-size);
+  font-weight: 800;
+  line-height: 0.8;
+  margin: 0.08em 0.12em 0 0;
+  color: var(--text-block-accent);
+  font-family: Georgia, 'Times New Roman', serif;
+  letter-spacing: -0.02em;
+}
+
+/* ============================================================
+   Variant: Pull Quote
+   The pull-quote class promotes the pullQuote field to
+   the block-level pull-quote treatment (decorated in CSS only)
+   ============================================================ */
+.text-block.pull-quote .text-block-pull-quote {
+  font-size: clamp(1.25rem, 3cqi, 1.75rem);
+  font-style: italic;
+  font-weight: 600;
+  border-left-width: 6px;
+}
+
+/* ============================================================
+   Variant: Large Display
+   Oversized typography for hero / impact statements
+   ============================================================ */
+.text-block.large-display > div {
+  max-width: 100%;
+  text-align: center;
+}
+
+.text-block.large-display h1,
+.text-block.large-display h2 {
+  font-size: clamp(2.5rem, 8cqi, 5.5rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+}
+
+.text-block.large-display h3,
+.text-block.large-display h4 {
+  font-size: clamp(1.75rem, 5cqi, 3.5rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.text-block.large-display p {
+  font-size: clamp(1.15rem, 2.5cqi, 1.5rem);
+  max-width: 60ch;
+  margin-left: auto;
+  margin-right: auto;
+  color: var(--text-block-muted);
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+
+/* Tablet */
+@media (min-width: 600px) {
+  .text-block {
+    padding: 3.5rem 2rem;
+  }
+}
+
+/* Desktop */
+@media (min-width: 900px) {
+  .text-block {
+    padding: 4.5rem 3rem;
+  }
+}
+
+/* Two-column collapses to single on mobile */
+@media (max-width: 767px) {
+  .text-block.two-column > div {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .text-block.two-column > div > div:first-child {
+    border-right: none;
+    padding-right: 0;
+    border-bottom: 1.5px solid var(--text-block-border);
+    padding-bottom: 2rem;
+  }
+
+  .text-block.two-column > div > div:last-child {
+    padding-left: 0;
+  }
+
+  .text-block.large-display h1,
+  .text-block.large-display h2 {
+    font-size: clamp(2rem, 10vw, 3rem);
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .text-block a {
+    transition: none;
+  }
+}

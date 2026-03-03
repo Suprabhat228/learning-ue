@@ -316,6 +316,54 @@
     ]
   },
   {
+    "id": "grid-card-item",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Card Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Image Alt Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "label": "Card Title"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "description",
+        "label": "Card Description"
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "link",
+        "label": "CTA Link"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "linkText",
+        "label": "CTA Link Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "linkTitle",
+        "label": "CTA Link Title"
+      }
+    ]
+  },
+  {
     "id": "hero-banner",
     "fields": [
       {
@@ -930,6 +978,35 @@
             "name": "title"
           }
         ]
+      }
+    ]
+  },
+  {
+    "id": "text-block",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "eyebrow",
+        "label": "Eyebrow Label"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "heading",
+        "label": "Heading"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "body",
+        "label": "Body Content"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "pullQuote",
+        "label": "Pull Quote"
       }
     ]
   }

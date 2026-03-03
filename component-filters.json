@@ -24,7 +24,8 @@
       "hero-banner",
       "gallery-lightbox",
       "sidebar",
-      "sidebar-2"
+      "sidebar-2",
+      "grid-card"
     ]
   },
   {
@@ -58,6 +59,12 @@
     "id": "gallery-lightbox",
     "components": [
       "gallery-item"
+    ]
+  },
+  {
+    "id": "grid-card",
+    "components": [
+      "grid-card-item"
     ]
   },
   {

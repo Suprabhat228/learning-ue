@@ -59,7 +59,8 @@
         "hero-banner",
         "gallery-lightbox",
         "sidebar",
-        "sidebar-2"
+        "sidebar-2",
+        "grid-card"
       ]
     }
   ]
