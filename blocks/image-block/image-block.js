@@ -52,6 +52,7 @@ function buildOverlay(text) {
 }
 
 export default function decorate(block) {
+  console.log('block >>> ',block);
   const column = block.firstElementChild;
   if (!column) return;
 
