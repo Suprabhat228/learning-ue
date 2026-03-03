@@ -1,48 +1,62 @@
 .image-block {
   --image-block-max-width: 1200px;
   --image-block-radius: 1rem;
-  --image-block-shadow: 
-    0 10px 40px rgba(0, 0, 0, 0.15),
-    0 2px 8px rgba(0, 0, 0, 0.1);
+  --image-block-shadow:
+    0 12px 48px rgba(0, 0, 0, 0.18),
+    0 4px 14px rgba(0, 0, 0, 0.12);
 }
 
-/* Stronger visual presence */
+/* Wrapper must be positioned for overlay */
 .image-block .image-block-image-wrapper {
+  position: relative; /* IMPORTANT */
   overflow: hidden;
   border-radius: var(--image-block-radius);
   box-shadow: var(--image-block-shadow);
   transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
 
-/* Subtle lift on hover */
+/* Hover lift */
 .image-block.zoom-on-hover .image-block-image-wrapper:hover {
-  transform: translateY(-4px);
+  transform: translateY(-6px);
   box-shadow:
-    0 18px 60px rgba(0, 0, 0, 0.2),
-    0 4px 14px rgba(0, 0, 0, 0.15);
+    0 24px 70px rgba(0, 0, 0, 0.25),
+    0 8px 20px rgba(0, 0, 0, 0.18);
 }
 
-/* Better caption */
-.image-block .image-block-caption {
-  font-size: 0.95rem;
-  color: #4b5563;
-  margin-top: 1rem;
-  text-align: left;
-  max-width: 75ch;
-}
+/* ---------------- OVERLAY FIX ---------------- */
 
-/* Stronger overlay readability */
 .image-block .image-block-overlay {
+  position: absolute;        /* FIX */
+  inset: 0;                  /* Fill entire image */
+  display: flex;
+  align-items: flex-end;     /* Stick to bottom */
+  padding: 2rem 2rem 1.75rem;
   background: linear-gradient(
     to top,
-    rgba(0,0,0,0.75) 0%,
-    rgba(0,0,0,0.35) 60%,
-    rgba(0,0,0,0.05) 100%
+    rgba(0, 0, 0, 0.85) 0%,
+    rgba(0, 0, 0, 0.45) 55%,
+    rgba(0, 0, 0, 0.1) 85%,
+    transparent 100%
   );
 }
 
+/* Overlay text */
 .image-block .image-block-overlay-text {
-  font-size: clamp(1.4rem, 3vw, 2rem);
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
   font-weight: 800;
+  line-height: 1.2;
   letter-spacing: -0.02em;
+  max-width: 90%;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* Caption refinement */
+.image-block .image-block-caption {
+  font-size: 0.95rem;
+  color: #4b5563;
+  margin-top: 1.25rem;
+  max-width: 70ch;
+  line-height: 1.6;
 }
