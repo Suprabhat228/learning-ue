@@ -848,34 +848,33 @@
     "fields": [
       {
         "component": "text",
-        "valueType": "string",
         "name": "sectionTitle",
-        "label": "Section Title"
+        "label": "Section Title",
+        "valueType": "string"
       },
       {
         "component": "richtext",
-        "valueType": "string",
         "name": "sectionContent",
         "label": "Section Content",
-        "value": ""
+        "valueType": "string"
       },
       {
         "component": "aem-content",
-        "valueType": "string",
         "name": "ctaLink",
-        "label": "CTA Link"
+        "label": "CTA Link",
+        "valueType": "string"
       },
       {
         "component": "text",
-        "valueType": "string",
         "name": "ctaText",
-        "label": "CTA Text"
+        "label": "CTA Text",
+        "valueType": "string"
       },
       {
         "component": "select",
-        "valueType": "string",
         "name": "sectionType",
         "label": "Section Type",
+        "valueType": "string",
         "options": [
           {
             "name": "Navigation",
