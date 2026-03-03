@@ -62,7 +62,7 @@
     ]
   },
   {
-    "id": "grid-card",
+    "id": "grid-card-items",
     "components": [
       "grid-card-item"
     ]

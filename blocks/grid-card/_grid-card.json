@@ -83,10 +83,8 @@
   ],
   "filters": [
     {
-      "id": "grid-card",
-      "components": [
-        "grid-card-item"
-      ]
+      "id": "grid-card-items",
+      "components": ["grid-card-item"]
     }
   ]
 }
