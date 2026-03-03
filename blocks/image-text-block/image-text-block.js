@@ -2,39 +2,12 @@ import { createOptimizedPicture } from '../../scripts/aem.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
 
 /**
- * Utility: safely extract row by data-aue-prop
+ * Utility: find a row by its data-aue-prop
  */
-function getRowByProp(rows, prop) {
+function getRow(rows, prop) {
   return rows.find((row) =>
     row.querySelector(`[data-aue-prop="${prop}"]`)
   );
-}
-
-/**
- * Build CTA manually from individual fields
- */
-function buildCta(linkRow, linkTextRow, linkTitleRow, linkTypeRow) {
-  if (!linkRow) return null;
-
-  const url = linkRow.textContent.trim();
-  const text = linkTextRow?.textContent.trim();
-  const title = linkTitleRow?.textContent.trim();
-  const type = linkTypeRow?.textContent.trim() || 'primary';
-
-  if (!url || !text) return null;
-
-  const anchor = document.createElement('a');
-  anchor.href = url;
-  anchor.textContent = text;
-  anchor.className = `image-text-block-cta image-text-block-cta--${type}`;
-
-  if (title) anchor.title = title;
-
-  const wrapper = document.createElement('div');
-  wrapper.className = 'image-text-block-cta-wrapper';
-  wrapper.append(anchor);
-
-  return wrapper;
 }
 
 export default function decorate(block) {
@@ -43,22 +16,27 @@ export default function decorate(block) {
 
   const rows = [...column.children];
 
-  // Extract rows safely by property name
+  // Find rows safely (no index destructuring)
   const imageRow = rows.find((row) => row.querySelector('picture'));
-  const eyebrowRow = getRowByProp(rows, 'eyebrow');
-  const headingRow = getRowByProp(rows, 'heading');
-  const descriptionRow = getRowByProp(rows, 'description');
-  const linkRow = getRowByProp(rows, 'link');
-  const linkTextRow = getRowByProp(rows, 'linkText');
-  const linkTitleRow = getRowByProp(rows, 'linkTitle');
-  const linkTypeRow = getRowByProp(rows, 'linkType');
+  const eyebrowRow = getRow(rows, 'eyebrow');
+  const headingRow = getRow(rows, 'heading');
+  const descriptionRow = getRow(rows, 'description');
+  const linkRow = getRow(rows, 'link');
+  const linkTextRow = getRow(rows, 'linkText');
+  const linkTitleRow = getRow(rows, 'linkTitle');
+  const linkTypeRow = getRow(rows, 'linkType');
+
+  /* =========================================================
+     OUTER LAYOUT WRAPPER (SAFE)
+  ========================================================= */
 
   const inner = document.createElement('div');
   inner.className = 'image-text-block-inner';
+
   moveInstrumentation(column, inner);
 
   /* =========================================================
-     IMAGE SECTION
+     IMAGE PANE (PRESERVE ORIGINAL ROW)
   ========================================================= */
 
   if (imageRow) {
@@ -88,11 +66,11 @@ export default function decorate(block) {
       inner.append(imagePane);
     }
 
-    imageRow.remove();
+    imageRow.remove(); // safe: content migrated
   }
 
   /* =========================================================
-     TEXT SECTION
+     TEXT PANE (REUSE ORIGINAL FIELD ROWS)
   ========================================================= */
 
   const textPane = document.createElement('div');
@@ -100,66 +78,63 @@ export default function decorate(block) {
 
   // Eyebrow
   if (eyebrowRow) {
-    const text = eyebrowRow.textContent.trim();
-    if (text) {
-      const span = document.createElement('span');
-      span.className = 'image-text-block-eyebrow';
-      span.textContent = text;
-      textPane.append(span);
-    }
-    eyebrowRow.remove();
+    eyebrowRow.classList.add('image-text-block-eyebrow');
+    textPane.append(eyebrowRow);
   }
 
   // Heading
   if (headingRow) {
-    const existingHeading =
-      headingRow.querySelector('h1,h2,h3,h4,h5,h6');
-
-    if (existingHeading) {
-      existingHeading.className = 'image-text-block-heading';
-      textPane.append(existingHeading);
-    } else {
-      const text = headingRow.textContent.trim();
-      if (text) {
-        const h2 = document.createElement('h2');
-        h2.className = 'image-text-block-heading';
-        h2.textContent = text;
-        textPane.append(h2);
-      }
-    }
-
-    headingRow.remove();
+    headingRow.classList.add('image-text-block-heading');
+    textPane.append(headingRow);
   }
 
-  // Description (richtext)
+  // Description
   if (descriptionRow) {
-    if (descriptionRow.textContent.trim()) {
-      descriptionRow.className = 'image-text-block-description';
-      textPane.append(descriptionRow);
-    } else {
-      descriptionRow.remove();
+    descriptionRow.classList.add('image-text-block-description');
+    textPane.append(descriptionRow);
+  }
+
+  /* =========================================================
+     CTA BUILD (SAFE — DO NOT RECREATE FIELDS)
+  ========================================================= */
+
+  if (linkRow) {
+    const url = linkRow.textContent.trim();
+    const text = linkTextRow?.textContent.trim();
+    const title = linkTitleRow?.textContent.trim();
+    const type = linkTypeRow?.textContent.trim() || 'primary';
+
+    if (url && text) {
+      const anchor = document.createElement('a');
+      anchor.href = url;
+      anchor.textContent = text;
+      anchor.className = `image-text-block-cta image-text-block-cta--${type}`;
+
+      if (title) anchor.title = title;
+
+      const wrapper = document.createElement('div');
+      wrapper.className = 'image-text-block-cta-wrapper';
+      wrapper.append(anchor);
+
+      textPane.append(wrapper);
     }
   }
 
-  // CTA
-  const cta = buildCta(
-    linkRow,
-    linkTextRow,
-    linkTitleRow,
-    linkTypeRow,
-  );
+  inner.append(textPane);
 
-  if (cta) {
-    textPane.append(cta);
-  }
+  /* =========================================================
+     FINAL STRUCTURE UPDATE (SAFE)
+     Replace only column content, not block root
+  ========================================================= */
 
-  // Remove raw CTA rows
+  column.replaceChildren(inner);
+
+  /* =========================================================
+     CLEANUP ORIGINAL RAW CTA ROWS
+  ========================================================= */
+
   linkRow?.remove();
   linkTextRow?.remove();
   linkTitleRow?.remove();
   linkTypeRow?.remove();
-
-  inner.append(textPane);
-
-  block.replaceChildren(inner);
 }
