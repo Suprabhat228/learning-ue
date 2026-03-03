@@ -61,7 +61,8 @@
         "sidebar",
         "sidebar-2",
         "grid-card",
-        "text-block"
+        "text-block",
+        "image-block"
       ]
     }
   ]
