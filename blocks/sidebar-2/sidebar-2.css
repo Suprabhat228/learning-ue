@@ -1,0 +1,747 @@
+
+/* ============================================================
+   Sidebar 2 Block — sidebar-2.css
+   Variants: left (default), right, collapsible, sticky, floating
+   Focus: rich collapsible animations, entrance transitions,
+          section-level accordion, chevron rotation, mobile overlay
+   ============================================================ */
+
+/* 1. CSS Custom Properties */
+.sidebar-2 {
+  --s2-width: 17rem;
+  --s2-bg: #ffffff;
+  --s2-border: #e2e8f0;
+  --s2-header-bg: #f8fafc;
+  --s2-shadow: 0 4px 28px 0 rgba(15, 23, 42, 0.09);
+  --s2-radius: 0.75rem;
+  --s2-body-pad: 1.25rem;
+  --s2-section-gap: 0rem;
+  --s2-title-color: #1e293b;
+  --s2-label-color: #94a3b8;
+  --s2-nav-link-color: #475569;
+  --s2-nav-link-hover: #0f172a;
+  --s2-nav-active-bg: #eff6ff;
+  --s2-nav-active-color: #2563eb;
+  --s2-nav-active-border: #2563eb;
+  --s2-tag-bg: #f1f5f9;
+  --s2-tag-color: #334155;
+  --s2-tag-hover-bg: #dbeafe;
+  --s2-tag-hover-color: #1d4ed8;
+  --s2-cta-bg: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  --s2-cta-color: #ffffff;
+  --s2-toggle-color: #64748b;
+  --s2-chevron-color: #94a3b8;
+  --s2-mobile-btn-bg: #2563eb;
+  --s2-mobile-btn-color: #ffffff;
+  --s2-overlay-bg: rgba(15, 23, 42, 0.45);
+  --s2-ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --s2-dur: 320ms;
+  --s2-enter-dur: 420ms;
+  --s2-z: 200;
+  --s2-floating-z: 300;
+  --s2-section-divider: #f1f5f9;
+}
+
+/* 2. Block Root */
+.sidebar-2 {
+  display: block;
+  position: relative;
+}
+
+/* 3. Sidebar Panel */
+.sidebar-2 .sidebar-2-panel {
+  display: flex;
+  flex-direction: column;
+  width: var(--s2-width);
+  min-height: 100%;
+  background: var(--s2-bg);
+  border: 1px solid var(--s2-border);
+  border-radius: var(--s2-radius);
+  box-shadow: var(--s2-shadow);
+  overflow: hidden;
+  /* Panel-level transition for shadow and width changes */
+  transition:
+    box-shadow var(--s2-dur) var(--s2-ease),
+    width var(--s2-dur) var(--s2-ease);
+}
+
+/* ── Position variants ── */
+.sidebar-2 .sidebar-2-panel--left {
+  border-right: 2px solid var(--s2-border);
+  border-radius: var(--s2-radius) 0 0 var(--s2-radius);
+}
+
+.sidebar-2 .sidebar-2-panel--right {
+  border-left: 2px solid var(--s2-border);
+  border-radius: 0 var(--s2-radius) var(--s2-radius) 0;
+}
+
+/* ── Sticky variant ── */
+.sidebar-2 .sidebar-2-panel--sticky {
+  position: sticky;
+  top: 1.5rem;
+  max-height: calc(100vh - 3rem);
+  overflow-y: auto;
+}
+
+/* ── Floating variant ── */
+.sidebar-2 .sidebar-2-panel--floating {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  z-index: var(--s2-floating-z);
+  border-radius: 0 var(--s2-radius) var(--s2-radius) 0;
+  box-shadow: 6px 0 40px rgba(15, 23, 42, 0.18);
+  /* Slide-in from left */
+  transform: translateX(-110%);
+  transition:
+    transform var(--s2-dur) var(--s2-ease),
+    box-shadow var(--s2-dur) var(--s2-ease),
+    visibility 0ms var(--s2-dur);
+}
+
+.sidebar-2 .sidebar-2-panel--floating.sidebar-2-panel--right {
+  left: auto;
+  right: 0;
+  transform: translateX(110%);
+  border-radius: var(--s2-radius) 0 0 var(--s2-radius);
+}
+
+.sidebar-2 .sidebar-2-panel--floating.sidebar-2-panel--open {
+  transform: translateX(0);
+  transition:
+    transform var(--s2-dur) var(--s2-ease),
+    box-shadow var(--s2-dur) var(--s2-ease);
+}
+
+/* ── Entrance animation (applied by JS on first render) ── */
+.sidebar-2 .sidebar-2-panel--enter {
+  opacity: 0;
+  transform: translateX(-1.5rem);
+}
+
+.sidebar-2 .sidebar-2-panel--right.sidebar-2-panel--enter {
+  transform: translateX(1.5rem);
+}
+
+.sidebar-2 .sidebar-2-panel--enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition:
+    opacity var(--s2-enter-dur) var(--s2-ease),
+    transform var(--s2-enter-dur) var(--s2-ease);
+}
+
+/* Floating panels handle their own entrance via the open/closed transform */
+.sidebar-2 .sidebar-2-panel--floating.sidebar-2-panel--enter,
+.sidebar-2 .sidebar-2-panel--floating.sidebar-2-panel--enter-active {
+  opacity: 1;
+  transform: translateX(-110%);
+}
+
+.sidebar-2 .sidebar-2-panel--floating.sidebar-2-panel--right.sidebar-2-panel--enter,
+.sidebar-2 .sidebar-2-panel--floating.sidebar-2-panel--right.sidebar-2-panel--enter-active {
+  transform: translateX(110%);
+}
+
+/* ── Collapsed panel state ── */
+.sidebar-2 .sidebar-2-panel--collapsed {
+  box-shadow: 0 2px 8px 0 rgba(15, 23, 42, 0.05);
+}
+
+/* 4. Sidebar Header */
+.sidebar-2 .sidebar-2-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem var(--s2-body-pad);
+  background: var(--s2-header-bg);
+  border-bottom: 1px solid var(--s2-border);
+  min-height: 3.25rem;
+  /* Subtle bottom shadow separating header from body */
+  box-shadow: 0 1px 0 var(--s2-section-divider);
+  position: relative;
+  z-index: 1;
+}
+
+.sidebar-2 .sidebar-2-header-title {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--s2-label-color);
+  user-select: none;
+}
+
+/* 5. Panel-level Collapse Toggle */
+.sidebar-2 .sidebar-2-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--s2-toggle-color);
+  border-radius: 0.375rem;
+  transition:
+    background var(--s2-dur) var(--s2-ease),
+    color var(--s2-dur) var(--s2-ease);
+}
+
+.sidebar-2 .sidebar-2-toggle:hover {
+  background: #f1f5f9;
+  color: var(--s2-title-color);
+}
+
+.sidebar-2 .sidebar-2-toggle:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+/* Animated 3-line hamburger → X icon */
+.sidebar-2 .sidebar-2-toggle-icon {
+  display: block;
+  width: 1rem;
+  height: 0.125rem;
+  background: currentcolor;
+  position: relative;
+  transition: background var(--s2-dur) var(--s2-ease);
+}
+
+.sidebar-2 .sidebar-2-toggle-icon::before,
+.sidebar-2 .sidebar-2-toggle-icon::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 0.125rem;
+  background: currentcolor;
+  position: absolute;
+  transition:
+    transform var(--s2-dur) var(--s2-ease),
+    top var(--s2-dur) var(--s2-ease),
+    bottom var(--s2-dur) var(--s2-ease);
+}
+
+.sidebar-2 .sidebar-2-toggle-icon::before {
+  top: -0.375rem;
+}
+
+.sidebar-2 .sidebar-2-toggle-icon::after {
+  bottom: -0.375rem;
+}
+
+/* X state when collapsed */
+.sidebar-2 .sidebar-2-panel--collapsed .sidebar-2-toggle-icon {
+  background: transparent;
+}
+
+.sidebar-2 .sidebar-2-panel--collapsed .sidebar-2-toggle-icon::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+
+.sidebar-2 .sidebar-2-panel--collapsed .sidebar-2-toggle-icon::after {
+  bottom: 0;
+  transform: rotate(-45deg);
+}
+
+/* 6. Sidebar Body (panel-level collapsible target) */
+.sidebar-2 .sidebar-2-body {
+  flex: 1;
+  overflow-y: auto;
+  /* max-height / opacity / overflow are set inline by JS for animation */
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 transparent;
+}
+
+.sidebar-2 .sidebar-2-body::-webkit-scrollbar {
+  width: 4px;
+}
+
+.sidebar-2 .sidebar-2-body::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 2px;
+}
+
+/* 7. Sidebar Section Wrapper */
+.sidebar-2 .sidebar-2-section {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid var(--s2-section-divider);
+  transition: background var(--s2-dur) var(--s2-ease);
+}
+
+.sidebar-2 .sidebar-2-section:last-child {
+  border-bottom: none;
+}
+
+/* Subtle hover tint on the whole section */
+.sidebar-2 .sidebar-2-section:hover {
+  background: #fafbfc;
+}
+
+/* 8. Section Header (accordion trigger) */
+.sidebar-2 .sidebar-2-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.9375rem var(--s2-body-pad);
+  cursor: pointer;
+  user-select: none;
+  gap: 0.5rem;
+  /* Interactive feel */
+  transition: background var(--s2-dur) var(--s2-ease);
+  border-radius: 0;
+}
+
+.sidebar-2 .sidebar-2-section-header:hover {
+  background: #f1f5f9;
+}
+
+.sidebar-2 .sidebar-2-section-header:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: -2px;
+  border-radius: 0.25rem;
+}
+
+/* Remove pointer cursor from non-collapsible headers */
+.sidebar-2:not(.collapsible) .sidebar-2-section-header {
+  cursor: default;
+}
+
+/* 9. Section Title */
+.sidebar-2 .sidebar-2-section-title {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--s2-label-color);
+  margin: 0;
+  padding: 0;
+  flex: 1;
+  transition: color var(--s2-dur) var(--s2-ease);
+}
+
+.sidebar-2 .sidebar-2-section-header:hover .sidebar-2-section-title {
+  color: var(--s2-title-color);
+}
+
+/* 10. Chevron Icon (rotate on open/close) */
+.sidebar-2 .sidebar-2-section-chevron {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+  position: relative;
+  color: var(--s2-chevron-color);
+  transition: transform var(--s2-dur) var(--s2-ease), color var(--s2-dur) var(--s2-ease);
+}
+
+/* Draw chevron with borders */
+.sidebar-2 .sidebar-2-section-chevron::before {
+  content: '';
+  display: block;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-right: 2px solid currentcolor;
+  border-bottom: 2px solid currentcolor;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-60%, -65%) rotate(45deg);
+  transition: transform var(--s2-dur) var(--s2-ease);
+}
+
+/* Collapsed state: chevron points right (default) */
+.sidebar-2 .sidebar-2-section--collapsed .sidebar-2-section-chevron {
+  transform: rotate(-90deg);
+  color: #2563eb;
+}
+
+.sidebar-2 .sidebar-2-section-header:hover .sidebar-2-section-chevron {
+  color: var(--s2-title-color);
+}
+
+/* 11. Section Body (accordion content — animated by JS) */
+.sidebar-2 .sidebar-2-section-body {
+  /* Base padding — visible when open */
+  padding: 0 var(--s2-body-pad) 1.125rem;
+  /* JS controls max-height, opacity, overflow for animation */
+  will-change: max-height, opacity;
+}
+
+/* When section is collapsed, remove bottom padding to avoid gap flash */
+.sidebar-2 .sidebar-2-section--collapsed .sidebar-2-section-body {
+  padding-bottom: 0;
+}
+
+.sidebar-2 .sidebar-2-section-empty {
+  font-size: 0.8125rem;
+  color: var(--s2-label-color);
+  font-style: italic;
+  margin: 0;
+  padding: 0.75rem var(--s2-body-pad);
+}
+
+/* 12. Navigation Section */
+.sidebar-2 .sidebar-2-nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.sidebar-2 .sidebar-2-nav-item {
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar-2 .sidebar-2-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.5625rem 0.875rem;
+  border-radius: 0.5rem;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--s2-nav-link-color);
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  transition:
+    background var(--s2-dur) var(--s2-ease),
+    color var(--s2-dur) var(--s2-ease),
+    border-color var(--s2-dur) var(--s2-ease),
+    transform 150ms var(--s2-ease);
+}
+
+.sidebar-2 .sidebar-2-nav-link:hover {
+  background: #f8fafc;
+  color: var(--s2-nav-link-hover);
+  transform: translateX(2px);
+}
+
+.sidebar-2 .sidebar-2-nav-link:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+.sidebar-2 .sidebar-2-nav-link.active {
+  background: var(--s2-nav-active-bg);
+  color: var(--s2-nav-active-color);
+  border-left-color: var(--s2-nav-active-border);
+  font-weight: 600;
+}
+
+/* Staggered item entrance — items animate in sequence when parent opens */
+.sidebar-2 .sidebar-2-nav-item {
+  opacity: 0;
+  transform: translateX(-0.5rem);
+  animation: sidebar2-item-in var(--s2-dur) var(--s2-ease) forwards;
+}
+
+.sidebar-2 .sidebar-2-section--collapsed .sidebar-2-nav-item {
+  animation: none;
+  opacity: 0;
+}
+
+.sidebar-2 .sidebar-2-nav-item:nth-child(1)  { animation-delay: 40ms; }
+.sidebar-2 .sidebar-2-nav-item:nth-child(2)  { animation-delay: 80ms; }
+.sidebar-2 .sidebar-2-nav-item:nth-child(3)  { animation-delay: 120ms; }
+.sidebar-2 .sidebar-2-nav-item:nth-child(4)  { animation-delay: 160ms; }
+.sidebar-2 .sidebar-2-nav-item:nth-child(5)  { animation-delay: 200ms; }
+.sidebar-2 .sidebar-2-nav-item:nth-child(6)  { animation-delay: 240ms; }
+.sidebar-2 .sidebar-2-nav-item:nth-child(7)  { animation-delay: 280ms; }
+.sidebar-2 .sidebar-2-nav-item:nth-child(n+8) { animation-delay: 320ms; }
+
+@keyframes sidebar2-item-in {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* 13. Info Section */
+.sidebar-2 .sidebar-2-info {
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: #475569;
+}
+
+.sidebar-2 .sidebar-2-info p {
+  margin: 0 0 0.75rem;
+}
+
+.sidebar-2 .sidebar-2-info p:last-child {
+  margin-bottom: 0;
+}
+
+.sidebar-2 .sidebar-2-info a {
+  color: #2563eb;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color var(--s2-dur) var(--s2-ease);
+}
+
+.sidebar-2 .sidebar-2-info a:hover {
+  color: #1d4ed8;
+}
+
+.sidebar-2 .sidebar-2-info strong {
+  color: var(--s2-title-color);
+  font-weight: 600;
+}
+
+/* 14. Tags Section */
+.sidebar-2 .sidebar-2-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.sidebar-2 .sidebar-2-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3125rem 0.75rem;
+  border-radius: 999px;
+  background: var(--s2-tag-bg);
+  color: var(--s2-tag-color);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  transition:
+    background var(--s2-dur) var(--s2-ease),
+    color var(--s2-dur) var(--s2-ease),
+    transform 150ms var(--s2-ease);
+}
+
+.sidebar-2 .sidebar-2-tag:hover {
+  background: var(--s2-tag-hover-bg);
+  color: var(--s2-tag-hover-color);
+  transform: scale(1.04);
+}
+
+.sidebar-2 .sidebar-2-tag:focus-within {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+.sidebar-2 .sidebar-2-tag-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* 15. CTA Section */
+.sidebar-2 .sidebar-2-cta {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.125rem;
+  background: #f0f7ff;
+  border-radius: 0.625rem;
+  border: 1px solid #bfdbfe;
+}
+
+.sidebar-2 .sidebar-2-cta-description {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: #334155;
+}
+
+.sidebar-2 .sidebar-2-cta-description p {
+  margin: 0 0 0.5rem;
+}
+
+.sidebar-2 .sidebar-2-cta-description p:last-child {
+  margin-bottom: 0;
+}
+
+.sidebar-2 .sidebar-2-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6875rem 1.25rem;
+  background: var(--s2-cta-bg);
+  color: var(--s2-cta-color);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  text-align: center;
+  transition:
+    filter var(--s2-dur) var(--s2-ease),
+    transform 150ms var(--s2-ease),
+    box-shadow var(--s2-dur) var(--s2-ease);
+}
+
+.sidebar-2 .sidebar-2-cta-btn:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3);
+}
+
+.sidebar-2 .sidebar-2-cta-btn:focus-visible {
+  outline: 2px solid #1d4ed8;
+  outline-offset: 3px;
+}
+
+.sidebar-2 .sidebar-2-cta-btn:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* 16. Mobile Toggle Button */
+.sidebar-2-mobile-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  background: var(--s2-mobile-btn-bg, #2563eb);
+  color: var(--s2-mobile-btn-color, #ffffff);
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  position: fixed;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  z-index: calc(var(--s2-floating-z, 300) + 1);
+  box-shadow: 0 4px 18px rgba(37, 99, 235, 0.35);
+  transition:
+    background 200ms ease,
+    transform 150ms ease,
+    box-shadow 200ms ease;
+}
+
+.sidebar-2-mobile-toggle:hover {
+  background: #1d4ed8;
+  transform: scale(1.07);
+  box-shadow: 0 6px 24px rgba(37, 99, 235, 0.42);
+}
+
+.sidebar-2-mobile-toggle:focus-visible {
+  outline: 2px solid #1d4ed8;
+  outline-offset: 3px;
+}
+
+/* Hamburger icon */
+.sidebar-2-hamburger-icon,
+.sidebar-2 .sidebar-2-hamburger-icon {
+  display: block;
+  width: 1.125rem;
+  height: 0.125rem;
+  background: currentcolor;
+  position: relative;
+}
+
+.sidebar-2-hamburger-icon::before,
+.sidebar-2-hamburger-icon::after,
+.sidebar-2 .sidebar-2-hamburger-icon::before,
+.sidebar-2 .sidebar-2-hamburger-icon::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 0.125rem;
+  background: currentcolor;
+  position: absolute;
+}
+
+.sidebar-2-hamburger-icon::before,
+.sidebar-2 .sidebar-2-hamburger-icon::before {
+  top: -0.375rem;
+}
+
+.sidebar-2-hamburger-icon::after,
+.sidebar-2 .sidebar-2-hamburger-icon::after {
+  bottom: -0.375rem;
+}
+
+/* 17. Body overlay backdrop */
+body.sidebar-2-overlay-active::before {
+  content: '';
+  display: block;
+  position: fixed;
+  inset: 0;
+  background: var(--s2-overlay-bg);
+  z-index: calc(var(--s2-floating-z) - 1);
+  backdrop-filter: blur(2px);
+  animation: sidebar2-overlay-in 250ms ease forwards;
+}
+
+@keyframes sidebar2-overlay-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* 18. Reduced motion — disable all animations/transitions */
+@media (prefers-reduced-motion: reduce) {
+  .sidebar-2 .sidebar-2-panel,
+  .sidebar-2 .sidebar-2-panel--enter-active,
+  .sidebar-2 .sidebar-2-toggle,
+  .sidebar-2 .sidebar-2-toggle-icon,
+  .sidebar-2 .sidebar-2-toggle-icon::before,
+  .sidebar-2 .sidebar-2-toggle-icon::after,
+  .sidebar-2 .sidebar-2-section-header,
+  .sidebar-2 .sidebar-2-section-chevron,
+  .sidebar-2 .sidebar-2-section-chevron::before,
+  .sidebar-2 .sidebar-2-section-body,
+  .sidebar-2 .sidebar-2-nav-link,
+  .sidebar-2 .sidebar-2-nav-item,
+  .sidebar-2 .sidebar-2-tag,
+  .sidebar-2 .sidebar-2-cta-btn,
+  .sidebar-2-mobile-toggle {
+    transition: none;
+    animation: none;
+  }
+}
+
+/* 19. Responsive — Mobile first */
+@media (max-width: 599px) {
+  .sidebar-2 .sidebar-2-panel {
+    width: 100%;
+    border-radius: 0;
+  }
+
+  .sidebar-2 .sidebar-2-panel--floating {
+    width: min(var(--s2-width), 85vw);
+    border-radius: 0 var(--s2-radius) var(--s2-radius) 0;
+  }
+
+  .sidebar-2 .sidebar-2-panel--floating.sidebar-2-panel--right {
+    border-radius: var(--s2-radius) 0 0 var(--s2-radius);
+  }
+}
+
+@media (min-width: 600px) {
+  .sidebar-2 .sidebar-2-panel {
+    width: var(--s2-width);
+  }
+
+  .sidebar-2-mobile-toggle {
+    display: none;
+  }
+
+  .sidebar-2 .sidebar-2-panel--floating {
+    position: static;
+    transform: none;
+    height: auto;
+    box-shadow: var(--s2-shadow);
+    visibility: visible;
+  }
+}
+
+@media (min-width: 900px) {
+  .sidebar-2 {
+    --s2-width: 18.5rem;
+    --s2-body-pad: 1.5rem;
+  }
+
+  .sidebar-2 .sidebar-2-panel--sticky {
+    top: 2rem;
+    max-height: calc(100vh - 4rem);
+  }
+}

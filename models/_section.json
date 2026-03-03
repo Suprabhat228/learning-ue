@@ -57,7 +57,9 @@
         "carousel",
         "home-page-banner",
         "hero-banner",
-        "gallery-lightbox"
+        "gallery-lightbox",
+        "sidebar",
+        "sidebar-2"
       ]
     }
   ]

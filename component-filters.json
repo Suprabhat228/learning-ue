@@ -22,7 +22,9 @@
       "carousel",
       "home-page-banner",
       "hero-banner",
-      "gallery-lightbox"
+      "gallery-lightbox",
+      "sidebar",
+      "sidebar-2"
     ]
   },
   {
@@ -68,6 +70,18 @@
     "id": "product-color-feature",
     "components": [
       "color-swatch"
+    ]
+  },
+  {
+    "id": "sidebar-2",
+    "components": [
+      "sidebar-2-section"
+    ]
+  },
+  {
+    "id": "sidebar",
+    "components": [
+      "sidebar-section"
     ]
   },
   {

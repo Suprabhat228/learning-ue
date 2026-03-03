@@ -1,0 +1,91 @@
+
+{
+  "definitions": [
+    {
+      "title": "Sidebar 2",
+      "id": "sidebar-2",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "Sidebar 2",
+              "filter": "sidebar-2"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Sidebar 2 Section",
+      "id": "sidebar-2-section",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block/item",
+            "template": {
+              "name": "Sidebar 2 Section",
+              "model": "sidebar-2-section"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "sidebar-2-section",
+      "fields": [
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "sectionTitle",
+          "label": "Section Title"
+        },
+        {
+          "component": "richtext",
+          "valueType": "string",
+          "name": "sectionContent",
+          "label": "Section Content",
+          "value": ""
+        },
+        {
+          "component": "aem-content",
+          "valueType": "string",
+          "name": "ctaLink",
+          "label": "CTA Link"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "ctaText",
+          "label": "CTA Text"
+        },
+        {
+          "component": "select",
+          "valueType": "string",
+          "name": "sectionType",
+          "label": "Section Type",
+          "options": [
+            { "name": "Navigation", "value": "navigation" },
+            { "name": "Info", "value": "info" },
+            { "name": "CTA", "value": "cta" },
+            { "name": "Tags", "value": "tags" }
+          ]
+        },
+        {
+          "component": "boolean",
+          "valueType": "boolean",
+          "name": "defaultCollapsed",
+          "label": "Collapsed by Default"
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "sidebar-2",
+      "components": ["sidebar-2-section"]
+    }
+  ]
+}

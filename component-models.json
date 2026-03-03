@@ -784,6 +784,120 @@
     ]
   },
   {
+    "id": "sidebar-2-section",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "sectionTitle",
+        "label": "Section Title"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "sectionContent",
+        "label": "Section Content",
+        "value": ""
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "ctaLink",
+        "label": "CTA Link"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "ctaText",
+        "label": "CTA Text"
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "sectionType",
+        "label": "Section Type",
+        "options": [
+          {
+            "name": "Navigation",
+            "value": "navigation"
+          },
+          {
+            "name": "Info",
+            "value": "info"
+          },
+          {
+            "name": "CTA",
+            "value": "cta"
+          },
+          {
+            "name": "Tags",
+            "value": "tags"
+          }
+        ]
+      },
+      {
+        "component": "boolean",
+        "valueType": "boolean",
+        "name": "defaultCollapsed",
+        "label": "Collapsed by Default"
+      }
+    ]
+  },
+  {
+    "id": "sidebar-section",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "sectionTitle",
+        "label": "Section Title"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "sectionContent",
+        "label": "Section Content",
+        "value": ""
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "ctaLink",
+        "label": "CTA Link"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "ctaText",
+        "label": "CTA Text"
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "sectionType",
+        "label": "Section Type",
+        "options": [
+          {
+            "name": "Navigation",
+            "value": "navigation"
+          },
+          {
+            "name": "Info",
+            "value": "info"
+          },
+          {
+            "name": "CTA",
+            "value": "cta"
+          },
+          {
+            "name": "Tags",
+            "value": "tags"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "member",
     "fields": [
       {

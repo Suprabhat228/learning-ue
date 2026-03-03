@@ -1,0 +1,85 @@
+
+{
+  "definitions": [
+    {
+      "title": "Sidebar",
+      "id": "sidebar",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "Sidebar",
+              "filter": "sidebar"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Sidebar Section",
+      "id": "sidebar-section",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block/item",
+            "template": {
+              "name": "Sidebar Section",
+              "model": "sidebar-section"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "sidebar-section",
+      "fields": [
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "sectionTitle",
+          "label": "Section Title"
+        },
+        {
+          "component": "richtext",
+          "valueType": "string",
+          "name": "sectionContent",
+          "label": "Section Content",
+          "value": ""
+        },
+        {
+          "component": "aem-content",
+          "valueType": "string",
+          "name": "ctaLink",
+          "label": "CTA Link"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "ctaText",
+          "label": "CTA Text"
+        },
+        {
+          "component": "select",
+          "valueType": "string",
+          "name": "sectionType",
+          "label": "Section Type",
+          "options": [
+            { "name": "Navigation", "value": "navigation" },
+            { "name": "Info", "value": "info" },
+            { "name": "CTA", "value": "cta" },
+            { "name": "Tags", "value": "tags" }
+          ]
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "sidebar",
+      "components": ["sidebar-section"]
+    }
+  ]
+}
