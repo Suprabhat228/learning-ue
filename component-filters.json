@@ -79,7 +79,7 @@
     ]
   },
   {
-    "id": "sidebar",
+    "id": "sidebar-sections",
     "components": [
       "sidebar-section"
     ]
