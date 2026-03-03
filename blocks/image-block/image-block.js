@@ -53,7 +53,7 @@ function buildOverlay(text) {
 
 export default function decorate(block) {
   console.log('block >>> ',block);
-  const column = block.firstElementChild;
+  const column = block;
   if (!column) return;
 
   const rows = [...column.children];
