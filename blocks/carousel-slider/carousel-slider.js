@@ -134,37 +134,101 @@ function buildSlide(item, variant, index) {
   const rows = [...item.children];
   const [imageRow, headingRow, descriptionRow, linkRow, priceRow, thumbnailRow] = rows;
 
-  const isEager = index === 0; // load first slide image eagerly
+  const isEager = index === 0;
 
-  // ── Extract fields ───────────────────────────────────────────────
-  const picture = extractPicture(
-    imageRow,
-    '',
-    isEager,
-    variant === 'full-screen'
-      ? [{ width: '2000' }, { width: '1200' }, { width: '750' }]
-      : [{ width: '1200' }, { width: '750' }, { width: '400' }],
-  );
+  /* =========================
+     IMAGE
+  ========================== */
 
-  const heading = rowText(headingRow);
-  const anchor = extractAnchor(linkRow);
-  const cta = buildCta(anchor);
-  const price = rowText(priceRow);
+  let picture = null;
+  if (imageRow) {
+    const img = imageRow.querySelector('img');
+    if (img) {
+      picture = createOptimizedPicture(
+        img.src,
+        img.alt || '',
+        isEager,
+        variant === 'full-screen'
+          ? [{ width: '2000' }, { width: '1200' }, { width: '750' }]
+          : [{ width: '1200' }, { width: '750' }, { width: '400' }]
+      );
 
-  const thumbPicture = extractPicture(thumbnailRow, '', false, [{ width: '120' }]);
+      const optimizedImg = picture.querySelector('img');
 
-  // ── Slide shell ──────────────────────────────────────────────────
+      // 🔥 Preserve UE instrumentation
+      moveInstrumentation(img, optimizedImg);
+    }
+  }
+
+  /* =========================
+     THUMBNAIL
+  ========================== */
+
+  let thumbPicture = null;
+  if (thumbnailRow) {
+    const thumbImg = thumbnailRow.querySelector('img');
+    if (thumbImg) {
+      thumbPicture = createOptimizedPicture(
+        thumbImg.src,
+        thumbImg.alt || '',
+        false,
+        [{ width: '120' }]
+      );
+
+      const optimizedThumb = thumbPicture.querySelector('img');
+
+      // 🔥 Preserve instrumentation
+      moveInstrumentation(thumbImg, optimizedThumb);
+    }
+  }
+
+  /* =========================
+     CTA
+  ========================== */
+
+  let cta = null;
+  if (linkRow) {
+    const anchor = linkRow.querySelector('a[href]');
+    if (anchor && anchor.getAttribute('href')?.trim()) {
+      cta = document.createElement('a');
+      cta.href = anchor.href;
+      cta.textContent = anchor.textContent.trim() || 'Learn More';
+
+      const title = anchor.getAttribute('title');
+      if (title) cta.setAttribute('title', title);
+
+      const typeClass = [...anchor.classList].find((c) =>
+        ['primary', 'secondary', 'outline'].includes(c)
+      );
+
+      cta.className = [
+        'carousel-slider-cta',
+        typeClass
+          ? `carousel-slider-cta--${typeClass}`
+          : 'carousel-slider-cta--primary',
+      ].join(' ');
+
+      // 🔥 VERY IMPORTANT
+      moveInstrumentation(anchor, cta);
+    }
+  }
+
+  /* =========================
+     SLIDE WRAPPER
+  ========================== */
+
   const slide = document.createElement('li');
   slide.className = 'carousel-slider-slide';
   slide.setAttribute('role', 'tabpanel');
-  slide.setAttribute('aria-roledescription', 'slide');
-  slide.setAttribute('aria-label', heading || `Slide ${index + 1}`);
   slide.setAttribute('aria-hidden', index === 0 ? 'false' : 'true');
 
-  // Migrate UE instrumentation from the raw EDS item column to our slide
+  // 🔥 Move instrumentation from block-item column
   moveInstrumentation(item, slide);
 
-  // ── Slide image ──────────────────────────────────────────────────
+  /* =========================
+     IMAGE WRAPPER
+  ========================== */
+
   if (picture) {
     const imageWrapper = document.createElement('div');
     imageWrapper.className = 'carousel-slider-image';
@@ -172,41 +236,59 @@ function buildSlide(item, variant, index) {
     slide.append(imageWrapper);
   }
 
-  // ── Slide content overlay ────────────────────────────────────────
-  const hasContent = heading || hasRichContent(descriptionRow) || cta || price;
-  if (hasContent) {
-    const content = document.createElement('div');
-    content.className = 'carousel-slider-content';
+  /* =========================
+     CONTENT WRAPPER
+  ========================== */
 
-    if (heading) {
-      const h = document.createElement(variant === 'product' ? 'h3' : 'h2');
-      h.className = 'carousel-slider-heading';
-      h.textContent = heading;
-      content.append(h);
-    }
+  const content = document.createElement('div');
+  content.className = 'carousel-slider-content';
 
-    if (variant === 'product' && price) {
-      const priceEl = document.createElement('p');
-      priceEl.className = 'carousel-slider-price';
-      priceEl.textContent = price;
-      content.append(priceEl);
-    }
+  // HEADING
+  if (headingRow?.textContent.trim()) {
+    const h = document.createElement(
+      variant === 'product' ? 'h3' : 'h2'
+    );
+    h.className = 'carousel-slider-heading';
+    h.textContent = headingRow.textContent.trim();
 
-    if (hasRichContent(descriptionRow)) {
-      descriptionRow.className = 'carousel-slider-description';
-      content.append(descriptionRow);
-    } else {
-      descriptionRow?.remove();
-    }
+    // 🔥 Preserve instrumentation
+    moveInstrumentation(headingRow, h);
 
-    if (cta) content.append(cta);
-
-    slide.append(content);
-  } else {
-    descriptionRow?.remove();
+    content.append(h);
   }
 
-  // Clean up raw rows that have been fully processed
+  // PRICE
+  if (variant === 'product' && priceRow?.textContent.trim()) {
+    const priceEl = document.createElement('p');
+    priceEl.className = 'carousel-slider-price';
+    priceEl.textContent = priceRow.textContent.trim();
+
+    // 🔥 Preserve instrumentation
+    moveInstrumentation(priceRow, priceEl);
+
+    content.append(priceEl);
+  }
+
+  // DESCRIPTION
+  if (descriptionRow) {
+    descriptionRow.classList.add('carousel-slider-description');
+
+    // 🔥 Preserve instrumentation automatically since we append original node
+    content.append(descriptionRow);
+  }
+
+  // CTA
+  if (cta) content.append(cta);
+
+  if (content.children.length) {
+    slide.append(content);
+  }
+
+  /* =========================
+     CLEANUP ORIGINAL ROWS
+     (Only after instrumentation moved)
+  ========================== */
+
   imageRow?.remove();
   headingRow?.remove();
   linkRow?.remove();
