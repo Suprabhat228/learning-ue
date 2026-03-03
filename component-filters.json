@@ -24,7 +24,7 @@
       "hero-banner",
       "gallery-lightbox",
       "sidebar",
-      "sidebar-2"
+      "sidebar-2-sections"
     ]
   },
   {
@@ -73,7 +73,7 @@
     ]
   },
   {
-    "id": "sidebar-2",
+    "id": "sidebar-2-sections",
     "components": [
       "sidebar-2-section"
     ]
