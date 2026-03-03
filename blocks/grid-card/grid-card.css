@@ -79,7 +79,7 @@
   margin: 0;
   padding: 0;
   display: grid;
-  
+
   /* grid-template-columns: repeat(var(--grid-card-columns, 3), 1fr); */
   grid-template-columns: repeat(
     auto-fit,
@@ -387,9 +387,9 @@
 
 /* Desktop: full column counts apply */
 @media (min-width: 900px) {
-  .grid-card .grid-card-grid {
+  /* .grid-card .grid-card-grid {
     grid-template-columns: repeat(var(--grid-card-columns, 3), 1fr);
-  }
+  } */
 
   .grid-card.masonry .grid-card-grid {
     columns: 3;
