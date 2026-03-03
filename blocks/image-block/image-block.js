@@ -154,7 +154,7 @@ export default function decorate(block) {
   // ── Overlay Text (Row 2) ─────────────────────────────────────────
   // Overlay sits inside the image wrapper so it positions over the image
   if (overlayRow) {
-    const overlayText = overlayRow.textContent.trim();
+    const overlayText = overlayRow?.querySelector('[data-aue-prop="overlayText"]')?.textContent.trim();
     if (overlayText) {
       const overlay = buildOverlay(overlayText);
       imageWrapper.append(overlay);
