@@ -160,7 +160,7 @@ export default function decorate(block) {
       imageWrapper.append(overlay);
     }
     // Always remove the raw row — content moved or empty
-    overlayRow.remove();
+    // overlayRow.remove();
   }
 
   figure.append(imageWrapper);
@@ -175,7 +175,7 @@ export default function decorate(block) {
       figure.append(figcaption);
     }
     // Always remove the raw row — content moved or field was empty
-    captionRow.remove();
+    // captionRow.remove();
   }
 
   // ── Lazy reveal fade-in ──────────────────────────────────────────
