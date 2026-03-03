@@ -29,13 +29,20 @@
       "text-block",
       "image-block",
       "image-text-block",
-      "testimonial-block"
+      "testimonial-block",
+      "carousel-slider"
     ]
   },
   {
     "id": "cards",
     "components": [
       "card"
+    ]
+  },
+  {
+    "id": "carousel-slider",
+    "components": [
+      "carousel-slide"
     ]
   },
   {
