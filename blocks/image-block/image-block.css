@@ -1,224 +1,48 @@
-
-/* ============================================================
-   Image Block
-   Variants: full-width, rounded-corners, with-caption,
-             with-overlay-text, lazy-loaded, zoom-on-hover
-   ============================================================ */
-
-/* 1. CSS Custom Properties */
 .image-block {
-  --image-block-max-width: 960px;
-  --image-block-radius: 0px;
-  --image-block-caption-color: #5a5a5a;
-  --image-block-caption-size: 0.875rem;
-  --image-block-overlay-bg: linear-gradient(to top, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.18) 60%, transparent 100%);
-  --image-block-overlay-color: #ffffff;
-  --image-block-overlay-padding: 1.75rem 1.5rem;
-  --image-block-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  --image-block-transition: 0.35s ease;
-  --image-block-zoom-scale: 1.05;
-  --image-block-reveal-duration: 0.55s;
+  --image-block-max-width: 1200px;
+  --image-block-radius: 1rem;
+  --image-block-shadow: 
+    0 10px 40px rgba(0, 0, 0, 0.15),
+    0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* 2. Block Root */
-.image-block {
-  max-width: var(--image-block-max-width);
-  margin: 0 auto;
-  padding: 2rem 1.25rem;
-  box-sizing: border-box;
-}
-
-/* 3. Direct Children — EDS column wrapper */
-.image-block > div {
-  margin: 0;
-  padding: 0;
-}
-
-/* 4. Figure */
-.image-block .image-block-figure {
-  margin: 0;
-  padding: 0;
-  display: block;
-  position: relative;
-}
-
-/* 5. Image Wrapper */
+/* Stronger visual presence */
 .image-block .image-block-image-wrapper {
-  position: relative;
   overflow: hidden;
   border-radius: var(--image-block-radius);
-  line-height: 0;
   box-shadow: var(--image-block-shadow);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
 
-/* 6. Picture & Image */
-.image-block picture {
-  display: block;
-  width: 100%;
+/* Subtle lift on hover */
+.image-block.zoom-on-hover .image-block-image-wrapper:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 18px 60px rgba(0, 0, 0, 0.2),
+    0 4px 14px rgba(0, 0, 0, 0.15);
 }
 
-.image-block img {
-  display: block;
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  transition: transform var(--image-block-transition);
-}
-
-/* 7. Caption */
+/* Better caption */
 .image-block .image-block-caption {
-  display: block;
-  margin-top: 0.75rem;
-  font-size: var(--image-block-caption-size);
-  color: var(--image-block-caption-color);
-  line-height: 1.55;
-  text-align: center;
-  letter-spacing: 0.01em;
-  font-style: italic;
+  font-size: 0.95rem;
+  color: #4b5563;
+  margin-top: 1rem;
+  text-align: left;
+  max-width: 75ch;
 }
 
-/* 8. Overlay */
+/* Stronger overlay readability */
 .image-block .image-block-overlay {
-  position: absolute;
-  inset: 0;
-  background: var(--image-block-overlay-bg);
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
-  pointer-events: none;
-  border-radius: var(--image-block-radius);
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.75) 0%,
+    rgba(0,0,0,0.35) 60%,
+    rgba(0,0,0,0.05) 100%
+  );
 }
 
 .image-block .image-block-overlay-text {
-  margin: 0;
-  padding: var(--image-block-overlay-padding);
-  color: var(--image-block-overlay-color);
-  font-size: clamp(1.15rem, 3vw, 1.75rem);
-  font-weight: 700;
-  line-height: 1.25;
-  letter-spacing: -0.01em;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
-  pointer-events: auto;
-}
-
-/* ============================================================
-   Variant: Full Width
-   Edge-to-edge, no max-width constraint, no side padding
-   ============================================================ */
-.image-block.full-width {
-  max-width: 100%;
-  padding: 0;
-}
-
-.image-block.full-width .image-block-figure {
-  width: 100%;
-}
-
-.image-block.full-width .image-block-image-wrapper {
-  border-radius: 0;
-  box-shadow: none;
-}
-
-.image-block.full-width img {
-  width: 100%;
-  max-height: 85vh;
-  object-fit: cover;
-  object-position: center;
-}
-
-.image-block.full-width .image-block-caption {
-  max-width: 960px;
-  margin: 0.75rem auto 0;
-  padding: 0 1.25rem;
-}
-
-/* ============================================================
-   Variant: Rounded Corners
-   ============================================================ */
-.image-block.rounded-corners {
-  --image-block-radius: 1rem;
-}
-
-/* ============================================================
-   Variant: Lazy Loaded — fade-in reveal
-   The pending/revealed classes are toggled by image-block.js
-   ============================================================ */
-.image-block.lazy-loaded .image-block-figure--pending {
-  opacity: 0;
-  transform: translateY(12px);
-}
-
-.image-block.lazy-loaded .image-block-figure--revealed {
-  opacity: 1;
-  transform: translateY(0);
-  transition:
-    opacity var(--image-block-reveal-duration) ease,
-    transform var(--image-block-reveal-duration) ease;
-}
-
-/* ============================================================
-   Variant: Zoom on Hover
-   Subtle scale on the img element; overflow:hidden on wrapper clips it
-   ============================================================ */
-.image-block.zoom-on-hover .image-block-image-wrapper:hover img,
-.image-block.zoom-on-hover .image-block-image-wrapper:focus-within img {
-  transform: scale(var(--image-block-zoom-scale));
-}
-
-/* Keyboard focus ring for accessibility when image is a link */
-.image-block .image-block-image-wrapper a:focus-visible {
-  outline: 3px solid #0066cc;
-  outline-offset: 3px;
-}
-
-/* ============================================================
-   Responsive
-   ============================================================ */
-
-/* Tablet */
-@media (min-width: 600px) {
-  .image-block {
-    padding: 2.5rem 2rem;
-  }
-
-  .image-block.full-width {
-    padding: 0;
-  }
-
-  .image-block .image-block-overlay-text {
-    font-size: clamp(1.25rem, 2.5vw, 2rem);
-  }
-}
-
-/* Desktop */
-@media (min-width: 900px) {
-  .image-block {
-    padding: 3rem 2rem;
-  }
-
-  .image-block.full-width {
-    padding: 0;
-  }
-
-  .image-block .image-block-caption {
-    font-size: 0.9375rem;
-  }
-}
-
-/* Reduced motion — disable all transitions and animations */
-@media (prefers-reduced-motion: reduce) {
-  .image-block img,
-  .image-block .image-block-figure--revealed {
-    transition: none;
-  }
-
-  .image-block.lazy-loaded .image-block-figure--pending {
-    opacity: 1;
-    transform: none;
-  }
-
-  .image-block.zoom-on-hover .image-block-image-wrapper:hover img,
-  .image-block.zoom-on-hover .image-block-image-wrapper:focus-within img {
-    transform: none;
-  }
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
 }
