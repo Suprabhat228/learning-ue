@@ -528,8 +528,11 @@ function initCarousel(block, slides, variant, thumbs) {
 }
 
 export default function decorate(block) {
-  const variant = resolveVariant(block);
 
+  if (block.dataset.carouselDecorated) return;
+  block.dataset.carouselDecorated = 'true';
+
+  const variant = resolveVariant(block);
   const items = [...block.children];
 
   // Guard: no slides authored — hide the containing section
