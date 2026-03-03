@@ -1,0 +1,513 @@
+
+/* ============================================================
+   Gallery / Lightbox Block
+   Variants: uniform (default), masonry, hover, filter
+   ============================================================ */
+
+/* 1. CSS Custom Properties */
+.gallery-lightbox {
+  --gallery-lightbox-max-width: 1200px;
+  --gallery-lightbox-padding-x: clamp(1rem, 4vw, 2.5rem);
+  --gallery-lightbox-padding-y: clamp(2rem, 5vw, 3.5rem);
+  --gallery-lightbox-gap: 0.875rem;
+  --gallery-lightbox-radius: 0.75rem;
+  --gallery-lightbox-color: #1a1a1a;
+  --gallery-lightbox-muted: #5a5a5a;
+  --gallery-lightbox-accent: #0066cc;
+  --gallery-lightbox-accent-hover: #004fa3;
+  --gallery-lightbox-bg: #f7f8fc;
+  --gallery-lightbox-card-bg: #ffffff;
+  --gallery-lightbox-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  --gallery-lightbox-shadow-hover: 0 8px 32px rgba(0, 0, 0, 0.15);
+  --gallery-lightbox-overlay-bg: rgba(0, 0, 0, 0.88);
+  --gallery-lightbox-transition: 0.25s ease;
+  --gallery-lightbox-img-ratio: 4 / 3;
+  --gallery-lightbox-cols: 2;
+  --gallery-lightbox-filter-btn-bg: #ffffff;
+  --gallery-lightbox-filter-btn-active-bg: #0066cc;
+  --gallery-lightbox-filter-btn-active-color: #ffffff;
+  --gallery-lightbox-placeholder-bg: #e2e8f0;
+}
+
+/* 2. Block Root */
+.gallery-lightbox {
+  max-width: var(--gallery-lightbox-max-width);
+  margin: 0 auto;
+  padding: var(--gallery-lightbox-padding-y) var(--gallery-lightbox-padding-x);
+  box-sizing: border-box;
+  background: var(--gallery-lightbox-bg);
+  border-radius: 1.25rem;
+}
+
+/* 3. Direct Children — EDS column wrapper reset */
+.gallery-lightbox > div {
+  margin: 0;
+  padding: 0;
+}
+
+/* ============================================================
+   Filter Bar
+   ============================================================ */
+.gallery-lightbox .gallery-lightbox-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.75rem;
+  justify-content: center;
+}
+
+.gallery-lightbox .gallery-lightbox-filter-btn {
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  border: 1.5px solid rgba(0, 0, 0, 0.12);
+  background: var(--gallery-lightbox-filter-btn-bg);
+  color: var(--gallery-lightbox-color);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color var(--gallery-lightbox-transition),
+    color var(--gallery-lightbox-transition),
+    border-color var(--gallery-lightbox-transition),
+    transform var(--gallery-lightbox-transition);
+  letter-spacing: 0.02em;
+}
+
+.gallery-lightbox .gallery-lightbox-filter-btn:hover {
+  border-color: var(--gallery-lightbox-accent);
+  color: var(--gallery-lightbox-accent);
+  transform: translateY(-1px);
+}
+
+.gallery-lightbox .gallery-lightbox-filter-btn--active {
+  background: var(--gallery-lightbox-filter-btn-active-bg);
+  color: var(--gallery-lightbox-filter-btn-active-color);
+  border-color: var(--gallery-lightbox-filter-btn-active-bg);
+}
+
+.gallery-lightbox .gallery-lightbox-filter-btn--active:hover {
+  color: var(--gallery-lightbox-filter-btn-active-color);
+  background: var(--gallery-lightbox-accent-hover);
+  border-color: var(--gallery-lightbox-accent-hover);
+}
+
+.gallery-lightbox .gallery-lightbox-filter-btn:focus-visible {
+  outline: 2.5px solid var(--gallery-lightbox-accent);
+  outline-offset: 2px;
+}
+
+/* ============================================================
+   Grid — Uniform (default)
+   ============================================================ */
+.gallery-lightbox .gallery-lightbox-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--gallery-lightbox-cols), 1fr);
+  gap: var(--gallery-lightbox-gap);
+}
+
+/* ============================================================
+   Grid — Masonry
+   Uses CSS columns for a staggered look.
+   ============================================================ */
+.gallery-lightbox.gallery-lightbox--masonry .gallery-lightbox-grid {
+  display: block;
+  column-count: var(--gallery-lightbox-cols);
+  column-gap: var(--gallery-lightbox-gap);
+}
+
+.gallery-lightbox.gallery-lightbox--masonry .gallery-lightbox-item {
+  break-inside: avoid;
+  margin-bottom: var(--gallery-lightbox-gap);
+}
+
+/* Masonry items: no fixed ratio — height flows naturally */
+.gallery-lightbox.gallery-lightbox--masonry .gallery-lightbox-img-wrapper {
+  aspect-ratio: unset;
+}
+
+.gallery-lightbox.gallery-lightbox--masonry .gallery-lightbox-img-wrapper picture,
+.gallery-lightbox.gallery-lightbox--masonry .gallery-lightbox-img-wrapper img {
+  height: auto;
+}
+
+/* ============================================================
+   Gallery Item Card
+   ============================================================ */
+.gallery-lightbox .gallery-lightbox-item {
+  position: relative;
+  background: var(--gallery-lightbox-card-bg);
+  border-radius: var(--gallery-lightbox-radius);
+  overflow: hidden;
+  box-shadow: var(--gallery-lightbox-shadow);
+  cursor: pointer;
+  transition:
+    box-shadow var(--gallery-lightbox-transition),
+    transform var(--gallery-lightbox-transition);
+  display: flex;
+  flex-direction: column;
+}
+
+.gallery-lightbox .gallery-lightbox-item:hover,
+.gallery-lightbox .gallery-lightbox-item:focus-visible {
+  box-shadow: var(--gallery-lightbox-shadow-hover);
+  transform: translateY(-3px);
+  outline: none;
+}
+
+.gallery-lightbox .gallery-lightbox-item:focus-visible {
+  outline: 3px solid var(--gallery-lightbox-accent);
+  outline-offset: 2px;
+}
+
+/* Hidden items (filter variant) */
+.gallery-lightbox .gallery-lightbox-item--hidden {
+  display: none;
+}
+
+/* ============================================================
+   Image Wrapper
+   ============================================================ */
+.gallery-lightbox .gallery-lightbox-img-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: var(--gallery-lightbox-img-ratio);
+  overflow: hidden;
+  background: var(--gallery-lightbox-placeholder-bg);
+}
+
+.gallery-lightbox .gallery-lightbox-img-wrapper picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.gallery-lightbox .gallery-lightbox-img-wrapper img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.gallery-lightbox .gallery-lightbox-item:hover .gallery-lightbox-img-wrapper img {
+  transform: scale(1.05);
+}
+
+/* ============================================================
+   Image Placeholder (no image authored)
+   ============================================================ */
+.gallery-lightbox .gallery-lightbox-placeholder {
+  width: 100%;
+  height: 100%;
+  background: var(--gallery-lightbox-placeholder-bg);
+}
+
+/* ============================================================
+   Hover Overlay
+   ============================================================ */
+.gallery-lightbox .gallery-lightbox-hover-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  background: rgba(0, 0, 0, 0);
+  color: #ffffff;
+  opacity: 0;
+  transition:
+    opacity var(--gallery-lightbox-transition),
+    background-color var(--gallery-lightbox-transition);
+  padding: 1rem;
+  text-align: center;
+}
+
+.gallery-lightbox .gallery-lightbox-item:hover .gallery-lightbox-hover-overlay,
+.gallery-lightbox .gallery-lightbox-item:focus-visible .gallery-lightbox-hover-overlay {
+  opacity: 1;
+  background: rgba(0, 0, 0, 0.48);
+}
+
+.gallery-lightbox .gallery-lightbox-zoom-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1;
+  color: #ffffff;
+  transition: background-color var(--gallery-lightbox-transition);
+}
+
+.gallery-lightbox .gallery-lightbox-item:hover .gallery-lightbox-zoom-icon {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.gallery-lightbox .gallery-lightbox-hover-caption {
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #ffffff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  max-width: 90%;
+}
+
+/* ============================================================
+   Below-image Caption & Category
+   ============================================================ */
+.gallery-lightbox .gallery-lightbox-item-caption {
+  margin: 0;
+  padding: 0.625rem 0.875rem 0.25rem;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--gallery-lightbox-color);
+  font-weight: 500;
+}
+
+.gallery-lightbox .gallery-lightbox-item-category {
+  display: inline-block;
+  margin: 0 0.875rem 0.75rem;
+  padding: 0.2em 0.65em;
+  border-radius: 999px;
+  background: var(--gallery-lightbox-bg);
+  color: var(--gallery-lightbox-accent);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* ============================================================
+   Lightbox Overlay
+   ============================================================ */
+.gallery-lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  background: var(--gallery-lightbox-overlay-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
+}
+
+.gallery-lightbox-overlay--visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Prevent body scroll while lightbox is open */
+.gallery-lightbox-body--locked {
+  overflow: hidden;
+}
+
+/* ============================================================
+   Lightbox Stage
+   ============================================================ */
+.gallery-lightbox-overlay .gallery-lightbox-stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: min(90vw, 1100px);
+  max-height: 90vh;
+  width: 100%;
+}
+
+.gallery-lightbox-overlay .gallery-lightbox-img {
+  display: block;
+  max-width: 100%;
+  max-height: 78vh;
+  width: auto;
+  height: auto;
+  border-radius: 0.5rem;
+  object-fit: contain;
+  box-shadow: 0 16px 64px rgba(0, 0, 0, 0.6);
+  transition: opacity 0.2s ease;
+}
+
+.gallery-lightbox-overlay .gallery-lightbox-caption {
+  margin: 0.875rem 0 0;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.85);
+  text-align: center;
+  max-width: 680px;
+}
+
+/* ============================================================
+   Lightbox Close Button
+   ============================================================ */
+.gallery-lightbox-overlay .gallery-lightbox-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background-color var(--gallery-lightbox-transition),
+    transform var(--gallery-lightbox-transition);
+  z-index: 9010;
+}
+
+.gallery-lightbox-overlay .gallery-lightbox-close:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.1);
+}
+
+.gallery-lightbox-overlay .gallery-lightbox-close:focus-visible {
+  outline: 2.5px solid #ffffff;
+  outline-offset: 3px;
+}
+
+/* ============================================================
+   Lightbox Navigation Arrows
+   ============================================================ */
+.gallery-lightbox-overlay .gallery-lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  font-size: 1.25rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background-color var(--gallery-lightbox-transition),
+    transform var(--gallery-lightbox-transition);
+  z-index: 9010;
+}
+
+.gallery-lightbox-overlay .gallery-lightbox-nav--prev {
+  left: 1rem;
+}
+
+.gallery-lightbox-overlay .gallery-lightbox-nav--next {
+  right: 1rem;
+}
+
+.gallery-lightbox-overlay .gallery-lightbox-nav:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.gallery-lightbox-overlay .gallery-lightbox-nav--prev:hover {
+  transform: translateY(-50%) translateX(-2px);
+}
+
+.gallery-lightbox-overlay .gallery-lightbox-nav--next:hover {
+  transform: translateY(-50%) translateX(2px);
+}
+
+.gallery-lightbox-overlay .gallery-lightbox-nav:focus-visible {
+  outline: 2.5px solid #ffffff;
+  outline-offset: 3px;
+}
+
+.gallery-lightbox-overlay .gallery-lightbox-nav:disabled {
+  opacity: 0.25;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* ============================================================
+   Lightbox Counter
+   ============================================================ */
+.gallery-lightbox-overlay .gallery-lightbox-counter {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.8125rem;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+/* ============================================================
+   Responsive — Tablet (min-width: 600px)
+   ============================================================ */
+@media (min-width: 600px) {
+  .gallery-lightbox {
+    --gallery-lightbox-cols: 3;
+  }
+
+  .gallery-lightbox.gallery-lightbox--masonry .gallery-lightbox-grid {
+    column-count: 2;
+  }
+}
+
+/* ============================================================
+   Responsive — Desktop (min-width: 900px)
+   ============================================================ */
+@media (min-width: 900px) {
+  .gallery-lightbox {
+    --gallery-lightbox-cols: 4;
+  }
+
+  .gallery-lightbox.gallery-lightbox--masonry .gallery-lightbox-grid {
+    column-count: 3;
+  }
+
+  .gallery-lightbox-overlay .gallery-lightbox-nav--prev {
+    left: 2rem;
+  }
+
+  .gallery-lightbox-overlay .gallery-lightbox-nav--next {
+    right: 2rem;
+  }
+}
+
+/* ============================================================
+   Reduced Motion
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .gallery-lightbox .gallery-lightbox-item,
+  .gallery-lightbox .gallery-lightbox-img-wrapper img,
+  .gallery-lightbox .gallery-lightbox-hover-overlay,
+  .gallery-lightbox .gallery-lightbox-filter-btn,
+  .gallery-lightbox-overlay,
+  .gallery-lightbox-overlay .gallery-lightbox-close,
+  .gallery-lightbox-overlay .gallery-lightbox-nav,
+  .gallery-lightbox-overlay .gallery-lightbox-img {
+    transition: none;
+  }
+
+  .gallery-lightbox .gallery-lightbox-item:hover {
+    transform: none;
+  }
+
+  .gallery-lightbox .gallery-lightbox-item:hover .gallery-lightbox-img-wrapper img {
+    transform: none;
+  }
+
+  .gallery-lightbox-overlay .gallery-lightbox-nav--prev:hover,
+  .gallery-lightbox-overlay .gallery-lightbox-nav--next:hover {
+    transform: translateY(-50%);
+  }
+}

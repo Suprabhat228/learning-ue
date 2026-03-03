@@ -21,7 +21,8 @@
       "teaser",
       "carousel",
       "home-page-banner",
-      "hero-banner"
+      "hero-banner",
+      "gallery-lightbox"
     ]
   },
   {
@@ -49,6 +50,12 @@
       "image",
       "button",
       "title"
+    ]
+  },
+  {
+    "id": "gallery-lightbox",
+    "components": [
+      "gallery-item"
     ]
   },
   {
