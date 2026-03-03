@@ -1,0 +1,385 @@
+
+/* ============================================================
+   Image-Text Block — Split Section
+   Variants: image-left (default), image-right, alternating,
+             overlapping, angled-split, above-fold
+   ============================================================ */
+
+/* 1. CSS Custom Properties */
+.image-text-block {
+  --image-text-block-max-width: 1280px;
+  --image-text-block-padding-x: clamp(1.25rem, 5vw, 3rem);
+  --image-text-block-padding-y: clamp(2.5rem, 6vw, 5rem);
+  --image-text-block-gap: clamp(2rem, 5vw, 4rem);
+  --image-text-block-image-col: 52%;
+  --image-text-block-text-col: 48%;
+  --image-text-block-radius: 1rem;
+  --image-text-block-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  --image-text-block-color: #1a1a1a;
+  --image-text-block-muted: #555555;
+  --image-text-block-eyebrow-color: #0066cc;
+  --image-text-block-accent: #0066cc;
+  --image-text-block-accent-hover: #004fa3;
+  --image-text-block-cta-radius: 0.5rem;
+  --image-text-block-transition: 0.25s ease;
+  --image-text-block-angle-width: 52px;
+  --image-text-block-overlap-offset: 3.5rem;
+}
+
+/* 2. Block Root */
+.image-text-block {
+  max-width: var(--image-text-block-max-width);
+  margin: 0 auto;
+  padding: var(--image-text-block-padding-y) var(--image-text-block-padding-x);
+  box-sizing: border-box;
+  color: var(--image-text-block-color);
+}
+
+/* 3. Direct Children — EDS column wrapper reset */
+.image-text-block > div {
+  margin: 0;
+  padding: 0;
+}
+
+/* 4. Inner Two-Pane Grid */
+.image-text-block .image-text-block-inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--image-text-block-gap);
+  align-items: center;
+}
+
+/* ============================================================
+   Image Pane
+   ============================================================ */
+.image-text-block .image-text-block-image-pane {
+  position: relative;
+  border-radius: var(--image-text-block-radius);
+  overflow: hidden;
+  line-height: 0;
+  box-shadow: var(--image-text-block-shadow);
+}
+
+.image-text-block picture {
+  display: block;
+  width: 100%;
+}
+
+.image-text-block img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  transition: transform var(--image-text-block-transition);
+}
+
+/* Subtle zoom on image pane hover */
+.image-text-block .image-text-block-image-pane:hover img {
+  transform: scale(1.04);
+}
+
+/* ============================================================
+   Text Pane
+   ============================================================ */
+.image-text-block .image-text-block-text-pane {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.25rem;
+}
+
+/* Eyebrow */
+.image-text-block .image-text-block-eyebrow {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--image-text-block-eyebrow-color);
+  line-height: 1;
+}
+
+/* Heading */
+.image-text-block .image-text-block-heading {
+  margin: 0;
+  font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+  font-weight: 800;
+  line-height: 1.13;
+  letter-spacing: -0.03em;
+  color: var(--image-text-block-color);
+}
+
+/* Description */
+.image-text-block .image-text-block-description {
+  margin: 0;
+}
+
+.image-text-block .image-text-block-description p {
+  margin: 0 0 0.875em;
+  font-size: clamp(0.95rem, 1.5vw, 1.075rem);
+  line-height: 1.75;
+  color: var(--image-text-block-muted);
+}
+
+.image-text-block .image-text-block-description p:last-child {
+  margin-bottom: 0;
+}
+
+.image-text-block .image-text-block-description a {
+  color: var(--image-text-block-accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+  transition: color var(--image-text-block-transition);
+}
+
+.image-text-block .image-text-block-description a:hover {
+  color: var(--image-text-block-accent-hover);
+}
+
+.image-text-block .image-text-block-description ul,
+.image-text-block .image-text-block-description ol {
+  margin: 0 0 0.875em 1.4rem;
+  padding: 0;
+  font-size: clamp(0.95rem, 1.5vw, 1.075rem);
+  line-height: 1.75;
+  color: var(--image-text-block-muted);
+}
+
+.image-text-block .image-text-block-description li {
+  margin-bottom: 0.4em;
+}
+
+/* ============================================================
+   CTA Buttons
+   ============================================================ */
+.image-text-block .image-text-block-cta-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.image-text-block .image-text-block-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem 1.875rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  border-radius: var(--image-text-block-cta-radius);
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color var(--image-text-block-transition),
+    color var(--image-text-block-transition),
+    border-color var(--image-text-block-transition),
+    box-shadow var(--image-text-block-transition),
+    transform var(--image-text-block-transition);
+}
+
+.image-text-block .image-text-block-cta:focus-visible {
+  outline: 3px solid var(--image-text-block-accent);
+  outline-offset: 3px;
+}
+
+/* Primary */
+.image-text-block .image-text-block-cta--primary {
+  background-color: var(--image-text-block-accent);
+  color: #ffffff;
+  border: 2px solid var(--image-text-block-accent);
+  box-shadow: 0 4px 14px rgba(0, 102, 204, 0.3);
+}
+
+.image-text-block .image-text-block-cta--primary:hover {
+  background-color: var(--image-text-block-accent-hover);
+  border-color: var(--image-text-block-accent-hover);
+  box-shadow: 0 6px 20px rgba(0, 102, 204, 0.42);
+  transform: translateY(-2px);
+}
+
+/* Secondary */
+.image-text-block .image-text-block-cta--secondary {
+  background-color: transparent;
+  color: var(--image-text-block-accent);
+  border: 2px solid var(--image-text-block-accent);
+}
+
+.image-text-block .image-text-block-cta--secondary:hover {
+  background-color: var(--image-text-block-accent);
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+/* Ghost */
+.image-text-block .image-text-block-cta--ghost {
+  background-color: transparent;
+  color: var(--image-text-block-color);
+  border: 2px solid var(--image-text-block-color);
+}
+
+.image-text-block .image-text-block-cta--ghost:hover {
+  background-color: var(--image-text-block-color);
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+/* ============================================================
+   Variant: No Image (text-only graceful fallback)
+   ============================================================ */
+.image-text-block.image-text-block--no-image .image-text-block-inner {
+  grid-template-columns: 1fr;
+}
+
+.image-text-block.image-text-block--no-image .image-text-block-text-pane {
+  max-width: 68ch;
+  margin: 0 auto;
+}
+
+/* ============================================================
+   Desktop two-pane layout (min-width: 768px)
+   ============================================================ */
+@media (min-width: 768px) {
+  /* Default: image-left */
+  .image-text-block .image-text-block-inner {
+    grid-template-columns:
+      var(--image-text-block-image-col)
+      var(--image-text-block-text-col);
+  }
+
+  /* ── Variant: Image Right ─────────────────────────────────── */
+  .image-text-block.image-right .image-text-block-inner {
+    grid-template-columns:
+      var(--image-text-block-text-col)
+      var(--image-text-block-image-col);
+  }
+
+  .image-text-block.image-right .image-text-block-image-pane {
+    order: 2;
+  }
+
+  .image-text-block.image-right .image-text-block-text-pane {
+    order: 1;
+  }
+
+  /* ── Variant: Alternating ─────────────────────────────────── */
+  /* Every even .image-text-block on the page flips automatically. */
+  .image-text-block.alternating:nth-of-type(even) .image-text-block-inner {
+    grid-template-columns:
+      var(--image-text-block-text-col)
+      var(--image-text-block-image-col);
+  }
+
+  .image-text-block.alternating:nth-of-type(even) .image-text-block-image-pane {
+    order: 2;
+  }
+
+  .image-text-block.alternating:nth-of-type(even) .image-text-block-text-pane {
+    order: 1;
+  }
+
+  /* ── Variant: Overlapping ─────────────────────────────────── */
+  .image-text-block.overlapping .image-text-block-inner {
+    grid-template-columns: 58% 46%;
+    gap: 0;
+    align-items: center;
+  }
+
+  .image-text-block.overlapping .image-text-block-image-pane {
+    position: relative;
+    z-index: 1;
+    border-radius: var(--image-text-block-radius);
+  }
+
+  .image-text-block.overlapping .image-text-block-text-pane {
+    position: relative;
+    z-index: 2;
+    margin-left: calc(var(--image-text-block-overlap-offset) * -1);
+    background: #ffffff;
+    border-radius: var(--image-text-block-radius);
+    padding: 2.5rem 2.25rem 2.5rem 2.75rem;
+    box-shadow: var(--image-text-block-shadow);
+  }
+
+  /* Image-right overlapping: text overlaps from the right */
+  .image-text-block.overlapping.image-right .image-text-block-inner {
+    grid-template-columns: 46% 58%;
+  }
+
+  .image-text-block.overlapping.image-right .image-text-block-image-pane {
+    order: 2;
+  }
+
+  .image-text-block.overlapping.image-right .image-text-block-text-pane {
+    order: 1;
+    margin-left: 0;
+    margin-right: calc(var(--image-text-block-overlap-offset) * -1);
+    padding: 2.5rem 2.75rem 2.5rem 2.25rem;
+  }
+
+  /* ── Variant: Angled Split ────────────────────────────────── */
+  /* Diagonal clip-path on the picture creates the wedge divider. */
+  .image-text-block.angled-split .image-text-block-image-pane {
+    border-radius: 0;
+    overflow: visible;
+    box-shadow: none;
+  }
+
+  .image-text-block.angled-split .image-text-block-image-pane picture {
+    /* Left-leaning wedge: right edge cuts inward diagonally */
+    clip-path: polygon(
+      0 0,
+      100% 0,
+      calc(100% - var(--image-text-block-angle-width)) 100%,
+      0 100%
+    );
+    border-radius: 0;
+  }
+
+  /* Image-right angled split: wedge cuts from the left edge */
+  .image-text-block.angled-split.image-right .image-text-block-image-pane picture {
+    clip-path: polygon(
+      var(--image-text-block-angle-width) 0,
+      100% 0,
+      100% 100%,
+      0 100%
+    );
+  }
+
+  /* Shadow layer behind the wedge */
+  .image-text-block .image-text-block-angle-clip {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    box-shadow: var(--image-text-block-shadow);
+  }
+}
+
+/* Large desktop padding boost */
+@media (min-width: 1024px) {
+  .image-text-block {
+    padding: var(--image-text-block-padding-y) clamp(3rem, 8vw, 6rem);
+  }
+}
+
+/* ============================================================
+   Reduced Motion — disable all transitions and transforms
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .image-text-block img,
+  .image-text-block .image-text-block-cta,
+  .image-text-block .image-text-block-description a {
+    transition: none;
+  }
+
+  .image-text-block .image-text-block-image-pane:hover img {
+    transform: none;
+  }
+
+  .image-text-block .image-text-block-cta:hover {
+    transform: none;
+  }
+}
