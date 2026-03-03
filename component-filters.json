@@ -28,7 +28,8 @@
       "grid-card",
       "text-block",
       "image-block",
-      "image-text-block"
+      "image-text-block",
+      "testimonial-block"
     ]
   },
   {
@@ -98,6 +99,12 @@
     "id": "team",
     "components": [
       "member"
+    ]
+  },
+  {
+    "id": "testimonial-block",
+    "components": [
+      "testimonial"
     ]
   }
 ]
