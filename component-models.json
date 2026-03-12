@@ -490,13 +490,46 @@
     ]
   },
   {
-    "id": "grid-card-item",
+    "id": "grid-card",
     "fields": [
+      {
+        "component": "multiselect",
+        "valueType": "string",
+        "name": "style",
+        "label": "Variant",
+        "description": "Layout variant class names applied to the block (e.g. image-right, overlapping). Can combine multiple.",
+        "options": [
+          {
+            "name": "Image left (default)",
+            "value": "image-left"
+          },
+          {
+            "name": "Image right",
+            "value": "image-right"
+          },
+          {
+            "name": "Alternating",
+            "value": "alternating"
+          },
+          {
+            "name": "Overlapping",
+            "value": "overlapping"
+          },
+          {
+            "name": "Angled split",
+            "value": "angled-split"
+          },
+          {
+            "name": "Above fold",
+            "value": "above-fold"
+          }
+        ]
+      },
       {
         "component": "reference",
         "valueType": "string",
         "name": "image",
-        "label": "Card Image",
+        "label": "Image",
         "multi": false
       },
       {
@@ -508,14 +541,20 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "title",
-        "label": "Card Title"
+        "name": "eyebrow",
+        "label": "Eyebrow Label"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "heading",
+        "label": "Heading"
       },
       {
         "component": "richtext",
         "valueType": "string",
         "name": "description",
-        "label": "Card Description"
+        "label": "Description"
       },
       {
         "component": "aem-content",
@@ -534,6 +573,26 @@
         "valueType": "string",
         "name": "linkTitle",
         "label": "CTA Link Title"
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "linkType",
+        "label": "CTA Button Style",
+        "options": [
+          {
+            "name": "Primary",
+            "value": "primary"
+          },
+          {
+            "name": "Secondary",
+            "value": "secondary"
+          },
+          {
+            "name": "Ghost",
+            "value": "ghost"
+          }
+        ]
       }
     ]
   },

@@ -31,7 +31,8 @@
       "image-text-block",
       "testimonial-block",
       "carousel-slider",
-      "cards-block"
+      "cards-block",
+      "grid-card"
     ]
   },
   {
@@ -77,12 +78,6 @@
     "id": "gallery-lightbox",
     "components": [
       "gallery-item"
-    ]
-  },
-  {
-    "id": "grid-card-items",
-    "components": [
-      "grid-card-item"
     ]
   },
   {
