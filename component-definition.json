@@ -83,6 +83,38 @@
       "id": "blocks",
       "components": [
         {
+          "title": "Cards Block",
+          "id": "cards-block",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "cards-block",
+                  "model": "cards-block",
+                  "filter": "cards-block"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Card Item",
+          "id": "card-item",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "card-item",
+                  "model": "card-item",
+                  "filter": "cards-block"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Cards",
           "id": "cards",
           "plugins": {

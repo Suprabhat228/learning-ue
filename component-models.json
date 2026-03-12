@@ -142,6 +142,93 @@
     ]
   },
   {
+    "id": "cards-block",
+    "fields": [
+      {
+        "component": "text",
+        "name": "section-label",
+        "label": "Section Label",
+        "description": "Small uppercase label above the heading (e.g., 'Our offerings').",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "section-heading",
+        "label": "Section Heading",
+        "description": "Main heading for the section (supports <em> for italics).",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "section-subtitle",
+        "label": "Section Subtitle",
+        "description": "Supporting text below the heading.",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "card-item",
+    "fields": [
+      {
+        "component": "text",
+        "name": "card-tag",
+        "label": "Card Tag",
+        "description": "Small badge text (e.g., '⭐ Award Winning').",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "card-title",
+        "label": "Card Title",
+        "description": "Main title for the card (e.g., 'Sampoorna Raksha Promise').",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "card-feature-1",
+        "label": "Feature 1",
+        "description": "First feature text (supports <strong> for highlights).",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "card-feature-2",
+        "label": "Feature 2",
+        "description": "Second feature text.",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "card-feature-3",
+        "label": "Feature 3",
+        "description": "Third feature text.",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "card-feature-4",
+        "label": "Feature 4",
+        "description": "Fourth feature text.",
+        "valueType": "string"
+      },
+      {
+        "component": "aem-content",
+        "name": "primary-cta",
+        "label": "Primary CTA",
+        "description": "Primary button link and text (e.g., 'Calculate Premium').",
+        "valueType": "string"
+      },
+      {
+        "component": "aem-content",
+        "name": "secondary-cta",
+        "label": "Secondary CTA",
+        "description": "Secondary button link and text (e.g., 'Know More').",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
     "id": "cards",
     "fields": [
       {

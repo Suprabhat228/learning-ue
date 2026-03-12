@@ -65,7 +65,8 @@
         "image-block",
         "image-text-block",
         "testimonial-block",
-        "carousel-slider"
+        "carousel-slider",
+        "cards-block"
       ]
     }
   ]
