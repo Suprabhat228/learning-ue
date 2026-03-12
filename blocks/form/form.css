@@ -1,0 +1,415 @@
+
+/* ============================================================
+   Form Block
+   Variants: standard, pinterest, minimal, floating-labels
+   ============================================================ */
+
+/* 1. CSS Custom Properties */
+.form {
+  --form-max-width: 600px;
+  --form-padding: 2rem;
+  --form-gap: 1.5rem;
+  --form-color: #333333;
+  --form-bg: #ffffff;
+  --form-border: #e0e0e0;
+  --form-radius: 8px;
+  --form-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --form-accent: #e60023;
+  --form-accent-hover: #cc001f;
+  --form-error: #d32f2f;
+  --form-success: #388e3c;
+  --form-label-color: #555555;
+  --form-input-bg: #ffffff;
+  --form-input-border: #cccccc;
+  --form-input-border-focus: var(--form-accent);
+  --form-input-color: var(--form-color);
+  --form-input-placeholder: #999999;
+  --form-transition: 0.2s ease;
+  --form-font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* 2. Block Root */
+.form {
+  max-width: var(--form-max-width);
+  margin: 0 auto;
+  padding: var(--form-padding);
+  background-color: var(--form-bg);
+  border-radius: var(--form-radius);
+  box-shadow: var(--form-shadow);
+  color: var(--form-color);
+  font-family: var(--form-font-family);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* 3. Form Title */
+.form .form-title {
+  margin: 0 0 0.5rem;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--form-color);
+  text-align: center;
+}
+
+/* 4. Form Description */
+.form .form-description {
+  margin: 0 0 1.5rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--form-label-color);
+  text-align: center;
+}
+
+.form .form-description p {
+  margin: 0 0 0.75rem;
+}
+
+.form .form-description p:last-child {
+  margin-bottom: 0;
+}
+
+/* 5. Form Fields Container */
+.form .form-fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--form-gap);
+}
+
+/* 6. Individual Form Fields */
+.form .form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.form .form-field-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--form-label-color);
+  display: block;
+}
+
+.form .form-field-required {
+  color: var(--form-error);
+}
+
+/* Input fields */
+.form .form-field-input {
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 1px solid var(--form-input-border);
+  border-radius: 4px;
+  background-color: var(--form-input-bg);
+  color: var(--form-input-color);
+  transition:
+    border-color var(--form-transition),
+    box-shadow var(--form-transition);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form .form-field-input:focus {
+  outline: none;
+  border-color: var(--form-input-border-focus);
+  box-shadow: 0 0 0 2px rgba(230, 0, 35, 0.2);
+}
+
+.form .form-field-input::placeholder {
+  color: var(--form-input-placeholder);
+  opacity: 1;
+}
+
+/* Textarea */
+.form .form-field-textarea {
+  min-height: 100px;
+  resize: vertical;
+  padding: 0.75rem 1rem;
+}
+
+/* Select dropdown */
+.form .form-field-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23555555' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 16px;
+  padding-right: 2.5rem;
+}
+
+/* Checkbox and Radio */
+.form .form-field-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.25rem 0;
+}
+
+.form .form-field-option--checkbox input,
+.form .form-field-option--radio input {
+  width: 1.1em;
+  height: 1.1em;
+  margin: 0;
+  accent-color: var(--form-accent);
+}
+
+/* File input */
+.form .form-field-file {
+  padding: 0.5rem 0;
+  border: 1px solid var(--form-input-border);
+  border-radius: 4px;
+  background-color: var(--form-input-bg);
+}
+
+.form .form-field-file::file-selector-button {
+  padding: 0.5rem 1rem;
+  background-color: var(--form-accent);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color var(--form-transition);
+  margin-right: 0.5rem;
+}
+
+.form .form-field-file::file-selector-button:hover {
+  background-color: var(--form-accent-hover);
+}
+
+/* 7. Submit Button */
+.form .form-submit {
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  background-color: var(--form-accent);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition:
+    background-color var(--form-transition),
+    transform var(--form-transition);
+  width: 100%;
+}
+
+.form .form-submit:hover {
+  background-color: var(--form-accent-hover);
+  transform: translateY(-1px);
+}
+
+.form .form-submit:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* 8. Success and Error Messages */
+.form-success,
+.form-error {
+  padding: 1rem;
+  border-radius: 4px;
+  text-align: center;
+  font-weight: 600;
+  margin: 1rem 0;
+}
+
+.form-success {
+  background-color: rgba(56, 142, 60, 0.1);
+  color: var(--form-success);
+}
+
+.form-error {
+  background-color: rgba(211, 47, 47, 0.1);
+  color: var(--form-error);
+}
+
+/* Field error states */
+.form-field--error .form-field-input {
+  border-color: var(--form-error);
+}
+
+.form-field--error .form-field-label {
+  color: var(--form-error);
+}
+
+/* ============================================================
+   Variant: Pinterest Style
+   ============================================================ */
+.form.pinterest {
+  --form-accent: #e60023;
+  --form-accent-hover: #ad001a;
+  --form-bg: #ffffff;
+  --form-radius: 16px;
+  --form-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  --form-padding: 2.5rem;
+  --form-gap: 1.75rem;
+}
+
+.form.pinterest .form-title {
+  font-size: clamp(1.75rem, 5vw, 2.25rem);
+  margin-bottom: 1rem;
+}
+
+.form.pinterest .form-description {
+  margin-bottom: 2rem;
+}
+
+.form.pinterest .form-field-input {
+  padding: 0.875rem 1.25rem;
+  font-size: 1.05rem;
+  border-radius: 8px;
+}
+
+.form.pinterest .form-field-textarea {
+  padding: 0.875rem 1.25rem;
+}
+
+.form.pinterest .form-submit {
+  padding: 0.875rem;
+  font-size: 1.05rem;
+  border-radius: 8px;
+  margin-top: 1.5rem;
+}
+
+.form.pinterest .form-fields {
+  gap: 1.75rem;
+}
+
+/* ============================================================
+   Variant: Floating Labels
+   ============================================================ */
+.form.floating-labels .form-field {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.form.floating-labels .form-field-input {
+  padding-top: 1.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.form.floating-labels .form-field-label {
+  position: absolute;
+  top: 1.5rem;
+  left: 1rem;
+  font-size: 1rem;
+  color: var(--form-input-placeholder);
+  pointer-events: none;
+  transition:
+    top var(--form-transition),
+    font-size var(--form-transition),
+    color var(--form-transition);
+  z-index: 1;
+}
+
+.form.floating-labels .form-field-input:focus + .form-field-label,
+.form.floating-labels .form-field-input:not(:placeholder-shown) + .form-field-label {
+  top: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--form-accent);
+}
+
+.form.floating-labels .form-field-input:focus {
+  padding-top: 1.75rem;
+}
+
+/* ============================================================
+   Variant: Minimal
+   ============================================================ */
+.form.minimal {
+  --form-bg: transparent;
+  --form-shadow: none;
+  --form-padding: 0;
+  --form-input-bg: transparent;
+  --form-input-border: transparent;
+  --form-input-border-focus: var(--form-accent);
+  --form-gap: 1rem;
+}
+
+.form.minimal .form-title {
+  font-size: 1.5rem;
+  text-align: left;
+}
+
+.form.minimal .form-description {
+  text-align: left;
+}
+
+.form.minimal .form-field-input {
+  border-bottom: 1px solid var(--form-input-border);
+  border-radius: 0;
+  padding: 0.5rem 0;
+  background-color: transparent;
+}
+
+.form.minimal .form-field-input:focus {
+  border-bottom-color: var(--form-input-border-focus);
+  box-shadow: none;
+}
+
+/* ============================================================
+   Responsive Adjustments
+   ============================================================ */
+@media (min-width: 600px) {
+  .form {
+    --form-padding: 2.5rem;
+    --form-gap: 2rem;
+  }
+
+  /* Two-column layout for wider screens */
+  .form.standard .form-fields,
+  .form.pinterest .form-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem 2rem;
+  }
+
+  .form.standard .form-submit,
+  .form.pinterest .form-submit {
+    grid-column: span 2;
+  }
+
+  .form.floating-labels .form-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem 2rem;
+  }
+
+  .form.floating-labels .form-submit {
+    grid-column: span 2;
+  }
+}
+
+@media (min-width: 900px) {
+  .form {
+    --form-max-width: 800px;
+  }
+
+  .form.pinterest .form-fields {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ============================================================
+   Reduced Motion
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .form * {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .form .form-submit:hover {
+    transform: none;
+  }
+}
+
+/* ============================================================
+   Accessibility Focus Styles
+   ============================================================ */
+.form :focus-visible {
+  outline: 2px solid var(--form-accent);
+  outline-offset: 2px;
+}

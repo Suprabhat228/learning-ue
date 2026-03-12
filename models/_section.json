@@ -67,7 +67,8 @@
         "testimonial-block",
         "carousel-slider",
         "cards-block",
-        "grid-card"
+        "grid-card",
+        "form"
       ]
     }
   ]

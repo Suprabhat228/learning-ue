@@ -1,0 +1,172 @@
+
+{
+  "definitions": [
+    {
+      "title": "Form",
+      "id": "form",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "form",
+              "model": "form",
+              "filter": "form"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Form Field",
+      "id": "form-field",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block/item",
+            "template": {
+              "name": "form-field",
+              "model": "form-field",
+              "filter": "form"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "form",
+      "fields": [
+        {
+          "component": "multiselect",
+          "name": "style",
+          "label": "Variant",
+          "description": "Form layout style",
+          "valueType": "string",
+          "options": [
+            { "name": "Standard", "value": "standard" },
+            { "name": "Pinterest Style", "value": "pinterest" },
+            { "name": "Minimal", "value": "minimal" },
+            { "name": "Floating Labels", "value": "floating-labels" }
+          ]
+        },
+        {
+          "component": "text",
+          "name": "formTitle",
+          "label": "Form Title",
+          "description": "Main heading for the form",
+          "valueType": "string"
+        },
+        {
+          "component": "richtext",
+          "name": "formDescription",
+          "label": "Form Description",
+          "description": "Introductory text for the form",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "name": "submitText",
+          "label": "Submit Button Text",
+          "description": "Text displayed on the submit button",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "name": "successMessage",
+          "label": "Success Message",
+          "description": "Message shown after successful submission",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "name": "errorMessage",
+          "label": "Error Message",
+          "description": "Message shown when submission fails",
+          "valueType": "string"
+        }
+      ]
+    },
+    {
+      "id": "form-field",
+      "fields": [
+        {
+          "component": "select",
+          "name": "fieldType",
+          "label": "Field Type",
+          "description": "Type of form field",
+          "valueType": "string",
+          "options": [
+            { "name": "Text Input", "value": "text" },
+            { "name": "Email", "value": "email" },
+            { "name": "Password", "value": "password" },
+            { "name": "Number", "value": "number" },
+            { "name": "Telephone", "value": "tel" },
+            { "name": "Textarea", "value": "textarea" },
+            { "name": "Select Dropdown", "value": "select" },
+            { "name": "Checkbox", "value": "checkbox" },
+            { "name": "Radio Group", "value": "radio" },
+            { "name": "Date", "value": "date" },
+            { "name": "File Upload", "value": "file" }
+          ]
+        },
+        {
+          "component": "text",
+          "name": "fieldName",
+          "label": "Field Name",
+          "description": "Internal name for the field (used in form data)",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "name": "fieldLabel",
+          "label": "Field Label",
+          "description": "Label displayed to users",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "name": "fieldPlaceholder",
+          "label": "Placeholder Text",
+          "description": "Placeholder text for input fields",
+          "valueType": "string"
+        },
+        {
+          "component": "boolean",
+          "name": "required",
+          "label": "Required Field",
+          "description": "Whether this field is required",
+          "valueType": "boolean"
+        },
+        {
+          "component": "richtext",
+          "name": "fieldOptions",
+          "label": "Field Options",
+          "description": "Options for select, radio, or checkbox fields (one per line)",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "name": "fieldPattern",
+          "label": "Validation Pattern",
+          "description": "Regex pattern for field validation (e.g., phone number format)",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "name": "fieldErrorMessage",
+          "label": "Custom Error Message",
+          "description": "Error message shown when validation fails",
+          "valueType": "string"
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "form",
+      "components": ["form-field"]
+    }
+  ]
+}
