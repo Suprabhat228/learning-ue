@@ -33,7 +33,8 @@
       "carousel-slider",
       "cards-block",
       "grid-card",
-      "form"
+      "form",
+      "tabs"
     ]
   },
   {
@@ -109,6 +110,15 @@
     "id": "sidebar-sections",
     "components": [
       "sidebar-section"
+    ]
+  },
+  {
+    "id": "tabs",
+    "components": [
+      "tabs-item",
+      "tabs-card",
+      "tabs-meta-pill",
+      "tabs-feature"
     ]
   },
   {

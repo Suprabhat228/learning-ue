@@ -68,7 +68,8 @@
         "carousel-slider",
         "cards-block",
         "grid-card",
-        "form"
+        "form",
+        "tabs"
       ]
     }
   ]

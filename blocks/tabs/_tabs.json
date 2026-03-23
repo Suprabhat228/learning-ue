@@ -1,0 +1,243 @@
+
+{
+  "definitions": [
+    {
+      "title": "Tabs",
+      "id": "tabs",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "tabs",
+              "model": "tabs",
+              "filter": "tabs"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Tabs Item",
+      "id": "tabs-item",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block/item",
+            "template": {
+              "name": "tabs-item",
+              "model": "tabs-item",
+              "filter": "tabs"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Tabs Card",
+      "id": "tabs-card",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block/item",
+            "template": {
+              "name": "tabs-card",
+              "model": "tabs-card",
+              "filter": "tabs"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Tabs Meta Pill",
+      "id": "tabs-meta-pill",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block/item",
+            "template": {
+              "name": "tabs-meta-pill",
+              "model": "tabs-meta-pill",
+              "filter": "tabs"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Tabs Feature",
+      "id": "tabs-feature",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block/item",
+            "template": {
+              "name": "tabs-feature",
+              "model": "tabs-feature",
+              "filter": "tabs"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "tabs",
+      "fields": [
+        {
+          "component": "richtext",
+          "valueType": "string",
+          "name": "section-title",
+          "label": "Section Title",
+          "description": "Main heading for the tabs section."
+        },
+        {
+          "component": "richtext",
+          "valueType": "string",
+          "name": "tabs-heading",
+          "label": "Tabs Heading (ARIA Label)",
+          "description": "Accessible label for the tab list navigation."
+        }
+      ]
+    },
+    {
+      "id": "tabs-item",
+      "fields": [
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "tab-label",
+          "label": "Tab Label",
+          "description": "Visible label for this tab button."
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "tab-id",
+          "label": "Tab ID",
+          "description": "Unique identifier for this tab (used to link button and panel). Use lowercase letters, numbers, and hyphens only."
+        }
+      ]
+    },
+    {
+      "id": "tabs-card",
+      "fields": [
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "tab-id",
+          "label": "Parent Tab ID",
+          "description": "ID of the tab this card belongs to. Must match a Tabs Item Tab ID."
+        },
+        {
+          "component": "richtext",
+          "valueType": "string",
+          "name": "panel-heading",
+          "label": "Panel Heading",
+          "description": "Heading for the active card panel."
+        },
+        {
+          "component": "richtext",
+          "valueType": "string",
+          "name": "panel-subtitle",
+          "label": "Panel Subtitle",
+          "description": "Short description shown under the panel heading."
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "card-name",
+          "label": "Primary Card Name",
+          "description": "Name of the primary card shown in the list and detail area."
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "card-tag",
+          "label": "Primary Card Tag",
+          "description": "Optional pill label for the primary card (e.g. 'Newly launched')."
+        },
+        {
+          "component": "aem-content",
+          "valueType": "string",
+          "name": "primaryCtaLink",
+          "label": "Primary CTA Link",
+          "description": "Destination for the primary CTA button (e.g. Apply Now)."
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "primaryCtaLinkText",
+          "label": "Primary CTA Text",
+          "description": "Visible text for the primary CTA button."
+        },
+        {
+          "component": "aem-content",
+          "valueType": "string",
+          "name": "secondaryCtaLink",
+          "label": "Secondary CTA Link",
+          "description": "Destination for the secondary CTA button (e.g. Know More)."
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "secondaryCtaLinkText",
+          "label": "Secondary CTA Text",
+          "description": "Visible text for the secondary CTA button."
+        }
+      ]
+    },
+    {
+      "id": "tabs-meta-pill",
+      "fields": [
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "tab-id",
+          "label": "Parent Tab ID",
+          "description": "ID of the tab this meta pill belongs to. Must match a Tabs Item Tab ID."
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "meta-pill",
+          "label": "Meta Pill Text",
+          "description": "Short label shown as a pill (e.g. 'Low interest')."
+        }
+      ]
+    },
+    {
+      "id": "tabs-feature",
+      "fields": [
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "tab-id",
+          "label": "Parent Tab ID",
+          "description": "ID of the tab this feature belongs to. Must match a Tabs Item Tab ID."
+        },
+        {
+          "component": "richtext",
+          "valueType": "string",
+          "name": "feature",
+          "label": "Feature Text",
+          "description": "Feature or benefit description shown in the list."
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "tabs",
+      "components": [
+        "tabs-item",
+        "tabs-card",
+        "tabs-meta-pill",
+        "tabs-feature"
+      ]
+    }
+  ]
+}
+  
