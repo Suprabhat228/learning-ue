@@ -430,8 +430,7 @@
                 "resourceType": "core/franklin/components/block/v1/block/item",
                 "template": {
                   "name": "info-card-step",
-                  "model": "info-card-step",
-                  "filter": "info-card"
+                  "model": "info-card-step"
                 }
               }
             }
