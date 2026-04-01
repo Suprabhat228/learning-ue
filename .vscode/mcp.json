@@ -1,0 +1,9 @@
+{
+  "servers": {
+    "eds-dev": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["D:/Suprabhat_Karmakar/__project/eds-mcp-server/dist/index.js"]
+    }
+  }
+}

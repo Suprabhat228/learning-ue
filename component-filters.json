@@ -34,7 +34,8 @@
       "cards-block",
       "grid-card",
       "form",
-      "tabs"
+      "tabs",
+      "info-card"
     ]
   },
   {
@@ -58,7 +59,7 @@
   {
     "id": "carousel",
     "components": [
-      "carousel-slide"
+      "carousel-item"
     ]
   },
   {
@@ -92,6 +93,12 @@
     "id": "home-page-banner-items",
     "components": [
       "home-page-banner-item"
+    ]
+  },
+  {
+    "id": "info-card",
+    "components": [
+      "info-card-step"
     ]
   },
   {

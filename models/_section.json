@@ -69,7 +69,8 @@
         "cards-block",
         "grid-card",
         "form",
-        "tabs"
+        "tabs",
+        "info-card"
       ]
     }
   ]

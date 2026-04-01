@@ -1,0 +1,279 @@
+
+.info-card {
+  --info-card-bg-step: var(--color-gray-900, #222222);
+  --info-card-bg-card: rgba(245, 243, 238, 0.85); /* Mimicking the frosted glass look */
+  --info-card-bg-footer: var(--color-gray-100, #F4F5F7);
+  --info-card-text-primary: var(--color-black, #000000);
+  --info-card-text-step-icon: var(--color-white, #FFFFFF);
+  --info-card-accent-line: var(--color-red-700, #A62A22);
+  --info-card-border-radius: 16px;
+  
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: var(--info-card-text-primary);
+  overflow: hidden; /* Contain absolute background */
+}
+
+.info-card-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.info-card-bg picture,
+.info-card-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.info-card-container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1200px;
+  padding: 3rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+}
+
+/* Header */
+.info-card-header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  max-width: 800px;
+}
+
+.info-card-main-title {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.info-card-subtitle {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.info-card-eligibility {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.info-card-elig-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 400;
+}
+
+.info-card-elig-item picture,
+.info-card-elig-item img {
+  width: 20px;
+  height: 20px;
+  display: block;
+  object-fit: contain;
+}
+
+/* Card Box */
+.info-card-box {
+  width: 100%;
+  max-width: 800px;
+  border-radius: var(--info-card-border-radius);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  background: var(--info-card-bg-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.info-card-main {
+  padding: 2.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.info-card-title {
+  margin: 0 0 2.5rem 0;
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+/* Steps */
+.info-card-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+  position: relative;
+  margin-bottom: 2.5rem;
+}
+
+/* Dashed line - Mobile (Vertical) */
+.info-card-steps::before {
+  content: '';
+  position: absolute;
+  top: 32px;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 2px dashed var(--info-card-accent-line);
+  z-index: 0;
+}
+
+.info-card-step {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+}
+
+.info-card-step-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: var(--info-card-bg-step);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--info-card-text-step-icon);
+  flex-shrink: 0;
+}
+
+.info-card-step-icon picture,
+.info-card-step-icon img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  filter: brightness(0) invert(1); /* Ensure icons are white if uploaded as black */
+}
+
+.info-card-step-text {
+  font-size: 0.875rem;
+  line-height: 1.4;
+  max-width: 160px;
+}
+
+.info-card-step-text p {
+  margin: 0;
+}
+
+.info-card-divider {
+  width: 100%;
+  border: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  margin: 0 0 1.5rem 0;
+}
+
+.info-card-subtext {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 400;
+}
+
+/* Footer */
+.info-card-footer {
+  background-color: var(--info-card-bg-footer);
+  padding: 1.5rem;
+  border-radius: 0 0 var(--info-card-border-radius) var(--info-card-border-radius);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+}
+
+.info-card-footer-text {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 400;
+}
+
+.info-card-footer-cta a.button.outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1.5rem;
+  border: 1px solid var(--info-card-text-primary);
+  border-radius: 24px;
+  background: transparent;
+  color: var(--info-card-text-primary);
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  min-width: 120px;
+}
+
+.info-card-footer-cta a.button.outline:hover,
+.info-card-footer-cta a.button.outline:focus-visible {
+  background-color: var(--info-card-text-primary);
+  color: var(--info-card-bg-footer);
+  outline: none;
+}
+
+/* Responsive Desktop */
+@media (min-width: 768px) {
+  .info-card-container {
+    padding: 4rem 2rem;
+  }
+
+  .info-card-main {
+    padding: 3rem 4rem;
+  }
+
+  .info-card-steps {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  /* Dashed line - Desktop (Horizontal) */
+  .info-card-steps::before {
+    top: 31px; /* Center of 64px icon */
+    left: 16%; /* Approximate center of first item */
+    right: 16%; /* Approximate center of last item */
+    bottom: auto;
+    transform: none;
+    border-left: none;
+    border-top: 2px dashed var(--info-card-accent-line);
+  }
+
+  .info-card-footer {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1.5rem 3rem;
+    text-align: left;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .info-card-footer-cta a.button.outline {
+    transition: none;
+  }
+}
+  

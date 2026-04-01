@@ -1,47 +1,74 @@
 
-# Carousel
+# Product Carousel
 
-A full-width, accessible image carousel block with autoplay, keyboard navigation, dot indicators, and CTA support — built for AEM Edge Delivery Services.
+An interactive horizontal scrolling carousel designed to display product cards with images, color swatches, details, and call-to-action buttons.
 
 ## Block Type
 Interactive
 
 ## Authoring (Universal Editor)
-
-To add this block to a page, insert a **Carousel** block and add one or more **Carousel Slide** child items. Each slide is independently authored with an image, optional eyebrow label, title, description, and a call-to-action link. The carousel supports autoplay (5 seconds), pauses on hover or focus, and can be navigated via arrow buttons or keyboard arrow keys.
+Authors add the main section heading and an optional "Compare" link at the block level. They then add repeating "Carousel Item" blocks for each product. Each product card requires an image, a comma-separated list of hex colors for swatches, rich text for the content (use Bold for the top badge), and rich text for the actions (the first link becomes a solid button, the second becomes a text link). For swatch-driven image changes, authors can configure alternate image URLs as `data-image0`, `data-image1`, etc. on the product image `<picture>` element (and optional `data-imageAlt0`, `data-imageAlt1`, etc. for alt text).
 
 ## Fields
-
-| Field       | Type        | Description                                                              |
-|-------------|-------------|--------------------------------------------------------------------------|
-| image       | reference   | Background image for the slide (required for visual impact)              |
-| imageAlt    | text        | Accessible alt text for the slide image                                  |
-| eyebrow     | text        | Small label displayed above the title (e.g., "New Arrival", "Featured")  |
-| title       | text        | Main heading for the slide (e.g., "Discover the Peak Collection")        |
-| description | richtext    | Supporting body text displayed below the title                           |
-| link        | aem-content | URL the CTA button points to                                             |
-| linkText    | text        | Visible CTA button label (e.g., "Shop Now", "Learn More")                |
-| linkTitle   | text        | Tooltip / title attribute for the CTA anchor (for accessibility)         |
+| Field        | Type       | Description                              |
+|--------------|------------|------------------------------------------|
+| heading      | richtext   | Main heading for the carousel section.  |
+| compare-link | aem-content| Link displayed next to the heading.     |
 
 ## Block Items
+Repeating `carousel-item` blocks.
 
-Each **Carousel Slide** is a repeating child item within the Carousel block. Authors can add as many slides as needed. Each slide renders as a full-width panel with an image background, gradient overlay, and a content region anchored to the bottom of the slide. Slides cycle automatically every 5 seconds (paused on hover/focus) and can be navigated manually via previous/next arrow buttons or left/right keyboard arrow keys.
-
-**Example Slide Content:**
-- **Image:** `/content/dam/hero-landscape.jpg`
-- **Image Alt:** `A panoramic mountain landscape at sunrise`
-- **Eyebrow:** `Featured`
-- **Title:** `Discover the Peak Collection`
-- **Description:** `Explore our latest range of outdoor gear crafted for every adventure, from base camp to summit.`
-- **Link:** `https://example.com/collection`
-- **Link Text:** `Shop Now`
-- **Link Title:** `Browse the Peak Collection`
+| Field    | Type      | Description                                                                 |
+|----------|-----------|-----------------------------------------------------------------------------|
+| image    | reference | Main image for the product card.                                           |
+| imageAlt | text      | Accessible description for the product image.                              |
+| swatches | text      | Comma-separated hex codes (e.g., `#ff0000, #00ff00`) for color swatches.   |
+| content  | richtext  | Badge (use Bold), Title (H3), Description, and Pricing.                    |
+| actions  | richtext  | Links for the card. First link becomes a button, second becomes a text link.|
 
 ## Variants
-
-No variants. The carousel adapts its aspect ratio automatically across breakpoints (mobile portrait → tablet landscape → cinema widescreen).
+No variants.
 
 ## Dependencies
+`moveInstrumentation` from `../../scripts/scripts.js`
 
-- `createOptimizedPicture` — from `../../scripts/aem.js`; generates responsive `<picture>` elements with WebP sources.
-- `moveInstrumentation` — from `../../scripts/scripts.js`; migrates Universal Editor instrumentation attributes when DOM nodes are replaced.
+## Content
+
+```json
+{
+  "heading": "<h2>Explore the line-up.</h2>",
+  "compare-link": "Compare all models >",
+  "_itemCount": 4,
+  "_items": [
+    {
+      "image": "iPhone 17 Pro in Desert Titanium",
+      "imageAlt": "iPhone 17 Pro in Desert Titanium",
+      "swatches": "#f09a37, #3b3b40, #e3e4e5",
+      "content": "<h3>iPhone 17 Pro</h3><p>Innovative design for ultimate performance and battery life.</p><p>From ₹134900.00*</p><p>or ₹21650.00/mo. for 6 mo.‡</p>",
+      "actions": "<p><a href=\"#\">Learn more</a> <a href=\"#\">Buy ></a></p>"
+    },
+    {
+      "image": "iPhone Air in Silver",
+      "imageAlt": "iPhone Air in Silver",
+      "swatches": "#e3e4e5, #f0f0f0, #1d1d1f",
+      "content": "<h3>iPhone Air</h3><p>The thinnest iPhone ever. With the power of pro inside.</p><p>From ₹119900.00*</p><p>or ₹19150.00/mo. for 6 mo.‡</p>",
+      "actions": "<p><a href=\"#\">Learn more</a> <a href=\"#\">Buy ></a></p>"
+    },
+    {
+      "image": "iPhone 17 in Purple",
+      "imageAlt": "iPhone 17 in Purple",
+      "swatches": "#d8c8e8, #a0b0d0, #e3e4e5, #1d1d1f",
+      "content": "<h3>iPhone 17</h3><p>Even more delightful. Even more durable.</p><p>From ₹82900.00*</p><p>or ₹14468.00/mo. for 6 mo.‡‡</p>",
+      "actions": "<p><a href=\"#\">Learn more</a> <a href=\"#\">Buy ></a></p>"
+    },
+    {
+      "image": "iPhone 17e in Pink",
+      "imageAlt": "iPhone 17e in Pink",
+      "swatches": "#f8d8d8, #e3e4e5, #1d1d1f",
+      "content": "<p><strong>New</strong></p><h3>iPhone 17e</h3><p>Feature stacked. Value packed.</p><p>From ₹64900.00*</p><p>or ₹11327.00/mo. for 6 mo.‡‡</p>",
+      "actions": "<p><a href=\"#\">Learn more</a> <a href=\"#\">Buy ></a></p>"
+    }
+  ]
+}
+```
+  

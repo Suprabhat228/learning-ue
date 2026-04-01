@@ -377,56 +377,62 @@
     ]
   },
   {
-    "id": "carousel-slide",
+    "id": "carousel",
+    "fields": [
+      {
+        "component": "richtext",
+        "name": "heading",
+        "label": "Section Heading",
+        "description": "Main heading for the carousel section.",
+        "valueType": "string"
+      },
+      {
+        "component": "aem-content",
+        "name": "compare-link",
+        "label": "Compare Link",
+        "description": "Link displayed next to the heading.",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "carousel-item",
     "fields": [
       {
         "component": "reference",
-        "valueType": "string",
         "name": "image",
-        "label": "Slide Image",
+        "label": "Product Image",
+        "description": "Main image for the product card.",
+        "valueType": "string",
         "multi": false
       },
       {
         "component": "text",
-        "valueType": "string",
         "name": "imageAlt",
-        "label": "Image Alt Text"
+        "label": "Image Alt Text",
+        "description": "Accessible description for the product image.",
+        "valueType": "string"
       },
       {
         "component": "text",
-        "valueType": "string",
-        "name": "eyebrow",
-        "label": "Eyebrow Label"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "title",
-        "label": "Slide Title"
+        "name": "swatches",
+        "label": "Color Swatches",
+        "description": "Comma-separated hex codes (e.g., #ff0000, #00ff00).",
+        "valueType": "string"
       },
       {
         "component": "richtext",
-        "valueType": "string",
-        "name": "description",
-        "label": "Slide Description"
+        "name": "content",
+        "label": "Card Content",
+        "description": "Badge (use Bold), Title (H3), Description, and Pricing.",
+        "valueType": "string"
       },
       {
-        "component": "aem-content",
-        "valueType": "string",
-        "name": "link",
-        "label": "CTA Link"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "linkText",
-        "label": "CTA Link Text"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "linkTitle",
-        "label": "CTA Link Title"
+        "component": "richtext",
+        "name": "actions",
+        "label": "Actions",
+        "description": "Links for the card. First link becomes a button, second becomes a text link.",
+        "valueType": "string"
       }
     ]
   },
@@ -1130,6 +1136,136 @@
             "value": "ghost"
           }
         ]
+      }
+    ]
+  },
+  {
+    "id": "info-card",
+    "fields": [
+      {
+        "component": "reference",
+        "name": "bg-image",
+        "label": "Background Image",
+        "description": "Full width background image behind the card.",
+        "valueType": "string",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "name": "bg-imageAlt",
+        "label": "Background Image Alt",
+        "description": "Alt text for background image.",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "main-title",
+        "label": "Main Title",
+        "description": "The primary heading at the top.",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "subtitle",
+        "label": "Subtitle",
+        "description": "Text below the main title.",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "name": "eligibility-1-icon",
+        "label": "Eligibility 1 Icon",
+        "description": "Icon for the first eligibility criteria.",
+        "valueType": "string",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "name": "eligibility-1-iconAlt",
+        "label": "Eligibility 1 Icon Alt",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "eligibility-1-text",
+        "label": "Eligibility 1 Text",
+        "description": "Text for the first eligibility criteria.",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "name": "eligibility-2-icon",
+        "label": "Eligibility 2 Icon",
+        "description": "Icon for the second eligibility criteria.",
+        "valueType": "string",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "name": "eligibility-2-iconAlt",
+        "label": "Eligibility 2 Icon Alt",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "eligibility-2-text",
+        "label": "Eligibility 2 Text",
+        "description": "Text for the second eligibility criteria.",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "card-title",
+        "label": "Card Title",
+        "description": "Heading inside the main card.",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "card-subtext",
+        "label": "Card Subtext",
+        "description": "Text below the steps inside the card.",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "footer-text",
+        "label": "Footer Text",
+        "description": "Text in the card footer.",
+        "valueType": "string"
+      },
+      {
+        "component": "aem-content",
+        "name": "footer-cta",
+        "label": "Footer CTA Button",
+        "description": "Call to action button in the footer.",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "info-card-step",
+    "fields": [
+      {
+        "component": "reference",
+        "name": "step-icon",
+        "label": "Step Icon",
+        "description": "Icon for this step.",
+        "valueType": "string",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "name": "step-iconAlt",
+        "label": "Step Icon Alt",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "step-text",
+        "label": "Step Text",
+        "description": "Description for this step.",
+        "valueType": "string"
       }
     ]
   },
