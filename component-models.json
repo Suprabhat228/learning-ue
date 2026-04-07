@@ -1591,6 +1591,95 @@
     ]
   },
   {
+    "id": "tabbed-offers",
+    "fields": [
+      {
+        "component": "richtext",
+        "name": "title",
+        "label": "Title",
+        "description": "Main heading for the block.",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "subtitle",
+        "label": "Subtitle",
+        "description": "Text displayed below the title.",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "tabbed-offers-item",
+    "fields": [
+      {
+        "component": "text",
+        "name": "tab-category",
+        "label": "Tab Category",
+        "description": "The tab under which this card should appear.",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "name": "card-image",
+        "label": "Card Image",
+        "description": "Background image for the top half of the card.",
+        "valueType": "string",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "name": "card-imageAlt",
+        "label": "Card Image Alt Text",
+        "description": "Accessible description for the card image.",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "name": "brand-logo",
+        "label": "Brand Logo",
+        "description": "Circular logo image.",
+        "valueType": "string",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "name": "brand-logoAlt",
+        "label": "Brand Logo Alt Text",
+        "description": "Accessible description for the brand logo.",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "offer-title",
+        "label": "Offer Title",
+        "description": "Main offer text (e.g., Get up to ₹2,000 Off).",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "offer-description",
+        "label": "Offer Description",
+        "description": "Details below the title.",
+        "valueType": "string"
+      },
+      {
+        "component": "aem-content",
+        "name": "cta",
+        "label": "CTA Link",
+        "description": "URL for the button.",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "ctaText",
+        "label": "CTA Text",
+        "description": "Label for the button.",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
     "id": "tabs",
     "fields": [
       {

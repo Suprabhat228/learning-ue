@@ -35,7 +35,8 @@
       "grid-card",
       "form",
       "tabs",
-      "info-card"
+      "info-card",
+      "tabbed-offers"
     ]
   },
   {
@@ -117,6 +118,12 @@
     "id": "sidebar-sections",
     "components": [
       "sidebar-section"
+    ]
+  },
+  {
+    "id": "tabbed-offers",
+    "components": [
+      "tabbed-offers-item"
     ]
   },
   {

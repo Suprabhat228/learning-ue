@@ -70,7 +70,8 @@
         "grid-card",
         "form",
         "tabs",
-        "info-card"
+        "info-card",
+        "tabbed-offers"
       ]
     }
   ]

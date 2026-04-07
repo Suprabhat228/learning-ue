@@ -545,6 +545,38 @@
           }
         },
         {
+          "title": "Tabbed Offers",
+          "id": "tabbed-offers",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "tabbed-offers",
+                  "model": "tabbed-offers",
+                  "filter": "tabbed-offers"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Offer Card",
+          "id": "tabbed-offers-item",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "tabbed-offers-item",
+                  "model": "tabbed-offers-item",
+                  "filter": "tabbed-offers"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Tabs",
           "id": "tabs",
           "plugins": {
