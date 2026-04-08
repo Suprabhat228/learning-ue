@@ -36,7 +36,8 @@
       "form",
       "tabs",
       "info-card",
-      "tabbed-offers"
+      "tabbed-offers",
+      "full-view-02"
     ]
   },
   {
@@ -82,6 +83,12 @@
     "id": "form",
     "components": [
       "form-field"
+    ]
+  },
+  {
+    "id": "full-view-02",
+    "components": [
+      "full-view-02-item"
     ]
   },
   {

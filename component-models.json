@@ -638,6 +638,101 @@
     ]
   },
   {
+    "id": "full-view-02",
+    "fields": [
+      {
+        "component": "text",
+        "name": "block-id",
+        "label": "Block ID",
+        "description": "Optional anchor/id for in-page linking.",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "eyebrow",
+        "label": "Eyebrow",
+        "description": "Optional small label above the main heading.",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "heading",
+        "label": "Heading",
+        "description": "Main section heading (e.g., \"Highlights\").",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "description",
+        "label": "Description",
+        "description": "Optional short paragraph under the heading.",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "full-view-02-item",
+    "fields": [
+      {
+        "component": "text",
+        "name": "title",
+        "label": "Card Title",
+        "description": "Title text shown under the icon.",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "name": "icon",
+        "label": "Icon",
+        "description": "Icon asset displayed in the colored square.",
+        "valueType": "string",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "name": "iconAlt",
+        "label": "Icon Alt Text",
+        "description": "Accessible description for the icon.",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "icon-background-color",
+        "label": "Icon Background Color",
+        "description": "Hex or gradient token for the icon container background (e.g., #a259ff).",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "body",
+        "label": "Body",
+        "description": "Optional supporting copy under the title.",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "badge",
+        "label": "Badge",
+        "description": "Optional small label above the title.",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "link-label",
+        "label": "Link Label",
+        "description": "Optional CTA label (not used in this design).",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "link-url",
+        "label": "Link URL",
+        "description": "Optional CTA URL.",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
     "id": "gallery-item",
     "fields": [
       {
