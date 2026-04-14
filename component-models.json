@@ -456,6 +456,86 @@
     ]
   },
   {
+    "id": "editorial-cards",
+    "fields": [
+      {
+        "component": "reference",
+        "name": "image",
+        "label": "Card Image",
+        "valueType": "string",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "name": "imageAlt",
+        "label": "Image Alt Text",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "category",
+        "label": "Category (e.g. Design, Tech, Nature, Business)",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "icon",
+        "label": "Icon Character (used if no image — e.g. ✦ ◈ ❋)",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "title",
+        "label": "Card Title",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "description",
+        "label": "Card Description",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "tags",
+        "label": "Tags (comma-separated, e.g. Layout, Typography)",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "author",
+        "label": "Author Name | Date (e.g. Sofia R. | Apr 10)",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "stats",
+        "label": "Stats (optional, e.g. Views:4.2k, Saves:312, Comments:48)",
+        "valueType": "string"
+      },
+      {
+        "component": "select",
+        "name": "variant",
+        "label": "Card Variant",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Default",
+            "value": ""
+          },
+          {
+            "name": "Featured (wide)",
+            "value": "featured"
+          },
+          {
+            "name": "Horizontal",
+            "value": "horizontal"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "form",
     "fields": [
       {
